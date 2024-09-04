@@ -1,0 +1,553 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Project">
+      <UniqueIdentifier>{b6cfa1df-9916-48ad-8c18-f653946103ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameScene">
+      <UniqueIdentifier>{d00a8998-a08f-48ce-850f-96c0eddb4980}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameScene\Sample">
+      <UniqueIdentifier>{e3a0acb5-08b3-41f0-a41e-4357a3698e46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameManager">
+      <UniqueIdentifier>{6783ae0e-f5a0-4867-a365-1d65f9d0e07e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameScene\Sample2">
+      <UniqueIdentifier>{c0575fdd-b572-4e5a-8413-fa3cf96d3880}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="External">
+      <UniqueIdentifier>{14a915d2-8493-4c0a-a515-545fd5a67d14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Text">
+      <UniqueIdentifier>{86ea6656-3c90-41a3-872c-722ea8f63729}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine">
+      <UniqueIdentifier>{abdf560c-0a11-4c32-b8f0-948d3e3b2874}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Source File">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="YTEngine\Source File\Common">
+      <UniqueIdentifier>{07c0a95e-6a93-4df8-8d44-8e73f10e1ea2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Source File\Math">
+      <UniqueIdentifier>{06a9a389-3fa9-4add-ab75-e624db9a3dd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Source File\ImGui">
+      <UniqueIdentifier>{00ad347e-53a6-4856-9344-67a497557e0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Source File\ConvertFunction">
+      <UniqueIdentifier>{5f4a72fc-e562-4946-a2ac-4329dcdc39c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Source File\Polygone">
+      <UniqueIdentifier>{6a198dbf-5723-494c-be30-e68adffa3015}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Source File\Polygone\3D">
+      <UniqueIdentifier>{45f53b96-3860-406f-90bf-8d1946adf2ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Source File\Polygone\3D\Model">
+      <UniqueIdentifier>{bc061468-3fa2-4b64-a612-cab1c2939851}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Source File\Polygone\3D\Sphere">
+      <UniqueIdentifier>{c3da23d8-f671-4592-aa90-b00a4373331a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Source File\Polygone\3D\Particle">
+      <UniqueIdentifier>{5ce2def9-4d37-4049-bbcb-73c42cd3469d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Source File\Polygone\3D\Particle3DManager">
+      <UniqueIdentifier>{3ec739a0-2572-47d0-a8e3-2884e559d8fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Source File\Polygone\2D">
+      <UniqueIdentifier>{e51d4b2b-92a7-4a65-aa9d-03229af44e71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Source File\Input">
+      <UniqueIdentifier>{8654ad5d-6e38-43c8-90ef-8d93aa2c6272}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Source File\TextureManager">
+      <UniqueIdentifier>{7cee7120-9bf3-4b3b-a93a-30c9b8710e6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Source File\Audio">
+      <UniqueIdentifier>{4e9ce233-b84c-4858-95a3-08d752302d12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Source File\Pipeline">
+      <UniqueIdentifier>{dd9a03be-6394-4e47-b16e-f7b88147685e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Source File\Camera">
+      <UniqueIdentifier>{87a8506f-b468-4ee9-a25f-edaaa2092b76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Source File\ModelManager">
+      <UniqueIdentifier>{2747883a-dcbe-4951-b835-e69a4e599a81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Source File\SrvManager">
+      <UniqueIdentifier>{4f83e7d1-c856-4e25-9517-e1f481814346}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Header File">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="YTEngine\Header File\Common">
+      <UniqueIdentifier>{489343cf-64f2-4e1a-99e3-9a53fd5598b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Header File\Math">
+      <UniqueIdentifier>{b543a5c7-1ed6-4ca8-ac06-3165a71162a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Header File\Math\Vector">
+      <UniqueIdentifier>{aaf74c02-09fc-4fb3-8841-c46e52af7448}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Header File\Math\Matrix">
+      <UniqueIdentifier>{979fd626-d0ee-4f17-8e46-8c4d9e8a2bb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Header File\Math\Shape">
+      <UniqueIdentifier>{4de1d903-5e8b-49b9-b9c0-f0d9591a86c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Header File\ImGui">
+      <UniqueIdentifier>{14d4744c-9636-4620-8765-10b4ee6446ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Header File\ConvertFunction">
+      <UniqueIdentifier>{88525f3c-706e-4397-b214-f9c6099be35f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Header File\Polygone">
+      <UniqueIdentifier>{7d6b79d6-b619-47a8-8605-e65a4fad754b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Header File\Polygone\2D">
+      <UniqueIdentifier>{83900f6e-9ffb-4fd9-992c-e68b69015b2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Header File\Polygone\3D">
+      <UniqueIdentifier>{f7f05086-715d-489d-9568-38cf742858b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Header File\Polygone\3D\Particle">
+      <UniqueIdentifier>{d3eb6c6b-887b-4ad2-b25a-d06e1be2d5be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Header File\Polygone\3D\Sphere">
+      <UniqueIdentifier>{e202b27b-4fd4-47d6-917f-053ff7d7086c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Header File\Polygone\3D\Model">
+      <UniqueIdentifier>{fafdcfea-8c0f-4b2e-a2c4-892975276f5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Header File\Polygone\3D\Particle3DManager">
+      <UniqueIdentifier>{d8dd8122-9282-4dc5-83dd-13e2bca63bf8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Header File\Polygone\3D\AnimationModel">
+      <UniqueIdentifier>{305d7fc5-1fb5-4be1-a271-b6c4eaa923b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Header File\Input">
+      <UniqueIdentifier>{bd6a7a20-7921-47f1-a1ef-c5a99c26491a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Header File\Audio">
+      <UniqueIdentifier>{38c8c39f-90cc-4b8a-99bb-e3a6cf511aa2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Header File\Pipeline">
+      <UniqueIdentifier>{960690e0-f2d3-4f0a-a7e9-81f206ff3f49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Header File\TextureManager">
+      <UniqueIdentifier>{923fe313-40bb-48ce-aa0b-eb17ee0b5333}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Header File\Camera">
+      <UniqueIdentifier>{21e76dcb-803b-4fd7-91bd-042fb6766ede}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Header File\Lighting">
+      <UniqueIdentifier>{6894304a-98cd-4168-b852-c62f99047467}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Header File\AdjustmentItems">
+      <UniqueIdentifier>{790ca7fe-3aed-4cdc-bdf7-edc3fdacdae6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Header File\ModelManager">
+      <UniqueIdentifier>{3d3be091-044e-42b8-93ea-7d8380a25a1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Header File\Animation">
+      <UniqueIdentifier>{97ce354a-4949-41c4-886a-96dc659bbfc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Header File\Manager">
+      <UniqueIdentifier>{3843d394-1415-4d74-a180-2e7806e3ddf5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Resource File">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="YTEngine\Resource File\Object2d">
+      <UniqueIdentifier>{4ce80b78-a1ee-4775-a383-6c321fe1a91b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Resource File\Object3d">
+      <UniqueIdentifier>{50a3e48e-01ba-4cc1-95a6-f0f6473efa6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Resource File\Object3d\SkinningObject3D">
+      <UniqueIdentifier>{787ef094-af7b-4197-b31c-b8867e74d3ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Resource File\Particle3D">
+      <UniqueIdentifier>{b41805c9-84ac-4738-9010-423926ba4b89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YTEngine\Resource File\AnimationObject3D">
+      <UniqueIdentifier>{9eccab60-4ff5-457b-9904-6ce6fe4d5a63}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="YTEngine\Math\Matrix\Calculation\Matrix4x4Calculation.cpp">
+      <Filter>YTEngine\Source File\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\EngineCore\ImGuiManager\ImGuiManager.cpp">
+      <Filter>YTEngine\Source File\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\Math\Vector\Calculation\VectorCalculation.cpp">
+      <Filter>YTEngine\Source File\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\EngineCore\DirectXCommon\DirectXCommon.cpp">
+      <Filter>YTEngine\Source File\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\Conversion\CompileShader\CompileShaderManager.cpp">
+      <Filter>YTEngine\Source File\ConvertFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\Input\Input.cpp">
+      <Filter>YTEngine\Source File\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Game\GameManager\GameManager.cpp">
+      <Filter>Project\GameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\ResourceManager\TextureManager\TextureManager.cpp">
+      <Filter>YTEngine\Source File\TextureManager</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\EngineCore\WinApp\WinApp.cpp">
+      <Filter>YTEngine\Source File\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Game\GameScene\GameScene.cpp">
+      <Filter>Project\GameScene\Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\Camera\Camera.cpp">
+      <Filter>YTEngine\Source File\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\Graphics\3D\Model\Model.cpp">
+      <Filter>YTEngine\Source File\Polygone\3D\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\ResourceManager\PipelineManager\PipelineManager.cpp">
+      <Filter>YTEngine\Source File\Pipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\EngineCore\YTEngine\YTEngine.cpp">
+      <Filter>YTEngine\Source File</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\Conversion\ConvertColor\ConvertColor.cpp">
+      <Filter>YTEngine\Source File\ConvertFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\Conversion\ConvertLog\ConvertLog.cpp">
+      <Filter>YTEngine\Source File\ConvertFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\Graphics\2D\Sprite\Sprite.cpp">
+      <Filter>YTEngine\Source File\Polygone\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\Graphics\3D\Sphere\Sphere.cpp">
+      <Filter>YTEngine\Source File\Polygone\3D\Sphere</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\Graphics\2D\Triangle\Triangle.cpp">
+      <Filter>YTEngine\Source File\Polygone\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\Graphics\3D\Particle3D\Particle3D.cpp">
+      <Filter>YTEngine\Source File\Polygone\3D\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\main.cpp">
+      <Filter>YTEngine\Source File</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\Math\WorldTransform\WorldTransform.cpp">
+      <Filter>YTEngine\Source File\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\Graphics\3D\ModelManager\ModelManager.cpp">
+      <Filter>YTEngine\Source File\ModelManager</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\Graphics\3D\Particle3DManager\Particle3DManager.cpp">
+      <Filter>YTEngine\Source File\Polygone\3D\Particle3DManager</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\Line\Line.cpp">
+      <Filter>YTEngine\Source File</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\Math\Quaternion\Quaternion.cpp">
+      <Filter>YTEngine\Source File\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\Utility\GlobalVariables\GlobalVariables.cpp">
+      <Filter>YTEngine\Source File</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\Graphics\3D\ModelManager\ReadNode.cpp">
+      <Filter>YTEngine\Source File\ModelManager</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\Math\Collision\Collision.cpp">
+      <Filter>Project</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\Graphics\3D\ModelManager\Skeleton.cpp">
+      <Filter>YTEngine\Source File\ModelManager</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\Graphics\3D\ModelManager\Animation.cpp">
+      <Filter>YTEngine\Source File\ModelManager</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\Graphics\3D\ModelManager\Joint.cpp">
+      <Filter>YTEngine\Source File\ModelManager</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\Graphics\3D\ModelManager\SkinCluster.cpp">
+      <Filter>YTEngine\Source File\ModelManager</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\ResourceManager\SrvManager\SrvManager.cpp">
+      <Filter>YTEngine\Source File\SrvManager</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\Manager\AnimationManager\AnimationManager.cpp">
+      <Filter>YTEngine\Source File</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\Graphics\3D\AnimationModel\AnimationModel.cpp">
+      <Filter>YTEngine\Source File</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\Audio\Audio.cpp">
+      <Filter>YTEngine\Source File</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Resources\Shader\Particle3D\Particle3d.PS.hlsl">
+      <Filter>YTEngine\Resource File\Particle3D</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\Particle3D\Particle3d.VS.hlsl">
+      <Filter>YTEngine\Resource File\Particle3D</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\Object2D\Object2d.PS.hlsl">
+      <Filter>YTEngine\Resource File\Object2d</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\Object2D\Object2d.VS.hlsl">
+      <Filter>YTEngine\Resource File\Object2d</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\Object3D\Object3d.PS.hlsl">
+      <Filter>YTEngine\Resource File\Object3d</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\Object3D\Object3d.VS.hlsl">
+      <Filter>YTEngine\Resource File\Object3d</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\AnimationObject3D\AnimationObject3D.PS.hlsl">
+      <Filter>YTEngine\Resource File\AnimationObject3D</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\AnimationObject3D\AnimationObject3D.VS.hlsl">
+      <Filter>YTEngine\Resource File\AnimationObject3D</Filter>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="YTEngine\Math\Vector\Vector3.h">
+      <Filter>YTEngine\Header File\Math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Math\Vector\Vector4.h">
+      <Filter>YTEngine\Header File\Math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Math\Matrix\Calculation\Matrix4x4Calculation.h">
+      <Filter>YTEngine\Header File\Math\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\EngineCore\ImGuiManager\ImGuiManager.h">
+      <Filter>YTEngine\Header File\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Math\Vector\Transform.h">
+      <Filter>YTEngine\Header File\Math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Math\Vector\Calculation\VectorCalculation.h">
+      <Filter>YTEngine\Header File\Math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Math\Vector\Vector2.h">
+      <Filter>YTEngine\Header File\Math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Math\Vector\VertexData.h">
+      <Filter>YTEngine\Header File\Math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Math\Vector\Material.h">
+      <Filter>YTEngine\Header File\Math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Math\Vector\DirectionalLight.h">
+      <Filter>YTEngine\Header File\Math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\EngineCore\DirectXCommon\DirectXCommon.h">
+      <Filter>YTEngine\Header File\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Conversion\CompileShader\CompileShaderManager.h">
+      <Filter>YTEngine\Header File\ConvertFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Input\Input.h">
+      <Filter>YTEngine\Header File\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Game\GameManager\IGameScene.h">
+      <Filter>Project\GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\ResourceManager\TextureManager\TextureManager.h">
+      <Filter>YTEngine\Header File\TextureManager</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\EngineCore\WinApp\WinApp.h">
+      <Filter>YTEngine\Header File\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Game\GameManager\GameManager.h">
+      <Filter>Project\GameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Game\GameScene\GameScene.h">
+      <Filter>Project\GameScene\Sample</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Camera\Camera.h">
+      <Filter>YTEngine\Header File\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\ResourceManager\PipelineManager\PipelineManager.h">
+      <Filter>YTEngine\Header File\Pipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Graphics\3D\Particle3D\Particle.h">
+      <Filter>YTEngine\Header File\Polygone\3D\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Graphics\3D\Particle3D\Particle3D.h">
+      <Filter>YTEngine\Header File\Polygone\3D\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\EngineCore\YTEngine\YTEngine.h">
+      <Filter>YTEngine\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Math\Matrix\Matrix3x3.h">
+      <Filter>YTEngine\Header File\Math\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Math\Matrix\Matrix4x4.h">
+      <Filter>YTEngine\Header File\Math\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Math\Matrix\TransformationMatrix.h">
+      <Filter>YTEngine\Header File\Math\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Conversion\ConvertLog\ConvertLog.h">
+      <Filter>YTEngine\Header File\ConvertFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Conversion\ConvertColor\ConvertColor.h">
+      <Filter>YTEngine\Header File\ConvertFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Graphics\2D\Sprite\Sprite.h">
+      <Filter>YTEngine\Header File\Polygone\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Graphics\3D\Sphere\Sphere.h">
+      <Filter>YTEngine\Header File\Polygone\3D\Sphere</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Graphics\2D\Triangle\Triangle.h">
+      <Filter>YTEngine\Header File\Polygone\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Graphics\3D\Model\Model.h">
+      <Filter>YTEngine\Header File\Polygone\3D\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Graphics\3D\Particle3D\AccelerationField.h">
+      <Filter>YTEngine\Header File\Polygone\3D\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Math\Shape\AABB.h">
+      <Filter>YTEngine\Header File\Math\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Math\WorldTransform\WorldTransform.h">
+      <Filter>YTEngine\Header File\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Line\Line.h">
+      <Filter>YTEngine\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Lighting\PointLight.h">
+      <Filter>YTEngine\Header File\Lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Lighting\SpotLight.h">
+      <Filter>YTEngine\Header File\Lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Graphics\3D\ModelManager\ModelManager.h">
+      <Filter>YTEngine\Header File\ModelManager</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\ResourceManager\SrvManager\SrvManager.h">
+      <Filter>YTEngine\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Graphics\3D\Particle3DManager\Particle3DManager.h">
+      <Filter>YTEngine\Header File\Polygone\3D\Particle3DManager</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Math\Quaternion\Quaternion.h">
+      <Filter>YTEngine\Header File\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="External\nlohmann\json_fwd.hpp">
+      <Filter>External</Filter>
+    </ClInclude>
+    <ClInclude Include="External\nlohmann\json.hpp">
+      <Filter>External</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Math\Shape\SphereShape.h">
+      <Filter>YTEngine\Header File\Math\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Graphics\3D\MaterialData\MaterialData.h">
+      <Filter>YTEngine\Header File\Polygone\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Utility\GlobalVariables\GlobalVariables.h">
+      <Filter>YTEngine\Header File\AdjustmentItems</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Graphics\3D\ModelManager\Node.h">
+      <Filter>YTEngine\Header File\ModelManager</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Graphics\3D\ModelManager\ReadNode.h">
+      <Filter>YTEngine\Header File\ModelManager</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Math\Collision\Collision.h">
+      <Filter>Project</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Graphics\3D\ModelManager\KeyFrame.h">
+      <Filter>YTEngine\Header File\ModelManager</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Graphics\3D\ModelManager\NodeAnimation.h">
+      <Filter>YTEngine\Header File\ModelManager</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Graphics\3D\ModelManager\Animation.h">
+      <Filter>YTEngine\Header File\ModelManager</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Math\Transform\EulerTransform.h">
+      <Filter>YTEngine\Header File\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Math\Transform\QuaternionTransform.h">
+      <Filter>YTEngine\Header File\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Graphics\3D\ModelManager\Joint.h">
+      <Filter>YTEngine\Header File\ModelManager</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Graphics\3D\ModelManager\Skeleton.h">
+      <Filter>YTEngine\Header File\ModelManager</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Graphics\3D\ModelManager\VertexWeightData.h">
+      <Filter>YTEngine\Header File\ModelManager</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Graphics\3D\ModelManager\JoinWeightData.h">
+      <Filter>YTEngine\Header File\ModelManager</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Graphics\3D\ModelManager\ModelData.h">
+      <Filter>YTEngine\Header File\ModelManager</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Graphics\3D\ModelManager\SkinCluster.h">
+      <Filter>YTEngine\Header File\ModelManager</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Graphics\3D\ModelManager\VertexInfluence.h">
+      <Filter>YTEngine\Header File\ModelManager</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Graphics\3D\ModelManager\WellForGPU.h">
+      <Filter>YTEngine\Header File\ModelManager</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Manager\AnimationManager\AnimationManager.h">
+      <Filter>YTEngine\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Graphics\3D\AnimationModel\AnimationModel.h">
+      <Filter>YTEngine\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Lighting\LightingType.h">
+      <Filter>YTEngine\Header File\Lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Audio\Audio.h">
+      <Filter>YTEngine\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\Audio\AudioStruct.h">
+      <Filter>YTEngine\Header File</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Shader\Particle3D\Particle3D.hlsli">
+      <Filter>YTEngine\Resource File\Particle3D</Filter>
+    </None>
+    <None Include="Resources\Shader\Object2D\Object2d.hlsli">
+      <Filter>YTEngine\Resource File\Object2d</Filter>
+    </None>
+    <None Include="Resources\Shader\Object3D\Object3d.hlsli">
+      <Filter>YTEngine\Resource File\Object3d</Filter>
+    </None>
+    <None Include=".editorconfig">
+      <Filter>Text</Filter>
+    </None>
+    <None Include=".gitattributes">
+      <Filter>Text</Filter>
+    </None>
+    <None Include=".gitignore">
+      <Filter>Text</Filter>
+    </None>
+    <None Include="Resources\Shader\AnimationObject3D\AnimationObject3D.hlsli">
+      <Filter>YTEngine\Resource File\AnimationObject3D</Filter>
+    </None>
+  </ItemGroup>
+</Project>

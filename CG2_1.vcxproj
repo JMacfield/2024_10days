@@ -1,0 +1,296 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Demo|x64">
+      <Configuration>Demo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{cf451278-00c1-4d36-95d3-b55ae87e0973}</ProjectGuid>
+    <RootNamespace>CG21</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>YTEngine</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(ProjectDir)External\nlohmann;$(ProjectDir)External\DirectXTex;$(ProjectDir)External\ImGui</IncludePath>
+    <IntDir>$(SolutionDir)..\Generated\Obj\$(ProjectName)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)..\Generated\Outputs\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(ProjectDir)External\nlohmann;$(ProjectDir)External\DirectXTex;$(ProjectDir)External\ImGui</IncludePath>
+    <IntDir>$(SolutionDir)..\Generated\Obj\$(ProjectName)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)..\Generated\Outputs\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">
+    <IncludePath>$(ProjectDir)External\nlohmann;$(ProjectDir)External\DirectXTex;$(ProjectDir)External\ImGui</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;USE_IMGUI;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>$(ProjectDir)YTEngine\ResourceManager\SrvManager;$(ProjectDir)YTEngine\Audio;$(ProjectDir)\YTEngine\Lighting;$(ProjectDir)YTEngine\Graphics\3D\ModelManager;$(ProjectDir)\External\assimp\include;$(ProjectDir)YTEngine\Utility\Globalvariables;$(ProjectDir)YTEngine\Input;$(ProjectDir)Project\Game;$(ProjectDir)YTEngine\Camera;$(ProjectDir)YTEngine\ResourceManager\TextureManager;$(ProjectDir)YTEngine\Graphics\2D\Sprite;$(ProjectDir)YTEngine\Graphics\3D\Model;$(ProjectDir)YTEngine\Graphics\3D\Particle3D;$(ProjectDir)YTEngine\EngineCore\DirectXCommon;$(ProjectDir)YTEngine\EngineCore\YTEngine;$(ProjectDir)YTEngine\EngineCore\WinApp;$(ProjectDir)YTEngine\Math\Vector;$(ProjectDir)YTEngine\ResourceManager\PipelineManager;$(ProjectDir)YTEngine\Math\Matrix;$(ProjectDir)YTEngine\Math\WorldTransform;$(ProjectDir)YTEngine\Math\Quaternion;$(ProjectDir)YTEngine\Math\Matrix\Calculation;$(ProjectDir)YTEngine\Conversion\ConvertLog;$(ProjectDir)YTEngine\Conversion\ConvertColor;$(ProjectDir)YTEngine\Conversion\CompileShader;$(ProjectDir)YTEngine\Math\Vector\Calculation;$(ProjectDir)YTEngine\SrvManager;$(ProjectDir)YTEngine\Math\Shape;$(ProjectDir)YTEngine\Graphics\3D\ModelData;$(ProjectDir)YTEngine\Graphics\3D\MaterialData;$(ProjectDir)YTEngine\ConvertFunction\CompileShader;$(ProjectDir)YTEngine\Math\Collision;$(ProjectDir)Project\AllGameScene\GameManager;$(ProjectDir)YTEngine\EngineCore\ImGuiManager;$(ProjectDir)YTEngine\Math\Transform;$(ProjectDir)YTEngine\Manager\AnimationManager;$(ProjectDir)YTEngine\Graphics\3D\AnimationModel</AdditionalIncludeDirectories>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
+      <AdditionalLibraryDirectories>$(ProjectDir)External\assimp\lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>assimp-vc143-mdd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxcompiler.dll" "$(TargetDir)dxcompiler.dll
+copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dxil.dll</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;USE_IMGUI;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>$(ProjectDir)Ellysia\Audio;$(ProjectDir)\Ellysia\Lighting;$(ProjectDir)Ellysia\Polygon\3D\ModelManager;$(ProjectDir)\External\assimp\include;$(ProjectDir)Ellysia\AdjustmentItems;$(ProjectDir)Ellysia\Input;$(ProjectDir)Project\AllGameScene;$(ProjectDir)Ellysia\Camera;$(ProjectDir)Ellysia\TextureManager;$(ProjectDir)Ellysia\Polygon\2D\Sprite;$(ProjectDir)Ellysia\Polygon\3D\Model;$(ProjectDir)Ellysia\Polygon\3D\Particle3D;$(ProjectDir)Ellysia\Common\DirectX;$(ProjectDir)Ellysia\Common\Windows;$(ProjectDir)Ellysia\Math\Vector;$(ProjectDir)Ellysia\PipelineManager;$(ProjectDir)Ellysia\Math\Matrix;$(ProjectDir)Ellysia\Math\WorldTransform;$(ProjectDir)Ellysia\Math\Quaternion;$(ProjectDir)Ellysia\Math\Matrix\Calculation;$(ProjectDir)Ellysia\ConvertFunction\ConvertLog;$(ProjectDir)Ellysia\Math\Vector\Calculation;$(ProjectDir)Ellysia\SrvManager;$(ProjectDir)Ellysia\Math\Shape;$(ProjectDir)Ellysia\Polygon\3D\ModelData;$(ProjectDir)Ellysia\Polygon\3D\MaterialData;$(ProjectDir)Ellysia\ConvertFunction\CompileShader;$(ProjectDir)Ellysia\Math\Collision;$(ProjectDir)Project\AllGameScene\GameManager;$(ProjectDir)Ellysia\ImGuiManager;$(ProjectDir)Ellysia\Math\Transform;$(ProjectDir)Ellysia\Manager\AnimationManager;$(ProjectDir)Ellysia\Polygon\3D\AnimationModel</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
+      <AdditionalLibraryDirectories>$(ProjectDir)External\assimp\lib\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>assimp-vc143-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxcompiler.dll" "$(TargetDir)dxcompiler.dll
+copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dxil.dll</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">
+    <ClCompile>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;USE_IMGUI;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)Ellysia\Audio;$(ProjectDir)\Ellysia\Lighting;$(ProjectDir)Ellysia\Polygon\3D\ModelManager;$(ProjectDir)\External\assimp\include;$(ProjectDir)Ellysia\AdjustmentItems;$(ProjectDir)Ellysia\Input;$(ProjectDir)Project\AllGameScene;$(ProjectDir)Ellysia\Camera;$(ProjectDir)Ellysia\TextureManager;$(ProjectDir)Ellysia\Polygon\2D\Sprite;$(ProjectDir)Ellysia\Polygon\3D\Model;$(ProjectDir)Ellysia\Polygon\3D\Particle3D;$(ProjectDir)Ellysia\Common\DirectX;$(ProjectDir)Ellysia\Common\Windows;$(ProjectDir)Ellysia\Math\Vector;$(ProjectDir)Ellysia\PipelineManager;$(ProjectDir)Ellysia\Math\Matrix;$(ProjectDir)Ellysia\Math\WorldTransform;$(ProjectDir)Ellysia\Math\Quaternion;$(ProjectDir)Ellysia\Math\Matrix\Calculation;$(ProjectDir)Ellysia\ConvertFunction\ConvertLog;$(ProjectDir)Ellysia\Math\Vector\Calculation;$(ProjectDir)Ellysia\SrvManager;$(ProjectDir)Ellysia\Math\Shape;$(ProjectDir)Ellysia\Polygon\3D\ModelData;$(ProjectDir)Ellysia\Polygon\3D\MaterialData;$(ProjectDir)Ellysia\ConvertFunction\CompileShader;$(ProjectDir)Ellysia\Math\Collision;$(ProjectDir)Project\AllGameScene\GameManager;$(ProjectDir)Ellysia\ImGuiManager;$(ProjectDir)Ellysia\Math\Transform;$(ProjectDir)Ellysia\Manager\AnimationManager;$(ProjectDir)Ellysia\Polygon\3D\AnimationModel</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="YTEngine\Audio\Audio.cpp" />
+    <ClCompile Include="YTEngine\Utility\GlobalVariables\GlobalVariables.cpp" />
+    <ClCompile Include="YTEngine\Camera\Camera.cpp" />
+    <ClCompile Include="YTEngine\EngineCore\DirectXCommon\DirectXCommon.cpp" />
+    <ClCompile Include="YTEngine\EngineCore\WinApp\WinApp.cpp" />
+    <ClCompile Include="YTEngine\Conversion\CompileShader\CompileShaderManager.cpp" />
+    <ClCompile Include="YTEngine\Conversion\ConvertColor\ConvertColor.cpp" />
+    <ClCompile Include="YTEngine\Conversion\ConvertLog\ConvertLog.cpp" />
+    <ClCompile Include="YTEngine\EngineCore\YTEngine\YTEngine.cpp" />
+    <ClCompile Include="YTEngine\EngineCore\ImGuiManager\ImGuiManager.cpp" />
+    <ClCompile Include="YTEngine\Input\Input.cpp" />
+    <ClCompile Include="YTEngine\Line\Line.cpp" />
+    <ClCompile Include="YTEngine\main.cpp" />
+    <ClCompile Include="YTEngine\Manager\AnimationManager\AnimationManager.cpp" />
+    <ClCompile Include="YTEngine\Math\Collision\Collision.cpp" />
+    <ClCompile Include="YTEngine\Math\Matrix\Calculation\Matrix4x4Calculation.cpp" />
+    <ClCompile Include="YTEngine\Math\Quaternion\Quaternion.cpp" />
+    <ClCompile Include="YTEngine\Math\Vector\Calculation\VectorCalculation.cpp" />
+    <ClCompile Include="YTEngine\Math\WorldTransform\WorldTransform.cpp" />
+    <ClCompile Include="YTEngine\ResourceManager\PipelineManager\PipelineManager.cpp" />
+    <ClCompile Include="YTEngine\Graphics\2D\Sprite\Sprite.cpp" />
+    <ClCompile Include="YTEngine\Graphics\2D\Triangle\Triangle.cpp" />
+    <ClCompile Include="YTEngine\Graphics\3D\AnimationModel\AnimationModel.cpp" />
+    <ClCompile Include="YTEngine\Graphics\3D\ModelManager\Animation.cpp" />
+    <ClCompile Include="YTEngine\Graphics\3D\ModelManager\Joint.cpp" />
+    <ClCompile Include="YTEngine\Graphics\3D\ModelManager\ModelManager.cpp" />
+    <ClCompile Include="YTEngine\Graphics\3D\ModelManager\ReadNode.cpp" />
+    <ClCompile Include="YTEngine\Graphics\3D\ModelManager\Skeleton.cpp" />
+    <ClCompile Include="YTEngine\Graphics\3D\ModelManager\SkinCluster.cpp" />
+    <ClCompile Include="YTEngine\Graphics\3D\Model\Model.cpp" />
+    <ClCompile Include="YTEngine\Graphics\3D\Particle3DManager\Particle3DManager.cpp" />
+    <ClCompile Include="YTEngine\Graphics\3D\Particle3D\Particle3D.cpp" />
+    <ClCompile Include="YTEngine\Graphics\3D\Sphere\Sphere.cpp" />
+    <ClCompile Include="YTEngine\ResourceManager\SrvManager\SrvManager.cpp" />
+    <ClCompile Include="YTEngine\ResourceManager\TextureManager\TextureManager.cpp" />
+    <ClCompile Include="Project\Game\GameManager\GameManager.cpp" />
+    <ClCompile Include="Project\Game\GameScene\GameScene.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Resources\Shader\AnimationObject3D\AnimationObject3D.PS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\AnimationObject3D\AnimationObject3D.VS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\Object2D\Object2d.PS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\Object2D\Object2d.VS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\Object3D\Object3d.PS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\Object3D\Object3d.VS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\Particle3D\Particle3d.PS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\Particle3D\Particle3d.VS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="YTEngine\Audio\Audio.h" />
+    <ClInclude Include="YTEngine\Audio\AudioStruct.h" />
+    <ClInclude Include="YTEngine\Utility\GlobalVariables\GlobalVariables.h" />
+    <ClInclude Include="YTEngine\Camera\Camera.h" />
+    <ClInclude Include="YTEngine\EngineCore\DirectXCommon\DirectXCommon.h" />
+    <ClInclude Include="YTEngine\EngineCore\WinApp\WinApp.h" />
+    <ClInclude Include="YTEngine\Conversion\CompileShader\CompileShaderManager.h" />
+    <ClInclude Include="YTEngine\Conversion\ConvertColor\ConvertColor.h" />
+    <ClInclude Include="YTEngine\Conversion\ConvertLog\ConvertLog.h" />
+    <ClInclude Include="YTEngine\EngineCore\YTEngine\YTEngine.h" />
+    <ClInclude Include="YTEngine\EngineCore\ImGuiManager\ImGuiManager.h" />
+    <ClInclude Include="YTEngine\Input\Input.h" />
+    <ClInclude Include="YTEngine\Lighting\LightingType.h" />
+    <ClInclude Include="YTEngine\Lighting\PointLight.h" />
+    <ClInclude Include="YTEngine\Lighting\SpotLight.h" />
+    <ClInclude Include="YTEngine\Line\Line.h" />
+    <ClInclude Include="YTEngine\Manager\AnimationManager\AnimationManager.h" />
+    <ClInclude Include="YTEngine\Math\Collision\Collision.h" />
+    <ClInclude Include="YTEngine\Math\Matrix\Calculation\Matrix4x4Calculation.h" />
+    <ClInclude Include="YTEngine\Math\Matrix\Matrix3x3.h" />
+    <ClInclude Include="YTEngine\Math\Matrix\Matrix4x4.h" />
+    <ClInclude Include="YTEngine\Math\Matrix\TransformationMatrix.h" />
+    <ClInclude Include="YTEngine\Math\Quaternion\Quaternion.h" />
+    <ClInclude Include="YTEngine\Math\Shape\AABB.h" />
+    <ClInclude Include="YTEngine\Math\Shape\SphereShape.h" />
+    <ClInclude Include="YTEngine\Math\Transform\EulerTransform.h" />
+    <ClInclude Include="YTEngine\Math\Transform\QuaternionTransform.h" />
+    <ClInclude Include="YTEngine\Math\Vector\Calculation\VectorCalculation.h" />
+    <ClInclude Include="YTEngine\Math\Vector\DirectionalLight.h" />
+    <ClInclude Include="YTEngine\Math\Vector\Material.h" />
+    <ClInclude Include="YTEngine\Math\Vector\Transform.h" />
+    <ClInclude Include="YTEngine\Math\Vector\Vector2.h" />
+    <ClInclude Include="YTEngine\Math\Vector\Vector3.h" />
+    <ClInclude Include="YTEngine\Math\Vector\Vector4.h" />
+    <ClInclude Include="YTEngine\Math\Vector\VertexData.h" />
+    <ClInclude Include="YTEngine\Math\WorldTransform\WorldTransform.h" />
+    <ClInclude Include="YTEngine\ResourceManager\PipelineManager\PipelineManager.h" />
+    <ClInclude Include="YTEngine\Graphics\2D\Sprite\Sprite.h" />
+    <ClInclude Include="YTEngine\Graphics\2D\Triangle\Triangle.h" />
+    <ClInclude Include="YTEngine\Graphics\3D\AnimationModel\AnimationModel.h" />
+    <ClInclude Include="YTEngine\Graphics\3D\MaterialData\MaterialData.h" />
+    <ClInclude Include="YTEngine\Graphics\3D\ModelManager\Animation.h" />
+    <ClInclude Include="YTEngine\Graphics\3D\ModelManager\Joint.h" />
+    <ClInclude Include="YTEngine\Graphics\3D\ModelManager\JoinWeightData.h" />
+    <ClInclude Include="YTEngine\Graphics\3D\ModelManager\KeyFrame.h" />
+    <ClInclude Include="YTEngine\Graphics\3D\ModelManager\ModelData.h" />
+    <ClInclude Include="YTEngine\Graphics\3D\ModelManager\ModelManager.h" />
+    <ClInclude Include="YTEngine\Graphics\3D\ModelManager\Node.h" />
+    <ClInclude Include="YTEngine\Graphics\3D\ModelManager\NodeAnimation.h" />
+    <ClInclude Include="YTEngine\Graphics\3D\ModelManager\ReadNode.h" />
+    <ClInclude Include="YTEngine\Graphics\3D\ModelManager\Skeleton.h" />
+    <ClInclude Include="YTEngine\Graphics\3D\ModelManager\SkinCluster.h" />
+    <ClInclude Include="YTEngine\Graphics\3D\ModelManager\VertexInfluence.h" />
+    <ClInclude Include="YTEngine\Graphics\3D\ModelManager\VertexWeightData.h" />
+    <ClInclude Include="YTEngine\Graphics\3D\ModelManager\WellForGPU.h" />
+    <ClInclude Include="YTEngine\Graphics\3D\Model\Model.h" />
+    <ClInclude Include="YTEngine\Graphics\3D\Particle3DManager\Particle3DManager.h" />
+    <ClInclude Include="YTEngine\Graphics\3D\Particle3D\AccelerationField.h" />
+    <ClInclude Include="YTEngine\Graphics\3D\Particle3D\Particle.h" />
+    <ClInclude Include="YTEngine\Graphics\3D\Particle3D\Particle3D.h" />
+    <ClInclude Include="YTEngine\Graphics\3D\Sphere\Sphere.h" />
+    <ClInclude Include="YTEngine\ResourceManager\SrvManager\SrvManager.h" />
+    <ClInclude Include="YTEngine\ResourceManager\TextureManager\TextureManager.h" />
+    <ClInclude Include="External\nlohmann\json.hpp" />
+    <ClInclude Include="External\nlohmann\json_fwd.hpp" />
+    <ClInclude Include="Project\Game\GameManager\GameManager.h" />
+    <ClInclude Include="Project\Game\GameManager\IGameScene.h" />
+    <ClInclude Include="Project\Game\GameScene\GameScene.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".editorconfig" />
+    <None Include=".gitattributes" />
+    <None Include=".gitignore" />
+    <None Include="Resources\Shader\AnimationObject3D\AnimationObject3D.hlsli" />
+    <None Include="Resources\Shader\Object2D\Object2d.hlsli" />
+    <None Include="Resources\Shader\Object3D\Object3d.hlsli">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="Resources\Shader\Particle3D\Particle3D.hlsli" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="External\DirectXTex\DirectXTex_Desktop_2022_Win10.vcxproj">
+      <Project>{371b9fa9-4c90-4ac6-a123-aced756d6c77}</Project>
+    </ProjectReference>
+    <ProjectReference Include="External\ImGui\ImGui.vcxproj">
+      <Project>{4a762db2-1e1d-47d2-851f-de22b87c24d0}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
