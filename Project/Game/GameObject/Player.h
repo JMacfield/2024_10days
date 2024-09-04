@@ -14,11 +14,7 @@ public: // -- 公開 メンバ関数 -- //
 	void Update();
 	void Draw(Camera camera);
 
-	void Move(Vector3 direction) { 
-		worldTransform_.translate_.x += direction.x; 
-		worldTransform_.translate_.y += direction.y; 
-		worldTransform_.translate_.z += direction.z; 
-	};
+	void Move(Vector3 direction);
 	
 	WorldTransform GetWorld() { return worldTransform_; }
 
@@ -35,6 +31,9 @@ private: // -- 非公開 メンバ変数 -- //
 	Vector3 vel_;
 	// 重力加速度
 	const float kGravityPower_ = 0.49f;
+
+	// 移動限界距離( -x ~ x, -z ~ z)
+	const Vector2 kLimitArea_ = { 4.0f,4.0f };
 
 };
 

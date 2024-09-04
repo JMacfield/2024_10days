@@ -41,3 +41,19 @@ void Player::Draw(Camera camera){
 	//  描画
 	model_->Draw(worldTransform_,camera);
 }
+
+void Player::Move(Vector3 direction){
+
+	// 移動量に応じて移動
+	worldTransform_.translate_.x += direction.x;
+	worldTransform_.translate_.y += direction.y;
+	worldTransform_.translate_.z += direction.z;
+
+	// 限界まで移動していたら押し戻す
+	if (worldTransform_.translate_.x < -kLimitArea_.x) { worldTransform_.translate_.x = -kLimitArea_.x; }
+	if (worldTransform_.translate_.x > kLimitArea_.x) { worldTransform_.translate_.x = kLimitArea_.x; }
+	if (worldTransform_.translate_.z < -kLimitArea_.y) { worldTransform_.translate_.z = -kLimitArea_.y; }
+	if (worldTransform_.translate_.z > kLimitArea_.y) { worldTransform_.translate_.z = kLimitArea_.y; }
+	
+
+}

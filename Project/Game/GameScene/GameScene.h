@@ -39,40 +39,16 @@ public:
 
 
 private:
+	// -- カメラ -- //
 	Camera camera_ = {};
 
-	//SimpleSkin
-	static const int SIMPLE_SKIN_AMOUNT_ = 2;
-	std::unique_ptr<AnimationModel> simpleModel_[SIMPLE_SKIN_AMOUNT_] = { nullptr };
-	uint32_t modelHandle = 0;
-	uint32_t animationHande_ = {};
-	WorldTransform worldTransform_[SIMPLE_SKIN_AMOUNT_] = {};
-	
-	Skeleton skeleton_[SIMPLE_SKIN_AMOUNT_] = {};
-	float animationTime_[SIMPLE_SKIN_AMOUNT_] = {};
-	SkinCluster skinCluster_[SIMPLE_SKIN_AMOUNT_] = {};
-
-	//歩き
-	static const int WALK_HUMAN_AMOUNT_ = 2;
-	std::unique_ptr<AnimationModel> human_[WALK_HUMAN_AMOUNT_] = { nullptr };
-	uint32_t humanModelHandle = {};
-	uint32_t humanAnimationModel_ = {};
-	WorldTransform humanWorldTransform_[WALK_HUMAN_AMOUNT_] = {};
-	Skeleton humanSkeleton_[WALK_HUMAN_AMOUNT_] = {};
-	float humanAnimationTime_[WALK_HUMAN_AMOUNT_] = {};
-	SkinCluster humanSkinCluster_[WALK_HUMAN_AMOUNT_] = {};
-
-	// 床(仮置き)
+	// -- 床(仮置き) -- //
 	std::unique_ptr<Model> planeModel_ = nullptr;
 	uint32_t planeModelHandle_ = 0;
 	WorldTransform planeModelWorldTransform_ = {};
 	
+
 	float debugFloat_;
-
-	std::unique_ptr<Model> noneAnimationModel_ = nullptr;
-	WorldTransform noneAnimationWorldTransform_ = {};
-
-	const char* GroupName = "Player";
 
 	// -- Player -- //
 	std::unique_ptr<Player> player_;
