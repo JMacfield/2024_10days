@@ -19,7 +19,9 @@ GameScene::GameScene() {
 void GameScene::Initialize() {
 	
 	modelHandle = ModelManager::GetInstance()->LoadModelFile("Resources/AssignmentModel/simpleSkin", "simpleSkin.gltf");
-	
+	planeModelHandle_ = ModelManager::GetInstance()->LoadModelFile("Resources/AssignmentModel/plane", "plane.gltf");
+
+
 	for (int i = 0; i < SIMPLE_SKIN_AMOUNT_; ++i) {
 		skeleton_[i].Create(ModelManager::GetInstance()->GetModelData(modelHandle).rootNode);
 		skinCluster_[i].Create(skeleton_[i], ModelManager::GetInstance()->GetModelData(modelHandle));
@@ -40,7 +42,7 @@ void GameScene::Initialize() {
 	//Walk
 	humanModelHandle = ModelManager::GetInstance()->LoadModelFile("Resources/AssignmentModel/human", "walk.gltf");
 	humanAnimationModel_ = AnimationManager::GetInstance()->LoadFile("Resources/AssignmentModel/human", "walk.gltf");
-
+	
 	for (int i = 0; i < WALK_HUMAN_AMOUNT_; ++i) {
 		human_[i].reset(AnimationModel::Create(humanModelHandle));
 		humanWorldTransform_[i].Initialize();
@@ -54,12 +56,11 @@ void GameScene::Initialize() {
 	humanWorldTransform_[0].translate_.y = 0.5f;
 	humanWorldTransform_[1].translate_.y = -2.0f;
 
-	//Animation無し
-
-	humanNoneAnimation_.reset(Model::Create(humanModelHandle));
-	humanNoneAnimationWorldTransform_.Initialize();
-	humanNoneAnimationWorldTransform_.translate_.x = -2.0f;
-	humanNoneAnimationWorldTransform_.translate_.y = 0.5f;
+	// -- 床 仮置き -- //
+	planeModel_.reset(Model::Create(planeModelHandle_));
+	
+	planeModelWorldTransform_.Initialize();
+	planeModelWorldTransform_.scale_ = { 32.0f,1.0f,32.0f };
 
 	//球
 	//uint32_t noneModelHandle = ModelManager::GetInstance()->LoadModelFile("Resources/CG3/Sphere", "Sphere.obj");
@@ -70,11 +71,19 @@ void GameScene::Initialize() {
 	noneAnimationWorldTransform_.translate_.x = -2.0f;
 	noneAnimationWorldTransform_.translate_.y = -1.0f;
 
+	// カメラ
 	camera_.Initialize();
+	camera_.rotate_= {1.57f,0.0f,0.0f};
+	camera_.translate_ = {0.0f,100.0f,0.0f};
 
 	for (int i = 0; i < SIMPLE_SKIN_AMOUNT_; ++i) {
 		worldTransform_[i].rotate_.y = 3.1415f;
 	}
+
+	// -- Player 初期化 -- //
+	player_ = std::make_unique<Player>();
+	player_->Init();
+
 }
 
 /// <summary>
@@ -85,6 +94,7 @@ void GameScene::Update(GameManager* gameManager) {
 
 	XINPUT_STATE joyState;
 
+	camera_.translate_.y = player_->GetWorld().translate_.y + 25.0f;
 	camera_.Update();
 
 	animationTime_[0] += 1.0f / 60.0f;
@@ -134,15 +144,31 @@ void GameScene::Update(GameManager* gameManager) {
 
 #ifdef _DEBUG
 	
+	if (Input::GetInstance()->IsPushLeft(joyState)) {
+		player_->Init();
+	}
 
 #endif
 	for (int i = 0; i < WALK_HUMAN_AMOUNT_; ++i) {
 		humanWorldTransform_[i].Update();
 	}
+
+	// -- Player 更新 -- //
+	player_->Update();
+
+	// -- 床 -- //
+	planeModelWorldTransform_.Update();
 }
 
 void GameScene::Draw() {
 	human_[0]->Draw(humanWorldTransform_[0], camera_, humanSkinCluster_[0]);
+
+	// -- 床 描画-- //
+	planeModel_->Draw(planeModelWorldTransform_, camera_);
+
+	// -- Player 描画 -- //
+	player_->Draw(camera_);
+
 }
 
 GameScene::~GameScene() {

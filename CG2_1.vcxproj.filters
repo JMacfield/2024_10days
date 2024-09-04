@@ -181,6 +181,9 @@
     <Filter Include="YTEngine\Resource File\AnimationObject3D">
       <UniqueIdentifier>{9eccab60-4ff5-457b-9904-6ce6fe4d5a63}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\GameObject">
+      <UniqueIdentifier>{14f8c1fa-1218-49b1-aea3-dfec175d86d2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="YTEngine\Math\Matrix\Calculation\Matrix4x4Calculation.cpp">
@@ -293,6 +296,9 @@
     </ClCompile>
     <ClCompile Include="YTEngine\Audio\Audio.cpp">
       <Filter>YTEngine\Source File</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Game\GameObject\Player.cpp">
+      <Filter>Project\GameObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -525,6 +531,9 @@
     </ClInclude>
     <ClInclude Include="YTEngine\Audio\AudioStruct.h">
       <Filter>YTEngine\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Game\GameObject\Player.h">
+      <Filter>Project\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -12,6 +12,9 @@
 #include <Particle3D.h>
 #include "SkinCluster.h"
 
+// ゲームオブジェクト
+#include "GameObject/Player.h"
+
 //StatePatternを使う時は必ず前方宣言をするように
 class Gamemanager;
 
@@ -59,10 +62,10 @@ private:
 	float humanAnimationTime_[WALK_HUMAN_AMOUNT_] = {};
 	SkinCluster humanSkinCluster_[WALK_HUMAN_AMOUNT_] = {};
 
-	//歩き(アニメーションなし)
-	std::unique_ptr<Model> humanNoneAnimation_ = nullptr;
-	uint32_t humanNoneAnimationModelHandle_ = 0;
-	WorldTransform humanNoneAnimationWorldTransform_ = {};
+	// 床(仮置き)
+	std::unique_ptr<Model> planeModel_ = nullptr;
+	uint32_t planeModelHandle_ = 0;
+	WorldTransform planeModelWorldTransform_ = {};
 	
 	float debugFloat_;
 
@@ -70,4 +73,9 @@ private:
 	WorldTransform noneAnimationWorldTransform_ = {};
 
 	const char* GroupName = "Player";
+
+	// -- Player -- //
+	std::unique_ptr<Player> player_;
+
+
 };
