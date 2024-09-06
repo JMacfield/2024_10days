@@ -5,6 +5,14 @@
 #include "TextureManager.h"
 #include "Camera.h"
 
+// 重力加速度
+const float kGravityPower_ = 0.49f;
+// 移動限界距離( -x ~ x, -z ~ z)
+const Vector2 kLimitArea_ = { 4.0f,4.0f };
+// フレームレート(仮)
+const float kFlamerate = 60.0f;
+
+
 class Player {
 public: // -- 公開 メンバ関数 -- //
 
@@ -18,6 +26,9 @@ public: // -- 公開 メンバ関数 -- //
 	void Move(Vector3 direction);
 	
 	WorldTransform GetWorld() { return worldTransform_; }
+
+	// 被弾時の減速処理
+	void ResiveSpeedDoun(float power);
 
 	// 隕石の落下スピード取得
 	float GetSpeed() const { return vel_.y; }
@@ -39,14 +50,15 @@ private: // -- 非公開 メンバ変数 -- //
 	// 加速度
 	float acc;
 
-	// 重力加速度
-	const float kGravityPower_ = 0.49f;
-
-	// 移動限界距離( -x ~ x, -z ~ z)
-	const Vector2 kLimitArea_ = { 4.0f,4.0f };
-
-	float t;
+	// 線形補間時間(0.0f ~ 1.0f)
+	float normalT;
+	// イージング時間(0.0f ~ 1.0f)
 	float easeT;
+	// 衝突時の減算量を保持(0.0f ~ 1.0f)
+	float reverseT;
+
+	// ゲーム時間(単位は秒)
+	float inGameTime;
 
 };
 

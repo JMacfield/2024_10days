@@ -19,18 +19,40 @@ void Player::Init(){
 	// 加速度 初期化
 	acc = 0.0f;
 
-	t = 0.0f;
+	// 線形補間時間(0.0f ~ 1.0f)
+	normalT = 0.0f;
+	// イージング時間(0.0f ~ 1.0f)
 	easeT = 0.0f;
+	// 衝突時の減算量を保持(0.0f ~ 1.0f)
+	reverseT = 0.0f;
+	
+	// ゲーム時間(単位は秒)
+	inGameTime = 30.0f;
+
+
 
 }
 
 void Player::Update(){
 	
-	if (t < 1.0f) {
-		// フレームレート * ゲーム時間(3分)で補間
-		t += 1.0f / (60.0f * 180.0f);
+	// time加算処理
+	if (normalT < 1.0f) {
+
+		// 被弾時に保持した値が0より上であればtを減少させる
+		if (reverseT > 0.0f) {
+			reverseT -= 1.0f / (kFlamerate * inGameTime);
+			normalT -= 1.0f / (kFlamerate * inGameTime);
+			if (reverseT < 0.0f) {
+				reverseT = 0.0f;
+			}
+		}
+		// 通常時の処理 
+		else {
+			// フレームレート * ゲーム時間(3分)で補間
+			normalT += 1.0f / (kFlamerate * inGameTime);
+		}
 		// イージング
-		easeT = GetSpeedForEaseInOutQuad(t);
+		easeT = GetSpeedForEaseInOutQuad(normalT);
 	}
 
 	// 落下
@@ -77,23 +99,23 @@ void Player::Debug()
 		ImGui::DragFloat("Acc", &this->acc, 0.0f);
 		// 小数点を2桁のみ表示
 		std::ostringstream ossNormalT;
-		ossNormalT << std::fixed << std::setprecision(2) << t;
+		ossNormalT << std::fixed << std::setprecision(2) << normalT;
 		std::string strNormalT = "NormalT : " + ossNormalT.str();
-		ImGui::ProgressBar(t, ImVec2(-1.0f, 0.0f), strNormalT.c_str());
+		ImGui::ProgressBar(normalT, ImVec2(-1.0f, 0.0f), strNormalT.c_str());
 		// 小数点を2桁のみ表示
 		std::ostringstream ossEaseT;
 		ossEaseT << std::fixed << std::setprecision(2) << easeT;
 		std::string strEaseT = "EaseT : " + ossEaseT.str();
 		ImGui::ProgressBar(easeT, ImVec2(-1.0f, 0.0f), strEaseT.c_str());
 
-		const int32_t LineSize = 15;
+		const int32_t LineSize = 100;
 		float values[LineSize] = {};
-		float tt = 0.0f;
+		float t = 0.0f;
 		for (int32_t i = 0; i < LineSize; i++) {
-			tt = (float)i / (float)LineSize;
-			tt = GetSpeedForEaseInOutQuad(tt);
+			t = (float)i / (float)LineSize;
+			t = GetSpeedForEaseInOutQuad(t);
 			// イージングで移動量を設定
-			values[i] = (1.0f - tt) * 0.0f + tt * 100.0f;
+			values[i] = (1.0f - t) * 0.0f + t * 100.0f;
 		}
 		int valuesCount = sizeof(values) / sizeof(float);
 
@@ -108,10 +130,10 @@ void Player::Debug()
 
 		// プロットの幅を計算 (各点のX軸の間隔)
 		float stepX = 200.0f / (valuesCount - 1);  // データ点間のX軸距離
-		float easedValue = GetSpeedForEaseInOutQuad(t) * 100.0f;  // イージングに基づいた値
+		float easedValue = GetSpeedForEaseInOutQuad(normalT) * 100.0f;  // イージングに基づいた値
 
 		// 各データポイントの画面座標を計算
-		ImVec2 pointPos = ImVec2(plotPos.x + (valuesCount - 1) * stepX * t,
+		ImVec2 pointPos = ImVec2(plotPos.x + (valuesCount - 1) * stepX * normalT,
 			plotPos.y + (1.0f - easedValue / 100.0f) * 200.0f);
 
 		// 赤い円を描画
@@ -127,11 +149,11 @@ void Player::Debug()
 	}
 
 	// デバッグ操作
-	if (ImGui::CollapsingHeader("Advanced Settings")) {
+	if (ImGui::CollapsingHeader("Advanced Setings")) {
 		// リセット
 		if (ImGui::Button("Reset")) {this->Init();}
 		// 被弾による加速度減少
-		if (ImGui::Button("Slow")) { this->acc = -0.1f; }
+		if (ImGui::Button("Slow")) { this->ResiveSpeedDoun(0.02f); }
 
 	}
 
@@ -158,15 +180,23 @@ void Player::Move(Vector3 direction){
 
 }
 
-float Player::GetSpeedForEaseInOutQuad(float tt)
+
+void Player::ResiveSpeedDoun(float power){
+
+	// powerに応じてtの値をを減少させる
+	this->reverseT += power;
+
+}
+
+float Player::GetSpeedForEaseInOutQuad(float t)
 {
 
 	float result = 0.0f;
-	if (tt < 0.5f) {
-		result = 2.0f * tt * tt;
+	if (t < 0.5f) {
+		result = 2.0f * t * t;
 	}
 	else {
-		result = 1 - std::pow(-2.0f * tt + 2.0f, 2.0f) / 2.0f;
+		result = 1 - std::pow(-2.0f * t + 2.0f, 2.0f) / 2.0f;
 
 	}
 	return result;
