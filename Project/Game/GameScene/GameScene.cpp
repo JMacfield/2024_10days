@@ -113,6 +113,23 @@ void GameScene::Update(GameManager* gameManager) {
 	// -- 床 更新 -- //
 	planeModelWorldTransform_.Update();
 
+	// -- UI 更新 -- //
+
+	// 速度に応じて画像を変更
+	float speed = player_->GetSpeed() * 100.0f;
+	int32_t viewSpeed = std::abs((int32_t)speed);
+	
+	speedUI_[0]->SetTexture(numberTexHandle_[(viewSpeed / 10000)]);
+	viewSpeed = viewSpeed % 10000;
+	speedUI_[1]->SetTexture(numberTexHandle_[(viewSpeed / 1000)]);
+	viewSpeed = viewSpeed % 1000;
+	speedUI_[2]->SetTexture(numberTexHandle_[(viewSpeed / 100)]);
+	viewSpeed = viewSpeed % 100;
+	speedUI_[4]->SetTexture(numberTexHandle_[(viewSpeed / 10)]);
+	viewSpeed = viewSpeed % 10;
+	speedUI_[5]->SetTexture(numberTexHandle_[(viewSpeed)]);
+
+
 }
 
 void GameScene::Draw() {

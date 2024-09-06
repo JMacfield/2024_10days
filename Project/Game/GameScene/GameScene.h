@@ -62,6 +62,4 @@ private:
 	// 文字テクスチャ
 	std::map<std::string, int32_t> stringTexHandle_;
 
-
-
 };
