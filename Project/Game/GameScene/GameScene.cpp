@@ -28,6 +28,10 @@ void GameScene::Initialize() {
 	player_ = std::make_unique<Player>();
 	player_->Init();
 
+	//enemy初期化
+	enemy_ = std::make_unique<Enemy>();
+	enemy_->Initialize();
+
 	// -- カメラ 初期化 -- //
 	camera_.Initialize();
 	camera_.rotate_= {1.57f,0.0f,0.0f};
@@ -110,6 +114,9 @@ void GameScene::Update(GameManager* gameManager) {
 	// -- Player 更新 -- //
 	player_->Update();
 
+	//enemy更新
+	enemy_->Update();
+
 	// -- 床 更新 -- //
 	planeModelWorldTransform_.Update();
 
@@ -122,6 +129,9 @@ void GameScene::Draw() {
 
 	// -- Player 描画 -- //
 	player_->Draw(camera_);
+
+	//enemy描画
+	enemy_->Draw(camera_);
 
 	// -- テクスチャ 更新 -- // 
 	for (int32_t i = 0; i < speedUI_.size(); i++) {
