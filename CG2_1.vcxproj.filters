@@ -303,6 +303,9 @@
     <ClCompile Include="Project\Game\GameObject\Enemy\Enemy.cpp">
       <Filter>YTEngine\Source File</Filter>
     </ClCompile>
+    <ClCompile Include="Project\Game\GameObject\Enemy\Missile\Missile.cpp">
+      <Filter>YTEngine\Source File</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\Particle3D\Particle3d.PS.hlsl">
@@ -539,6 +542,9 @@
       <Filter>Project\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Project\Game\GameObject\Enemy\Enemy.h">
+      <Filter>YTEngine\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Game\GameObject\Enemy\Missile\Missile.h">
       <Filter>YTEngine\Header File</Filter>
     </ClInclude>
   </ItemGroup>
