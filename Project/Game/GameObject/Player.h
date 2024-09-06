@@ -13,6 +13,7 @@ public: // -- 公開 メンバ関数 -- //
 	void Init();
 	void Update();
 	void Draw(Camera camera);
+	void Debug();
 
 	void Move(Vector3 direction);
 	
@@ -22,7 +23,7 @@ public: // -- 公開 メンバ関数 -- //
 	float GetSpeed() const { return vel_.y; }
 
 	// 線形補間を利用して速度を取得
-	//float GetSpeedForEaseInOutQuad(float minSpeed, float maxSpeed, float t);
+	float GetSpeedForEaseInOutQuad(float t);
 
 private: // -- 非公開 メンバ変数 -- //
 
@@ -35,6 +36,8 @@ private: // -- 非公開 メンバ変数 -- //
 
 	// 移動量
 	Vector3 vel_;
+	// 加速度
+	float acc;
 
 	// 重力加速度
 	const float kGravityPower_ = 0.49f;
@@ -42,6 +45,8 @@ private: // -- 非公開 メンバ変数 -- //
 	// 移動限界距離( -x ~ x, -z ~ z)
 	const Vector2 kLimitArea_ = { 4.0f,4.0f };
 
+	float t;
+	float easeT;
 
 };
 

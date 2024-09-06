@@ -31,7 +31,7 @@ void GameScene::Initialize() {
 	// -- カメラ 初期化 -- //
 	camera_.Initialize();
 	camera_.rotate_= {1.57f,0.0f,0.0f};
-	camera_.translate_ = {0.0f,100.0f,0.0f};
+	camera_.translate_ = {0.0f,player_->GetWorld().translate_.y,0.0f};
 
 	// -- UI 初期化＆ロード -- //
 
@@ -72,10 +72,14 @@ void GameScene::Update(GameManager* gameManager) {
 	// 入力
 	XINPUT_STATE joyState;
 
+	// -- Player 更新 -- //
+	player_->Update();
+
 	// カメラ 更新
-	camera_.translate_.y = player_->GetWorld().translate_.y + 25.0f;
 	camera_.Update();
-	
+	camera_.translate_.y = player_->GetWorld().translate_.y + 25.0f;
+	camera_.translate_.y += player_->GetSpeed();
+
 	// コントローラーを接続していなければ早期リターン
 	if (!Input::GetInstance()->GetJoystickState(joyState)) {
 		return;
@@ -107,9 +111,6 @@ void GameScene::Update(GameManager* gameManager) {
 
 #endif
 	
-	// -- Player 更新 -- //
-	player_->Update();
-
 	// -- 床 更新 -- //
 	planeModelWorldTransform_.Update();
 
