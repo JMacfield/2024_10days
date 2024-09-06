@@ -19,10 +19,10 @@ public: // -- 公開 メンバ関数 -- //
 	WorldTransform GetWorld() { return worldTransform_; }
 
 	// 隕石の落下スピード取得
-	float GetSpeed() { return vel_.y; }
+	float GetSpeed() const { return vel_.y; }
 
 	// 線形補間を利用して速度を取得
-	float GetSpeedForEaseInOutQuad(float minSpeed, float maxSpeed, float t);
+	//float GetSpeedForEaseInOutQuad(float minSpeed, float maxSpeed, float t);
 
 private: // -- 非公開 メンバ変数 -- //
 
@@ -41,6 +41,7 @@ private: // -- 非公開 メンバ変数 -- //
 
 	// 移動限界距離( -x ~ x, -z ~ z)
 	const Vector2 kLimitArea_ = { 4.0f,4.0f };
+
 
 };
 

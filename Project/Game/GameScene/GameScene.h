@@ -53,5 +53,15 @@ private:
 	// -- Player -- //
 	std::unique_ptr<Player> player_;
 
+	// -- UI -- //
+
+	// 速度
+	std::array<Sprite*,7> speedUI_;
+	// 数値テクスチャ
+	std::array<int32_t, 10> numberTexHandle_;
+	// 文字テクスチャ
+	std::map<std::string, int32_t> stringTexHandle_;
+
+
 
 };

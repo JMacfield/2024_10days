@@ -28,10 +28,38 @@ void GameScene::Initialize() {
 	player_ = std::make_unique<Player>();
 	player_->Init();
 
-	// カメラ
+	// -- カメラ 初期化 -- //
 	camera_.Initialize();
 	camera_.rotate_= {1.57f,0.0f,0.0f};
 	camera_.translate_ = {0.0f,100.0f,0.0f};
+
+	// -- UI 初期化＆ロード -- //
+
+	TextureManager* textureManager = TextureManager::GetInstance();// マネージャー 取得
+	std::string directrypath = "Resources/AssignmentTexture/UI/";// パスを指定
+	std::string format = ".png";// 拡張子を指定
+
+	// 数字テクスチャを読みこむ
+	for (int32_t i = 0; i < 10; i++) {
+		std::string number = std::to_string(i);
+		numberTexHandle_[i] = textureManager->LoadTexture(directrypath + number + format);
+	}
+
+	// 文字テクスチャ
+	stringTexHandle_["km"] = textureManager->LoadTexture(directrypath + "km" + format);
+	stringTexHandle_["dot"] = textureManager->LoadTexture(directrypath + "dot" + format);
+	
+	// 速度のテクスチャを設定
+	for (int32_t i = 0; i < speedUI_.size(); i++) {
+		speedUI_[i] = Sprite::Create(numberTexHandle_[0], Vector2(i * 32.0f, 5.0f));
+		speedUI_[i]->SetScale(Vector2(1.0f /8.0f, 1.0f / 8.0f));
+	}
+	// 4文字目を"."に7文字目をkmのテクスチャに変更
+	speedUI_[3]->SetTexture(stringTexHandle_["dot"]);
+	speedUI_[6]->SetTexture(stringTexHandle_["km"]);
+	speedUI_[6]->SetPosition(Vector2(246.0f, 5.0f));
+
+	
 
 }
 
@@ -82,10 +110,8 @@ void GameScene::Update(GameManager* gameManager) {
 	// -- Player 更新 -- //
 	player_->Update();
 
-	// -- 床 -- //
+	// -- 床 更新 -- //
 	planeModelWorldTransform_.Update();
-
-
 
 }
 
@@ -97,8 +123,18 @@ void GameScene::Draw() {
 	// -- Player 描画 -- //
 	player_->Draw(camera_);
 
+	// -- テクスチャ 更新 -- // 
+	for (int32_t i = 0; i < speedUI_.size(); i++) {
+		speedUI_[i]->Draw();
+	}
+
 }
 
 GameScene::~GameScene() {
 	
+	// Sprite 解放 
+	for (int32_t i = 0; i < speedUI_.size(); i++) {
+		delete speedUI_[i];
+	}
+
 }

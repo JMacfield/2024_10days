@@ -135,7 +135,8 @@ public:
 		return isUVSetting_;
 	}
 
-
+	// テクスチャ変更
+	void SetTexture(int32_t textureHandle);
 
 #pragma endregion
 

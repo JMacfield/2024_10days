@@ -42,6 +42,16 @@ void Sprite::CreateIndexBufferView() {
 
 
 
+void Sprite::SetTexture(int32_t textureHandle){
+	// テクスチャを設定
+	this->textureHandle_ = textureHandle;
+
+	//テクスチャの情報を取得
+	resourceDesc_ = TextureManager::GetInstance()->GetResourceDesc(textureHandle_);
+	size_ = { float(resourceDesc_.Width),float(resourceDesc_.Height) };
+
+}
+
 //初期化
 void Sprite::Initialize(uint32_t textureHandle,Vector2 position) {
 	this->textureHandle_ = textureHandle;
