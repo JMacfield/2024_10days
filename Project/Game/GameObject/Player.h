@@ -18,6 +18,12 @@ public: // -- 公開 メンバ関数 -- //
 	
 	WorldTransform GetWorld() { return worldTransform_; }
 
+	// 隕石の落下スピード取得
+	float GetSpeed() { return vel_.y; }
+
+	// 線形補間を利用して速度を取得
+	float GetSpeedForEaseInOutQuad(float minSpeed, float maxSpeed, float t);
+
 private: // -- 非公開 メンバ変数 -- //
 
 	// モデル
@@ -29,6 +35,7 @@ private: // -- 非公開 メンバ変数 -- //
 
 	// 移動量
 	Vector3 vel_;
+
 	// 重力加速度
 	const float kGravityPower_ = 0.49f;
 

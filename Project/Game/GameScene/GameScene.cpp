@@ -55,9 +55,19 @@ void GameScene::Update(GameManager* gameManager) {
 
 	// 移動量取得
 	Vector3 move = { (float)joyState.Gamepad.sThumbLX / SHRT_MAX,0.0f,(float)joyState.Gamepad.sThumbLY / SHRT_MAX };
-	move.x *= 0.5f;
+	if (move.x >= -0.3f && move.x <= 0.3f) {
+		move.x = 0.0f;
+	}
+	else {
+		move.x *= 0.5f;
+	}
 	move.y = 0.0f;
-	move.z *= 0.5f;
+	if (move.z >= -0.3f && move.z <= 0.3f) {
+		move.z = 0.0f;
+	}
+	else {
+		move.z *= 0.5f;
+	}
 	player_->Move(move);
 
 #ifdef _DEBUG
@@ -74,6 +84,9 @@ void GameScene::Update(GameManager* gameManager) {
 
 	// -- 床 -- //
 	planeModelWorldTransform_.Update();
+
+
+
 }
 
 void GameScene::Draw() {
