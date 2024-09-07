@@ -47,9 +47,12 @@ private:
 	uint32_t planeModelHandle_ = 0;
 	WorldTransform planeModelWorldTransform_ = {};
 	
+	// -- 目印 -- //
+	std::vector<Model*> landmarkModel_;
+	uint32_t landmarkModelHandle_ = 0;
+	std::vector<WorldTransform> landmarkWorldTransform_;
 
-	float debugFloat_;
-
+	
 	// -- Player -- //
 	std::unique_ptr<Player> player_;
 
