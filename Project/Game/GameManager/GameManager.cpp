@@ -1,5 +1,6 @@
 #include "GameManager.h"
 #include "GameScene/GameScene.h"
+#include "GameScene/TitleScene.h"
 
 //コンストラクタ
 GameManager::GameManager() {
@@ -8,7 +9,7 @@ GameManager::GameManager() {
 	
 void GameManager::Initialize() {
 	
-	currentGamaScene_ = new GameScene();
+	currentGamaScene_ = new TitleScene();
 	currentGamaScene_->Initialize();
 
 }

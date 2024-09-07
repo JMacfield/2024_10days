@@ -300,6 +300,15 @@
     <ClCompile Include="Project\Game\GameObject\Player.cpp">
       <Filter>Project\GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="Project\Game\GameScene\TitleScene.cpp">
+      <Filter>YTEngine\Source File</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Game\GameScene\ClearScene.cpp">
+      <Filter>YTEngine\Source File</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Game\GameScene\OverScene.cpp">
+      <Filter>YTEngine\Source File</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\Particle3D\Particle3d.PS.hlsl">
@@ -534,6 +543,15 @@
     </ClInclude>
     <ClInclude Include="Project\Game\GameObject\Player.h">
       <Filter>Project\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Game\GameScene\TitleScene.h">
+      <Filter>YTEngine\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Game\GameScene\ClearScene.h">
+      <Filter>YTEngine\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Game\GameScene\OverScene.h">
+      <Filter>YTEngine\Header File</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

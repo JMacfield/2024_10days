@@ -128,6 +128,9 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Project\Game\GameObject\Player.cpp" />
+    <ClCompile Include="Project\Game\GameScene\ClearScene.cpp" />
+    <ClCompile Include="Project\Game\GameScene\OverScene.cpp" />
+    <ClCompile Include="Project\Game\GameScene\TitleScene.cpp" />
     <ClCompile Include="YTEngine\Audio\Audio.cpp" />
     <ClCompile Include="YTEngine\Utility\GlobalVariables\GlobalVariables.cpp" />
     <ClCompile Include="YTEngine\Camera\Camera.cpp" />
@@ -204,6 +207,9 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Project\Game\GameObject\Player.h" />
+    <ClInclude Include="Project\Game\GameScene\ClearScene.h" />
+    <ClInclude Include="Project\Game\GameScene\OverScene.h" />
+    <ClInclude Include="Project\Game\GameScene\TitleScene.h" />
     <ClInclude Include="YTEngine\Audio\Audio.h" />
     <ClInclude Include="YTEngine\Audio\AudioStruct.h" />
     <ClInclude Include="YTEngine\Utility\GlobalVariables\GlobalVariables.h" />
