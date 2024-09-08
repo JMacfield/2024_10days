@@ -16,7 +16,7 @@
 #include "GameObject/Player.h"
 
 //StatePatternを使う時は必ず前方宣言をするように
-class Gamemanager;
+class GameManager;
 
 class GameScene : public IGameScene {
 public:
