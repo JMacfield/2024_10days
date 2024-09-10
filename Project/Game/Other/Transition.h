@@ -26,6 +26,10 @@ public:
 		normalT_ = 0.0f;
 	}
 
+	// トランジション中であるか
+	bool IsTransition();
+
+	// トランジションが終了したか
 	bool IsTransitioned();
 
 private:

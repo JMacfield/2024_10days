@@ -100,7 +100,9 @@ GameManager::~GameManager() {
 
 void GameManager::SceneEnd()
 {
-	transition->SceneEndTransition();
+	if (!transition->IsTransition()) {
+		transition->SceneEndTransition();
+	}
 }
 
 bool GameManager::IsTransitioned()

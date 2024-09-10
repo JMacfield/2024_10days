@@ -110,3 +110,7 @@ bool Transition::IsTransitioned()
 	}
 	return false;
 }
+bool Transition::IsTransition()
+{
+	return isTransition_;
+}
