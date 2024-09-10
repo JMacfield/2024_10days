@@ -30,6 +30,7 @@ void GameScene::Initialize() {
 	clowdModel_->SetColor(Vector4(1.0f, 1.0f, 1.0f, 0.5f));
 	clowdModelWorldTransform_.Initialize();
 	clowdModelWorldTransform_.scale_ = { 4.0f,8.0f,4.0f };
+	clowdModelWorldTransform_.translate_ = { 0.0f,200.0f,0.0f };
 	
 	// -- Player 初期化 -- //
 	player_ = std::make_unique<Player>();
@@ -61,8 +62,8 @@ void GameScene::Initialize() {
 		speedUI_[i] = Sprite::Create(numberTexHandle_[0], Vector2(i * 32.0f, 5.0f));
 		speedUI_[i]->SetScale(Vector2(1.0f /8.0f, 1.0f / 8.0f));
 	}
-	// 4文字目を"."に7文字目をkmのテクスチャに変更
-	speedUI_[3]->SetTexture(stringTexHandle_["dot"]);
+	// 3文字目を"."に7文字目をkmのテクスチャに変更
+	speedUI_[2]->SetTexture(stringTexHandle_["dot"]);
 	speedUI_[6]->SetTexture(stringTexHandle_["km"]);
 	speedUI_[6]->SetPosition(Vector2(246.0f, 5.0f));
 
@@ -134,14 +135,14 @@ void GameScene::Update(GameManager* gameManager) {
 	// -- UI 更新 -- //
 
 	// 速度に応じて画像を変更
-	float speed = player_->GetSpeed() * 100.0f;
+	float speed = player_->GetSpeed() * 1000.0f;
 	int32_t viewSpeed = std::abs((int32_t)speed);
 	
 	speedUI_[0]->SetTexture(numberTexHandle_[(viewSpeed / 10000)]);
 	viewSpeed = viewSpeed % 10000;
 	speedUI_[1]->SetTexture(numberTexHandle_[(viewSpeed / 1000)]);
 	viewSpeed = viewSpeed % 1000;
-	speedUI_[2]->SetTexture(numberTexHandle_[(viewSpeed / 100)]);
+	speedUI_[3]->SetTexture(numberTexHandle_[(viewSpeed / 100)]);
 	viewSpeed = viewSpeed % 100;
 	speedUI_[4]->SetTexture(numberTexHandle_[(viewSpeed / 10)]);
 	viewSpeed = viewSpeed % 10;
