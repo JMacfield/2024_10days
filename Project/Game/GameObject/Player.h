@@ -37,7 +37,7 @@ private: // -- 非公開 メンバ変数 -- //
 	Vector3 vel_;
 
 	// 重力加速度
-	const float kGravityPower_ = 0.49f;
+	const float kGravityPower_ = 0.00f;
 
 	// 移動限界距離( -x ~ x, -z ~ z)
 	const Vector2 kLimitArea_ = { 4.0f,4.0f };

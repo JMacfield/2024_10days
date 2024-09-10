@@ -3,6 +3,8 @@
 #include "AnimationModel.h"
 #include "TextureManager.h"
 #include "Camera.h"
+#include "GameObject/Player.h"
+#include "VectorCalculation.h"
 
 class Missile
 {
@@ -14,7 +16,7 @@ public:
 
 	void Update();
 
-	void Draw(const Camera& camera);
+	void Draw(Camera camera);
 
 	//	void OnCollision(Collider* collider) override;
 
@@ -25,13 +27,16 @@ public:
 	const bool GetIsDead() const { return isDead_; };
 
 private:
+
+	Player player_;
+
 	// モデル
 	std::unique_ptr<Model> model_ = nullptr;
 	// テクスチャ
 	uint32_t modelHandle_ = 0;
 
 	//ワールドトランスフォーム
-	WorldTransform worldTransform_{};
+	WorldTransform worldTransform_{0.0f,0.0f,0.0f};
 
 	//速度
 	Vector3 velocity_{};

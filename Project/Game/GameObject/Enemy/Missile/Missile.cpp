@@ -1,6 +1,8 @@
 #include "Missile.h"
 #include "GameObject/Enemy/Enemy.h"
 #include "ModelManager.h"
+#include "../../Player.h"
+#include "VectorCalculation.h"
 
 void Missile::Initialize(const Vector3& position, const Vector3& velocity)
 {
@@ -14,7 +16,7 @@ void Missile::Initialize(const Vector3& position, const Vector3& velocity)
 	//ワールドトランスフォームの初期化
 	worldTransform_.Initialize();
 	worldTransform_.translate_ = position;
-	worldTransform_.scale_ = { 0.6f,0.6f,0.6f };
+	worldTransform_.scale_ = { 10.6f,10.6f,10.6f };
 
 	/*AABB aabb = {
 		.min{-worldTransform_.scale_.x,-worldTransform_.scale_.y,-worldTransform_.scale_.z,},
@@ -29,19 +31,20 @@ void Missile::Initialize(const Vector3& position, const Vector3& velocity)
 
 void Missile::Update()
 {
+
 	//目標への差分ベクトルを計算
-	Vector3 targetPosition = 
-		GameObjectManager::GetInstance()->GetGameObject<Player>("Player")->GetWorldPosition();
-	Vector3 sub = targetPosition - worldTransform_.translation_;
+	Vector3 targetPosition = player_.GetWorld().translate_;
+	Vector3 sub = targetPosition - worldTransform_.translate_;
 
 	if (!isRepelled_)
 	{
 		//距離を計算
-		float distance = Mathseries::Length(sub);
+		//float distance = Length(sub);
 
 		//正規化
-		sub = Mathseries::Normalize(sub);
-		velocity_ = Mathseries::Normalize(velocity_);
+		sub = Normalize(sub);
+		
+		velocity_ = Normalize(velocity_);
 	}
 
 	//媒介変数の更新
@@ -58,7 +61,7 @@ void Missile::Update()
 	//一定時間追尾するようにする
 	if (trackingTimer_ >= kTrackingTime)
 	{
-		velocity_ = Mathseries::Slerp(velocity_, sub, trackingParameter_);
+		velocity_ = Slerp(velocity_, sub, trackingParameter_);
 		const float kSpeed = 0.6f;
 		velocity_ *= kSpeed;
 	}
@@ -66,29 +69,29 @@ void Missile::Update()
 	//追捕終了していなかったら
 	if (!isTrackingComplete_ && !isRepelled_)
 	{
-		velocity_ = Mathseries::Slerp(velocity_, sub, trackingParameter_);
+		velocity_ = Slerp(velocity_, sub, trackingParameter_);
 		const float kSpeed = 0.6f;
 		velocity_ *= kSpeed;
 	}
 
 	//移動処理
-	worldTransform_.translation_ += velocity_;
+	worldTransform_.translate_ += velocity_;
 
 	//回転処理
-	worldTransform_.rotation_.x += 0.2f;
-	worldTransform_.rotation_.y += 0.2f;
+	worldTransform_.rotate_.x += 0.2f;
+	worldTransform_.rotate_.y += 0.2f;
 
 	//ワールドトランスフォームの更新
-	worldTransform_.UpdateMatrixFromEuler();
+	worldTransform_.Update();
 
-	//フィールド外に出たら死亡フラグを立てる
-	if (worldTransform_.translation_.x <= -100.0f || worldTransform_.translation_.x >= 100.0f || worldTransform_.translation_.y <= 1.0f || worldTransform_.translation_.z <= -100.0f || worldTransform_.translation_.z >= 100.0f)
-	{
-		isDead_ = true;
-	}
+	////フィールド外に出たら死亡フラグを立てる
+	//if (worldTransform_.translate_.x <= -1000.0f || worldTransform_.translate_.x >= 1000.0f || worldTransform_.translate_.y <= 1.0f || worldTransform_.translate_.z <= -1000.0f || worldTransform_.translate_.z >= 1000.0f)
+	//{
+	//	isDead_ = true;
+	//}
 }
 
-void Missile::Draw(const Camera& camera)
+void Missile::Draw( Camera camera)
 {
 	model_->Draw(worldTransform_, camera);
 }

@@ -129,6 +129,9 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
   <ItemGroup>
     <ClCompile Include="Project\Game\GameObject\Enemy\Enemy.cpp" />
     <ClCompile Include="Project\Game\GameObject\Enemy\Missile\Missile.cpp" />
+    <ClCompile Include="Project\Game\GameObject\Enemy\Randam\Randam.cpp" />
+    <ClCompile Include="Project\Game\GameObject\Enemy\state\EnemyMissile.cpp" />
+    <ClCompile Include="Project\Game\GameObject\Enemy\state\EnemyNormal.cpp" />
     <ClCompile Include="Project\Game\GameObject\Player.cpp" />
     <ClCompile Include="YTEngine\Audio\Audio.cpp" />
     <ClCompile Include="YTEngine\Utility\GlobalVariables\GlobalVariables.cpp" />
@@ -207,6 +210,10 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
   <ItemGroup>
     <ClInclude Include="Project\Game\GameObject\Enemy\Enemy.h" />
     <ClInclude Include="Project\Game\GameObject\Enemy\Missile\Missile.h" />
+    <ClInclude Include="Project\Game\GameObject\Enemy\Randam\Randam.h" />
+    <ClInclude Include="Project\Game\GameObject\Enemy\state\EnemyMissile.h" />
+    <ClInclude Include="Project\Game\GameObject\Enemy\state\EnemyNormal.h" />
+    <ClInclude Include="Project\Game\GameObject\Enemy\state\IEnemyState.h" />
     <ClInclude Include="Project\Game\GameObject\Player.h" />
     <ClInclude Include="YTEngine\Audio\Audio.h" />
     <ClInclude Include="YTEngine\Audio\AudioStruct.h" />
