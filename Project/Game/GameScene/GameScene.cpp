@@ -71,7 +71,31 @@ void GameScene::Initialize() {
 	speedUI_[6]->SetTexture(stringTexHandle_["km"]);
 	speedUI_[6]->SetPosition(Vector2(246.0f, 5.0f));
 
+	// -- 速度メーター 初期化 -- //
+
+	// メーター段階
+	materStep_ = 0;
+
+	// 追加ディレクトリパス
+	std::string directrypathMidle = "mater/mater";
 	
+	// 初期化
+	for (int32_t i = 0; i < materUI_.size(); i++) {
+		
+		// 画像読み込み
+		std::string number = std::to_string(i);
+
+		materTex_[i] = textureManager->LoadTexture(directrypath + directrypathMidle + number + format);
+		
+		// スプライト生成
+		materUI_[i] = Sprite::Create(materTex_[i], Vector2(256.0f, 256.0f));
+		materUI_[i]->SetAnchorPoint(Vector2(0.5f, 0.5f));
+		//materUI_[i]->SetScale(Vector2(0.5f, 0.5f));
+
+	}
+
+	materUI_[1]->SetUVMode(true);
+	materUI_[1]->SetTextureSize(Vector2(256.0f,0.0f));
 
 }
 
@@ -155,6 +179,8 @@ void GameScene::Update(GameManager* gameManager) {
 	viewSpeed = viewSpeed % 10;
 	speedUI_[5]->SetTexture(numberTexHandle_[(viewSpeed)]);
 
+	// -- 速度メーター更新 -- //
+	//materUI_[1]->SetScale(Vector2(float(player_->GetNormalT() * 0.5f), 0.5f));
 
 	// ミサイルとの判定 プレイヤーとエネミーのOBB
 	//IsCollision(player_->GetCollision(),);
@@ -171,6 +197,12 @@ void GameScene::Draw() {
 	// -- Player 描画 -- //
 	player_->Draw(camera_);
 
+	// -- 速度メーター 描画 -- //
+	for (int32_t i = 0; i < materUI_.size(); i++) {
+		//materUI_[i]->Draw();
+	}
+
+	// -- テクスチャ 描画 -- // 
 	//enemy描画
 	enemy_->Draw(camera_);
 
@@ -188,6 +220,11 @@ GameScene::~GameScene() {
 	// Sprite 解放 
 	for (int32_t i = 0; i < speedUI_.size(); i++) {
 		delete speedUI_[i];
+	}
+
+	// メーター 解放 
+	for (int32_t i = 0; i < materUI_.size(); i++) {
+		delete materUI_[i];
 	}
 
 }

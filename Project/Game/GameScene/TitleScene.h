@@ -33,4 +33,13 @@ private:
 
 	XINPUT_STATE joyState;
 
+	// -- タイトルのUI -- //
+	std::array<std::unique_ptr<Sprite>, 4> titleUI_;
+	std::array<int32_t, 4> titleUITex_;
+
+	int32_t selectNumber_;
+	float normalT_;
+	bool isUpper_;
+
+
 };
