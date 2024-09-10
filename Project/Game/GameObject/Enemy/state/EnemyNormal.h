@@ -15,10 +15,6 @@ public:
 
 	void Update(Enemy* pEnemy) override;
 
-	//void Draw(Enemy* pEnemy, const Camera& camera) override;
-
-	//void OnCollision(Collider* collider) override;
-
 	const WorldTransform& GetWorldTransform() const override { return worldTransform_; };
 
 private:

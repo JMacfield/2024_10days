@@ -13,7 +13,5 @@ public:
 
 	virtual void Update(Enemy* named) = 0;
 
-	//virtual void OnCollision(Collider* collider) = 0;
-
 	virtual const WorldTransform& GetWorldTransform() const = 0;
 };
