@@ -315,6 +315,21 @@
     <ClCompile Include="Project\Game\Other\Transition.cpp">
       <Filter>YTEngine\Source File</Filter>
     </ClCompile>
+    <ClCompile Include="Project\Game\GameObject\Enemy\Missile\Missile.cpp">
+      <Filter>YTEngine\Source File</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Game\GameObject\Enemy\Randam\Randam.cpp">
+      <Filter>YTEngine\Source File</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Game\GameObject\Enemy\Enemy.cpp">
+      <Filter>YTEngine\Source File</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Game\GameObject\Enemy\state\EnemyMissile.cpp">
+      <Filter>YTEngine\Source File</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Game\GameObject\Enemy\state\EnemyNormal.cpp">
+      <Filter>YTEngine\Source File</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\Particle3D\Particle3d.PS.hlsl">
@@ -563,6 +578,24 @@
       <Filter>YTEngine\Header File</Filter>
     </ClInclude>
     <ClInclude Include="Project\Game\Other\Transition.h">
+      <Filter>YTEngine\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Game\GameObject\Enemy\Missile\Missile.h">
+      <Filter>YTEngine\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Game\GameObject\Enemy\Randam\Randam.h">
+      <Filter>YTEngine\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Game\GameObject\Enemy\Enemy.h">
+      <Filter>YTEngine\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Game\GameObject\Enemy\state\EnemyMissile.h">
+      <Filter>YTEngine\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Game\GameObject\Enemy\state\EnemyNormal.h">
+      <Filter>YTEngine\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Game\GameObject\Enemy\state\IEnemyState.h">
       <Filter>YTEngine\Header File</Filter>
     </ClInclude>
   </ItemGroup>
