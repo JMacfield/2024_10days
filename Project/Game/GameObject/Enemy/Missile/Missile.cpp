@@ -42,20 +42,25 @@ void Missile::Update()
 	if (!isRepelled_)
 	{
 		//距離を計算
-		//float distance = Length(sub);
+		float distance = Length(sub);
 
-		const float kSpeed = 100.6f;
+		const float kSpeed = 5.6f;
 
 		//正規化
 		sub = Normalize(sub);
 		
 		velocity_ = Normalize(velocity_);
 		velocity_ = sub * kSpeed;
+
+		if (distance <= 500.0f)
+		{
+			isRepelled_ = true;
+		}
 	}
 
 	//媒介変数の更新
 	if (trackingParameter_ < 0.1f) {
-		trackingParameter_ += 1.0f / (180.0f * 1.0f);
+		trackingParameter_ += 1.0f / (60.0f * 1.0f);
 	}
 
 	//追尾タイマーを進める
@@ -74,7 +79,7 @@ void Missile::Update()
 	if (isTrackingComplete_ == true)
 	{
 		velocity_ = Slerp(sub, velocity_, trackingParameter_);
-		const float kSpeed = 10.6f;
+		const float kSpeed = 1.0f;
 		velocity_ *= kSpeed;
 	}
 
@@ -88,13 +93,11 @@ void Missile::Update()
 	//ワールドトランスフォームの更新
 	worldTransform_.Update();
 
-	////フィールド外に出たら死亡フラグを立てる
-	//if (worldTransform_.translate_.x <= -1000.0f || worldTransform_.translate_.x >= 1000.0f || worldTransform_.translate_.y <= 1.0f || worldTransform_.translate_.z <= -1000.0f || worldTransform_.translate_.z >= 1000.0f)
-	//{
-	//	isDead_ = true;
-	//}
-
-	SetCollision();
+	//フィールド外に出たら死亡フラグを立てる
+	if  (worldTransform_.translate_.y >= player_->GetWorld().translate_.y + 50.0f)
+	{
+		isDead_ = true;
+	}
 }
 
 void Missile::Draw(Camera camera)
@@ -102,47 +105,3 @@ void Missile::Draw(Camera camera)
 	model_->Draw(worldTransform_, camera);
 }
 
-//void Missile::OnCollision(Collider* collider)
-//{
-//	if (collider->GetCollisionAttribute() == kCollisionAttributeWeapon && !isDead_)
-//	{
-//		SetCollisionAttribute(kCollisionAttributeWeapon);
-//		SetCollisionMask(kCollisionMaskWeapon);
-//		isRepelled_ = true;
-//		const float kSpeed = 0.6f;
-//		Vector3 targetPosition = GameObjectManager::GetInstance()->GetGameObject<NamedEnemy>("NamedEnemy")->GetWorldPosition();
-//		Vector3 sub = targetPosition - worldTransform_.translation_;
-//		sub = Mathseries::Normalize(sub);
-//		velocity_ = sub * kSpeed;
-//	}
-//
-//	if (isRepelled_)
-//	{
-//		if (collider->GetCollisionAttribute() & kCollisionAttributeEnemy)
-//		{
-//			isDead_ = true;
-//		}
-//	}
-//	else
-//	{
-//		if (collider->GetCollisionAttribute() & kCollisionAttributePlayer)
-//		{
-//			isDead_ = true;
-//		}
-//	}
-//}
-//
-//const Vector3 Missile::GetWorldPosition() const
-//{
-//	Vector3 pos{};
-//	pos.x = worldTransform_.matWorld_.m[3][0];
-//	pos.y = worldTransform_.matWorld_.m[3][1];
-//	pos.z = worldTransform_.matWorld_.m[3][2];
-//	return pos;
-//}
-
-void Missile::SetCollision() {
-	collision_.center = worldTransform_.GetWorldPosition();
-	GetOrientations(MakeRotateXYZMatrix(worldTransform_.rotate_.x, worldTransform_.rotate_.y, worldTransform_.rotate_.z), collision_.orientation);
-	collision_.size = { 1.0f,1.0f,1.0f };
-}

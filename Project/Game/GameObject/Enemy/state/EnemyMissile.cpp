@@ -70,12 +70,3 @@ void EnemyMissile::Update(Enemy* pEnemy)
 	worldTransform_.translate_.z = std::min<float>(worldTransform_.translate_.z, +kMoveLimitZ);
 }
 
-
-
-//void EnemyMissile::OnCollision(Collider* collider)
-//{
-//	if (collider->GetCollisionAttribute() == kCollisionAttributeWeapon)
-//	{
-//
-//	}
-//}

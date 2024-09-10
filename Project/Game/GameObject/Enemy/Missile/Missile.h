@@ -13,7 +13,7 @@ class Missile
 {
 public:
 	//追尾時間
-	static const uint32_t kTrackingTime = 180 * 2;
+	static const uint32_t kTrackingTime = 1000 * 2;
 
 	void Initialize(const Vector3& position, const Vector3& velocity);
 
