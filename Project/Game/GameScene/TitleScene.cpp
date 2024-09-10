@@ -31,7 +31,7 @@ void TitleScene::Initialize()
 
 
 	selectNumber_ = 0;;
-	normalT_ = 0.0f;
+	normalT_ = 0.5f;
 	isUpper_ = true;
 
 }
@@ -46,8 +46,88 @@ void TitleScene::Update(GameManager* gameManager)
 	if (gameManager->IsTransitioned()) {
 		gameManager->ChangeScene(new GameScene);
 	}
-	
+	else {
 
+		// normalT 増減
+		if (isUpper_) {
+			if (normalT_ < 1.0f) {
+				normalT_ += 1.0f / 60.0f;
+
+				if (normalT_ >= 1.0f) {
+					isUpper_ = false;
+				}
+			}
+		}
+		else {
+
+			if (normalT_ > 0.0f) {
+				normalT_ -= 1.0f / 60.0f;
+
+				if (normalT_ <= 0.0f) {
+					isUpper_ = true;
+				}
+			}
+
+		}
+
+		// 選択中のUIを回転させる
+		float rotUI = OtherCode::ExponentialInterpolation(-1.0f, 1.0f, normalT_, 1.0f);
+
+		switch (selectNumber_)
+		{
+		case 0:
+
+			titleUI_[1]->SetRotate(rotUI);
+
+			if (Input::GetInstance()->IsTriggerKey(DIK_UP)) {
+				selectNumber_ = 2;
+				normalT_ = 0.5f;
+				isUpper_ = true;
+
+				titleUI_[1]->SetRotate(0.0f);
+			}
+
+			if (Input::GetInstance()->IsTriggerKey(DIK_DOWN)) {
+				selectNumber_ = 2;
+				normalT_ = 0.5f;
+				isUpper_ = true;
+
+				titleUI_[1]->SetRotate(0.0f);
+			}
+
+
+
+			break;
+		case 1:
+
+			break;
+		case 2:
+
+			titleUI_[3]->SetRotate(rotUI);
+
+			if (Input::GetInstance()->IsTriggerKey(DIK_UP)) {
+				selectNumber_ = 0;
+				normalT_ = 0.5f;
+				isUpper_ = true;
+
+				titleUI_[3]->SetRotate(0.0f);
+			}
+
+			if (Input::GetInstance()->IsTriggerKey(DIK_DOWN)) {
+				selectNumber_ = 0;
+				normalT_ = 0.5f;
+				isUpper_ = true;
+
+				titleUI_[3]->SetRotate(0.0f);
+			}
+
+
+			break;
+		default:
+			break;
+		}
+
+	}
 
 #ifdef _DEBUG
 

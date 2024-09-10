@@ -64,4 +64,10 @@ private:
 	// 文字テクスチャ
 	std::map<std::string, int32_t> stringTexHandle_;
 
+	// 速度メーター
+	std::array<Sprite*, 2> materUI_;
+	// メーターテクスチャ
+	std::array<int32_t, 2> materTex_;
+	// メーター段階
+	int32_t materStep_;
 };

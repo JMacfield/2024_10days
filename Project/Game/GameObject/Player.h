@@ -40,6 +40,9 @@ public: // -- 公開 メンバ関数 -- //
 	// 隕石の落下スピード取得
 	float GetSpeed() const { return vel_.y; }
 
+	// 落下スピードの段階を取得
+	float GetNormalT() { return normalT; }
+
 	// 線形補間を利用して速度を取得
 	float GetSpeedForEaseInOutQuad(float t);
 
