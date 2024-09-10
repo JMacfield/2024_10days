@@ -14,11 +14,15 @@ void GameManager::Initialize() {
 	currentGamaScene_ = new TitleScene();
 	currentGamaScene_->Initialize();
 
+	transition = std::make_unique<Transition>();
+	transition->Init();
+
 }
 
 
 void GameManager::Update() {
 
+	transition->Update();
 
 #ifdef _DEBUG
 
@@ -69,7 +73,11 @@ void GameManager::Update() {
 }
 
 void GameManager::Draw() {
+
 	currentGamaScene_->Draw();
+
+	transition->Draw();
+
 }
 
 
@@ -80,6 +88,7 @@ void GameManager::ChangeScene(IGameScene* newGameScene) {
 	currentGamaScene_ = newGameScene;
 	
 	currentGamaScene_->Initialize();
+	transition->SceneStartTransition();
 }
 
 
@@ -87,4 +96,14 @@ void GameManager::ChangeScene(IGameScene* newGameScene) {
 GameManager::~GameManager() {
 	delete currentGamaScene_;
 
+}
+
+void GameManager::SceneEnd()
+{
+	transition->SceneEndTransition();
+}
+
+bool GameManager::IsTransitioned()
+{
+	return transition->IsTransitioned();
 }

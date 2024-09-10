@@ -312,7 +312,7 @@
     <ClCompile Include="Project\Game\Other\Code\OtherCode.cpp">
       <Filter>YTEngine\Source File</Filter>
     </ClCompile>
-    <ClCompile Include="Transition.cpp">
+    <ClCompile Include="Project\Game\Other\Transition.cpp">
       <Filter>YTEngine\Source File</Filter>
     </ClCompile>
   </ItemGroup>
@@ -562,7 +562,7 @@
     <ClInclude Include="Project\Game\Other\Code\OtherCode.h">
       <Filter>YTEngine\Header File</Filter>
     </ClInclude>
-    <ClInclude Include="Transition.h">
+    <ClInclude Include="Project\Game\Other\Transition.h">
       <Filter>YTEngine\Header File</Filter>
     </ClInclude>
   </ItemGroup>

@@ -2,6 +2,7 @@
 
 #include "IGameScene.h"
 
+#include "Other/Transition.h"
 
 class GameManager {
 public:
@@ -24,12 +25,17 @@ public:
 	//デストラクタ
 	~GameManager();
 
+	// シーン終了をマネージャに伝える
+	void SceneEnd();
+
+	bool IsTransitioned();
+
 private:
 
 	//StatePatternに必要な変数
 	IGameScene* currentGamaScene_ = nullptr;
 
 
-
+	std::unique_ptr< Transition> transition;
 	
 };

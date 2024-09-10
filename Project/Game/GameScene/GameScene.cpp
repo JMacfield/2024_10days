@@ -24,25 +24,6 @@ void GameScene::Initialize() {
 	planeModelWorldTransform_.Initialize();
 	planeModelWorldTransform_.scale_ = { 32.0f,1.0f,32.0f };
 
-	// -- 目印 -- //
-	landmarkModelHandle_ = ModelManager::GetInstance()->LoadModelFile("Resources/AssignmentModel/cube", "cube.gltf");
-	for (int32_t i = 0; i < 60; i++) {
-		
-		// 新規モデルを追加
-		Model* newModel = Model::Create(landmarkModelHandle_);
-		// 配列にモデルを追加
-		landmarkModel_.push_back(newModel);
-		
-		// 座標を初期化
-		WorldTransform newWorld;
-		newWorld.Initialize();
-		newWorld.translate_.y = i * 1000.0f;
-		newWorld.translate_.z = 5.0f;
-		
-		// 新規座標を追加
-		landmarkWorldTransform_.push_back(newWorld);
-	}
-
 	// -- Player 初期化 -- //
 	player_ = std::make_unique<Player>();
 	player_->Init();
@@ -133,10 +114,6 @@ void GameScene::Update(GameManager* gameManager) {
 	// -- 床 更新 -- //
 	planeModelWorldTransform_.Update();
 
-	// -- 目印 更新 -- //
-	for (WorldTransform world : landmarkWorldTransform_) {
-		world.Update();
-	}
 
 	// -- UI 更新 -- //
 
@@ -161,12 +138,6 @@ void GameScene::Draw() {
 	
 	// -- 床 描画-- //
 	planeModel_->Draw(planeModelWorldTransform_, camera_);
-
-	// -- 目印 描画 -- //
-	for (int32_t i = 0; i < landmarkModel_.size(); i++) {
-		Model* model = landmarkModel_.at(i);
-		model->Draw(landmarkWorldTransform_.at(i),camera_);
-	}
 
 	// -- Player 描画 -- //
 	player_->Draw(camera_);
