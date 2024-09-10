@@ -47,11 +47,10 @@ private:
 	uint32_t planeModelHandle_ = 0;
 	WorldTransform planeModelWorldTransform_ = {};
 	
-	// -- 目印 -- //
-	std::vector<Model*> landmarkModel_;
-	uint32_t landmarkModelHandle_ = 0;
-	std::vector<WorldTransform> landmarkWorldTransform_;
-
+	// -- 雲 -- //
+	std::unique_ptr<Model> clowdModel_;
+	uint32_t clowdModelHandle_ = 0;
+	WorldTransform clowdModelWorldTransform_ = {};
 	
 	// -- Player -- //
 	std::unique_ptr<Player> player_;

@@ -6,7 +6,7 @@
 #include "Camera.h"
 
 // 重力加速度
-const float kGravityPower_ = 0.49f;
+const float kGravityPower_ = 0.098f;
 // 移動限界距離( -x ~ x, -z ~ z)
 const Vector2 kLimitArea_ = { 4.0f,4.0f };
 // フレームレート(仮)

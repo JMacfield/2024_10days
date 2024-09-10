@@ -12,7 +12,7 @@ void Player::Init() {
 
 	// ワールド座標 初期化
 	worldTransform_.Initialize();
-	worldTransform_.translate_.y = 60000.0f;
+	worldTransform_.translate_.y = 600.0f;
 
 	// 移動量 初期化
 	vel_ = { 0.0f,-kGravityPower_,0.0f };
@@ -66,7 +66,7 @@ void Player::Update() {
 	// 落下
 	if (worldTransform_.translate_.y > 0.0f) {
 		// イージングで移動量を設定
-		vel_.y = (1.0f - easeT) * 0.0f + easeT * -100.0f;
+		vel_.y = (1.0f - easeT) * 0.0f + easeT * -10.0f;
 
 		//acc += 0.0001f;
 		//vel_.y += (-acc);

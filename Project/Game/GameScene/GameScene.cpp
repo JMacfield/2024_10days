@@ -24,6 +24,13 @@ void GameScene::Initialize() {
 	planeModelWorldTransform_.Initialize();
 	planeModelWorldTransform_.scale_ = { 32.0f,1.0f,32.0f };
 
+	// -- 雲 -- //
+	clowdModelHandle_ = ModelManager::GetInstance()->LoadModelFile("Resources/AssignmentModel/clowd", "clowd.gltf");
+	clowdModel_.reset(Model::Create(clowdModelHandle_));
+	clowdModel_->SetColor(Vector4(1.0f, 1.0f, 1.0f, 0.5f));
+	clowdModelWorldTransform_.Initialize();
+	clowdModelWorldTransform_.scale_ = { 4.0f,8.0f,4.0f };
+	
 	// -- Player 初期化 -- //
 	player_ = std::make_unique<Player>();
 	player_->Init();
@@ -77,7 +84,7 @@ void GameScene::Update(GameManager* gameManager) {
 
 	// カメラ 更新
 	camera_.Update();
-	camera_.translate_.y = player_->GetWorld().translate_.y + 25.0f;
+	camera_.translate_.y = player_->GetWorld().translate_.y + 30.0f;
 	camera_.translate_.y += player_->GetSpeed();
 
 	// コントローラーを接続していなければ早期リターン
@@ -109,10 +116,19 @@ void GameScene::Update(GameManager* gameManager) {
 		player_->Init();
 	}
 
+	ImGui::Begin("Clowd");
+	ImGui::DragFloat3("Pos", &clowdModelWorldTransform_.translate_.x, 1.0f);
+	ImGui::DragFloat3("Rot", &clowdModelWorldTransform_.rotate_.x, 0.01f);
+	ImGui::DragFloat3("Scale", &clowdModelWorldTransform_.scale_.x, 0.1f);
+	ImGui::End();
+
 #endif
 	
 	// -- 床 更新 -- //
 	planeModelWorldTransform_.Update();
+	
+	// -- 床 更新 -- //
+	clowdModelWorldTransform_.Update();
 
 
 	// -- UI 更新 -- //
@@ -139,6 +155,9 @@ void GameScene::Draw() {
 	// -- 床 描画-- //
 	planeModel_->Draw(planeModelWorldTransform_, camera_);
 
+	// -- 雲 描画 -- //
+	clowdModel_->Draw(clowdModelWorldTransform_,camera_);
+
 	// -- Player 描画 -- //
 	player_->Draw(camera_);
 
@@ -151,9 +170,6 @@ void GameScene::Draw() {
 
 GameScene::~GameScene() {
 	
-
-	// 目印 解放
-	landmarkModel_.clear();
 
 	// Sprite 解放 
 	for (int32_t i = 0; i < speedUI_.size(); i++) {
