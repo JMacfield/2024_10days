@@ -15,6 +15,8 @@
 // ゲームオブジェクト
 #include "GameObject/Player.h"
 
+#include "GameObject/Enemy/Enemy.h"
+
 //StatePatternを使う時は必ず前方宣言をするように
 class GameManager;
 
@@ -54,6 +56,12 @@ private:
 	
 	// -- Player -- //
 	Player* player_;
+
+	//Enemy
+	std::unique_ptr<Enemy> enemy_;
+
+	//ミサイル
+	std::list<std::unique_ptr<Missile>> missiles_{};
 
 	// -- UI -- //
 
