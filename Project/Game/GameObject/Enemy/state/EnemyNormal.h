@@ -24,16 +24,6 @@ private:
 	//クォータニオン
 	Quaternion destinationQuaternion_{ 0.0f,0.0f,0.0f,1.0f };
 
-	//ノックバック時の速度
-	Vector3 knockBackVelocity_{};
-
-	//ノックバックのフラグ
-	bool isKnockBack_ = false;
-
-	//ノックバックのタイマー
-	uint32_t knockBackTimer_ = 0;
-	uint32_t knockBackTime_ = 20;
-
 	//攻撃用のタイマー
 	uint32_t attackTimer_ = 0;
 	uint32_t attackTime_ = 0;

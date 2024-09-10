@@ -25,6 +25,8 @@ void EnemyNormal::Update(Enemy* pEnemy)
 			newState = new EnemyMissile();
 			newState->Initialize(pEnemy);
 			break;
+		case 1:
+
 
 		}
 		pEnemy->ChangeState(newState);

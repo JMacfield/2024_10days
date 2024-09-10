@@ -330,6 +330,12 @@
     <ClCompile Include="Project\Game\GameObject\Enemy\state\EnemyNormal.cpp">
       <Filter>YTEngine\Source File</Filter>
     </ClCompile>
+    <ClCompile Include="Project\Game\GameObject\Enemy\Beam\Beam.cpp">
+      <Filter>YTEngine\Source File</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Game\GameObject\Enemy\state\EnemyBeam.cpp">
+      <Filter>YTEngine\Source File</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\Particle3D\Particle3d.PS.hlsl">
@@ -599,6 +605,12 @@
       <Filter>YTEngine\Header File</Filter>
     </ClInclude>
     <ClInclude Include="Project\Game\GameObject\Enemy\state\IEnemyState.h">
+      <Filter>YTEngine\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Game\GameObject\Enemy\Beam\Beam.h">
+      <Filter>YTEngine\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Game\GameObject\Enemy\state\EnemyBeam.h">
       <Filter>YTEngine\Header File</Filter>
     </ClInclude>
   </ItemGroup>
