@@ -53,7 +53,7 @@ private:
 	WorldTransform clowdModelWorldTransform_ = {};
 	
 	// -- Player -- //
-	std::unique_ptr<Player> player_;
+	Player* player_;
 
 	// -- UI -- //
 
