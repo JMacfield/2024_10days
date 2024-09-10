@@ -156,6 +156,8 @@ void GameScene::Update(GameManager* gameManager) {
 	speedUI_[5]->SetTexture(numberTexHandle_[(viewSpeed)]);
 
 
+	// ミサイルとの判定 プレイヤーとエネミーのOBB
+	IsCollision(player_->GetCollision());
 }
 
 void GameScene::Draw() {

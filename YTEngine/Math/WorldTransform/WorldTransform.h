@@ -39,6 +39,7 @@ public:
 		this->rootNodeLocalMatrix_ = matrix4x4;
 	}
 
+	Vector3 GetWorldPosition() { return { worldMatrix_.m[3][0],worldMatrix_.m[3][1],worldMatrix_.m[3][2] }; }
 
 private:
 	//転送

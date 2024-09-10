@@ -5,6 +5,9 @@
 #include "TextureManager.h"
 #include "Camera.h"
 
+#include "OBB.h"
+#include "Collision.h"
+
 // 重力加速度
 const float kGravityPower_ = 0.098f;
 // 移動限界距離( -x ~ x, -z ~ z)
@@ -33,6 +36,9 @@ public: // -- 公開 メンバ関数 -- //
 	void Move(Vector3 direction);
 	
 	WorldTransform GetWorld() { return worldTransform_; }
+	OBB GetCollision() { return collision_; }
+
+	void SetCollision();
 
 	// 被弾時の減速処理
 	void ResiveSpeedDoun(float power);
@@ -71,7 +77,7 @@ private: // -- 非公開 メンバ変数 -- //
 	static Player* instance;
 
 	// プレイヤークラスの当たり判定用
-	
+	OBB collision_;
 
 };
 

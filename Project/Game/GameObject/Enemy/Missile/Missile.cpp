@@ -93,6 +93,8 @@ void Missile::Update()
 	//{
 	//	isDead_ = true;
 	//}
+
+	SetCollision();
 }
 
 void Missile::Draw(Camera camera)
@@ -138,3 +140,9 @@ void Missile::Draw(Camera camera)
 //	pos.z = worldTransform_.matWorld_.m[3][2];
 //	return pos;
 //}
+
+void Missile::SetCollision() {
+	collision_.center = worldTransform_.GetWorldPosition();
+	GetOrientations(MakeRotateXYZMatrix(worldTransform_.rotate_.x, worldTransform_.rotate_.y, worldTransform_.rotate_.z), collision_.orientation);
+	collision_.size = { 1.0f,1.0f,1.0f };
+}

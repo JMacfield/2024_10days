@@ -89,6 +89,8 @@ void Player::Update() {
 	}
 
 
+	SetCollision();
+
 	// ワールド座標 更新
 	worldTransform_.Update();
 
@@ -230,4 +232,10 @@ float Player::GetSpeedForEaseInOutQuad(float t)
 	if (t < 0.0f) { result *= -1.0f; }
 
 	return result;
+}
+
+void Player::SetCollision() {
+	collision_.center = worldTransform_.GetWorldPosition();
+	GetOrientations(MakeRotateXYZMatrix(worldTransform_.rotate_.x, worldTransform_.rotate_.y, worldTransform_.rotate_.z), collision_.orientation);
+	collision_.size = { 1.0f,1.0f,1.0f };
 }

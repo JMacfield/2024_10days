@@ -7,6 +7,7 @@
 #include "AnimationModel.h"
 #include "TextureManager.h"
 #include "Camera.h"
+#include "Collision.h"
 
 #include <memory>
 #include <Particle3D.h>

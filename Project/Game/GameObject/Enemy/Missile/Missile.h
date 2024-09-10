@@ -6,6 +6,9 @@
 #include "GameObject/Player.h"
 #include "VectorCalculation.h"
 
+#include "Collision.h"
+#include "OBB.h"
+
 class Missile
 {
 public:
@@ -25,6 +28,10 @@ public:
 	//const WorldTransform& GetWorldTransform() const override { return worldTransform_; };
 
 	const bool GetIsDead() const { return isDead_; };
+
+	OBB GetCollision() { return collision_; }
+
+	void SetCollision();
 
 private:
 
@@ -58,6 +65,9 @@ private:
 
 	//プレイヤーにはじかれたかどうか
 	bool isRepelled_ = false;
+
+	// ミサイル当たり判定用
+	OBB collision_;
 };
 
 
