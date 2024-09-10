@@ -57,6 +57,9 @@ private:
 	//Enemy
 	std::unique_ptr<Enemy> enemy_;
 
+	//ミサイル
+	std::list<std::unique_ptr<Missile>> missiles_{};
+
 	// -- UI -- //
 
 	// 速度

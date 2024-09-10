@@ -3,18 +3,20 @@
 #include "GameObject/Enemy/Enemy.h"
 #include "GameObject/Player.h"
 
-void NamedEnemyStateNormal::Initialize(Enemy* pEnemy)
+void EnemyNormal::Initialize(Enemy* pEnemy)
 {
 	worldTransform_ = pEnemy->GetWorld();
 	attackTime_ = Random::GetRandomInt(kMinAttackInterval, kMaxAttackInterval);
 }
 
-void NamedEnemyStateNormal::Update(Enemy* pEnemy)
+void EnemyNormal::Update(Enemy* pEnemy)
 {
+
+	//worldTransform_.translate_.x += 5.0f;
 	//攻撃処理
-	if (++attackTimer_ > attackTime_)
+	if (++attackTimer_ > attackTime_ && !pEnemy->GetIsSlow())
 	{
-		uint32_t attackNum = 1;
+		uint32_t attackNum = 0;
 		IEnemyState* newState = nullptr;
 		switch (attackNum)
 		{

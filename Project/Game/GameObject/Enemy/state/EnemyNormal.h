@@ -3,7 +3,7 @@
 #include "VectorCalculation.h"
 #include "Quaternion.h"
 
-class NamedEnemyStateNormal : public IEnemyState
+class EnemyNormal : public IEnemyState
 {
 public:
 	//攻撃までの最小時間
@@ -15,6 +15,7 @@ public:
 
 	void Update(Enemy* pEnemy) override;
 
+	//void Draw(Enemy* pEnemy, const Camera& camera) override;
 
 	//void OnCollision(Collider* collider) override;
 

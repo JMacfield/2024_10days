@@ -79,6 +79,9 @@ void GameScene::Update(GameManager* gameManager) {
 	// カメラ 更新
 	camera_.translate_.y = player_->GetWorld().translate_.y + 25.0f;
 	camera_.Update();
+
+	//enemy更新
+	enemy_->Update();
 	
 	// コントローラーを接続していなければ早期リターン
 	if (!Input::GetInstance()->GetJoystickState(joyState)) {
@@ -114,9 +117,6 @@ void GameScene::Update(GameManager* gameManager) {
 	// -- Player 更新 -- //
 	player_->Update();
 
-	//enemy更新
-	enemy_->Update();
-
 	// -- 床 更新 -- //
 	planeModelWorldTransform_.Update();
 
@@ -125,7 +125,7 @@ void GameScene::Update(GameManager* gameManager) {
 void GameScene::Draw() {
 	
 	// -- 床 描画-- //
-	planeModel_->Draw(planeModelWorldTransform_, camera_);
+	//planeModel_->Draw(planeModelWorldTransform_, camera_);
 
 	// -- Player 描画 -- //
 	player_->Draw(camera_);

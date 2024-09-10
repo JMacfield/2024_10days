@@ -9,6 +9,8 @@ void EnemyMissile::Initialize(Enemy* pEnemy)
 
 void EnemyMissile::Update(Enemy* pEnemy)
 {
+	//worldTransform_.translate_.x += 5.0f;
+
 	//待機処理
 	if (!isAttack_)
 	{
@@ -26,9 +28,9 @@ void EnemyMissile::Update(Enemy* pEnemy)
 			fireTimer_ = 0;
 			fireCount_++;
 			Vector3 velocity[4];
-			velocity[0] = { 0.2f,0.2f,0.0f };
+			velocity[0] = { 1.2f,0.0f,1.2f };
 			velocity[0] = TransformCalculation(velocity[0], worldTransform_.worldMatrix_);
-			velocity[1] = { -0.2f,0.2f,0.0f };
+			velocity[1] = { 1.2f,0.0f,-1.2f };
 			velocity[1] = TransformCalculation(velocity[1], worldTransform_.worldMatrix_);
 
 			Vector3 translation = pEnemy->GetWorld().translate_;
@@ -53,7 +55,7 @@ void EnemyMissile::Update(Enemy* pEnemy)
 	{
 		if (++recoveryTimer_ > kRecoveryTime)
 		{
-			IEnemyState* newState = new NamedEnemyStateNormal();
+			IEnemyState* newState = new EnemyNormal();
 			newState->Initialize(pEnemy);
 			pEnemy->ChangeState(newState);
 		}

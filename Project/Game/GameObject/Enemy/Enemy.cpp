@@ -2,7 +2,10 @@
 
 Enemy::Enemy() {}
 
-Enemy::~Enemy() {}
+Enemy::~Enemy() 
+{
+	delete state_;
+}
 
 void Enemy::Initialize() {
 
@@ -12,16 +15,21 @@ void Enemy::Initialize() {
 
 	// ワールド座標 初期化
 	worldTransform_.Initialize();
-	worldTransform_.translate_.y = 300.0f;
+	worldTransform_.translate_.y = 50.0f;
 
-	worldTransform_.scale_ = {1.0f,1.0f,1.0f};
+	worldTransform_.scale_ = {5.0f,5.0f,5.0f};
 
+	//状態の初期化
+	state_ = new EnemyNormal();
+	state_->Initialize(this);
 }
 
 void Enemy::Update() {
 
 	// ワールド座標 更新
 	worldTransform_.Update();
+
+	state_->Update(this);
 
 	//死亡フラグの立ったミサイルを削除
 	missiles_.remove_if([](std::unique_ptr<Missile>& missile)

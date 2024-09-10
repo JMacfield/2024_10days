@@ -16,7 +16,7 @@ void Missile::Initialize(const Vector3& position, const Vector3& velocity)
 	//ワールドトランスフォームの初期化
 	worldTransform_.Initialize();
 	worldTransform_.translate_ = position;
-	worldTransform_.scale_ = { 10.6f,10.6f,10.6f };
+	worldTransform_.scale_ = { 1.6f,1.6f,1.6f };
 
 	/*AABB aabb = {
 		.min{-worldTransform_.scale_.x,-worldTransform_.scale_.y,-worldTransform_.scale_.z,},
@@ -49,7 +49,7 @@ void Missile::Update()
 
 	//媒介変数の更新
 	if (trackingParameter_ < 0.1f) {
-		trackingParameter_ += 1.0f / (60.0f * 1.0f);
+		trackingParameter_ += 1.0f / (1800.0f * 1.0f);
 	}
 
 	//追尾タイマーを進める
@@ -61,13 +61,11 @@ void Missile::Update()
 	//一定時間追尾するようにする
 	if (trackingTimer_ >= kTrackingTime)
 	{
-		velocity_ = Slerp(velocity_, sub, trackingParameter_);
-		const float kSpeed = 0.6f;
-		velocity_ *= kSpeed;
+		isTrackingComplete_ = true;
 	}
 
 	//追捕終了していなかったら
-	if (!isTrackingComplete_ && !isRepelled_)
+	if (isTrackingComplete_ == true)
 	{
 		velocity_ = Slerp(velocity_, sub, trackingParameter_);
 		const float kSpeed = 0.6f;
@@ -78,8 +76,8 @@ void Missile::Update()
 	worldTransform_.translate_ += velocity_;
 
 	//回転処理
-	worldTransform_.rotate_.x += 0.2f;
-	worldTransform_.rotate_.y += 0.2f;
+	worldTransform_.rotate_.x += 0.02f;
+	worldTransform_.rotate_.y += 0.02f;
 
 	//ワールドトランスフォームの更新
 	worldTransform_.Update();
@@ -91,7 +89,7 @@ void Missile::Update()
 	//}
 }
 
-void Missile::Draw( Camera camera)
+void Missile::Draw(Camera camera)
 {
 	model_->Draw(worldTransform_, camera);
 }
