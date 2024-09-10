@@ -16,3 +16,10 @@ int32_t OtherCode::GetDigits(int32_t num) {
     }
     return result;
 }
+
+float OtherCode::ExponentialInterpolation(float a, float b, float t, float k) {
+    float result = 0.0f;
+    result = a + ((b - a) * k * t);
+
+    return result;
+}

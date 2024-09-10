@@ -312,6 +312,9 @@
     <ClCompile Include="Project\Game\Other\Code\OtherCode.cpp">
       <Filter>YTEngine\Source File</Filter>
     </ClCompile>
+    <ClCompile Include="Transition.cpp">
+      <Filter>YTEngine\Source File</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\Particle3D\Particle3d.PS.hlsl">
@@ -557,6 +560,9 @@
       <Filter>YTEngine\Header File</Filter>
     </ClInclude>
     <ClInclude Include="Project\Game\Other\Code\OtherCode.h">
+      <Filter>YTEngine\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Transition.h">
       <Filter>YTEngine\Header File</Filter>
     </ClInclude>
   </ItemGroup>

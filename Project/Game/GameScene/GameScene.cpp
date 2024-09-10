@@ -101,7 +101,7 @@ void GameScene::Update(GameManager* gameManager) {
 
 	// コントローラーを接続していなければ早期リターン
 	if (!Input::GetInstance()->GetJoystickState(joyState)) {
-		return;
+		//return;
 	}
 
 	// 移動量取得
