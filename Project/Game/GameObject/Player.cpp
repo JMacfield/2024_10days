@@ -1,5 +1,15 @@
 #include "Player.h"
 
+Player* Player::instance = nullptr;
+
+Player* Player::GetInstance()
+{
+	if(instance==nullptr){
+		instance = new Player();
+	}
+	return instance;
+}
+
 Player::Player() {}
 
 Player::~Player() {}
@@ -172,6 +182,13 @@ void Player::Debug()
 
 #endif // _DEBUG
 
+
+}
+
+void Player::Final()
+{
+	delete instance;
+	instance = nullptr;
 
 }
 

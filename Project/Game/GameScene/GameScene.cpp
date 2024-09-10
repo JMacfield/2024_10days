@@ -33,7 +33,7 @@ void GameScene::Initialize() {
 	clowdModelWorldTransform_.translate_ = { 0.0f,200.0f,0.0f };
 	
 	// -- Player 初期化 -- //
-	player_ = std::make_unique<Player>();
+	player_ = Player::GetInstance();
 	player_->Init();
 
 	// -- カメラ 初期化 -- //
@@ -171,6 +171,7 @@ void GameScene::Draw() {
 
 GameScene::~GameScene() {
 	
+	player_->Final();
 
 	// Sprite 解放 
 	for (int32_t i = 0; i < speedUI_.size(); i++) {

@@ -14,6 +14,12 @@ const float kFlamerate = 60.0f;
 
 
 class Player {
+
+public: // --静的 メンバ関数 -- //
+
+	// インタンス取得
+	static Player* GetInstance();
+
 public: // -- 公開 メンバ関数 -- //
 
 	Player();
@@ -22,6 +28,7 @@ public: // -- 公開 メンバ関数 -- //
 	void Update();
 	void Draw(Camera camera);
 	void Debug();
+	void Final();
 
 	void Move(Vector3 direction);
 	
@@ -59,6 +66,9 @@ private: // -- 非公開 メンバ変数 -- //
 
 	// ゲーム時間(単位は秒)
 	float inGameTime;
+
+	// プレイヤークラスのインスタンス
+	static Player* instance;
 
 };
 
