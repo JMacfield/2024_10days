@@ -216,6 +216,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\Game\Other\Transition.h" />
     <ClInclude Include="YTEngine\Audio\Audio.h" />
     <ClInclude Include="YTEngine\Audio\AudioStruct.h" />
+    <ClInclude Include="YTEngine\Math\Shape\OBB.h" />
     <ClInclude Include="YTEngine\Utility\GlobalVariables\GlobalVariables.h" />
     <ClInclude Include="YTEngine\Camera\Camera.h" />
     <ClInclude Include="YTEngine\EngineCore\DirectXCommon\DirectXCommon.h" />

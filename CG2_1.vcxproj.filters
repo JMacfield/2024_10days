@@ -565,6 +565,9 @@
     <ClInclude Include="Project\Game\Other\Transition.h">
       <Filter>YTEngine\Header File</Filter>
     </ClInclude>
+    <ClInclude Include="YTEngine\Math\Shape\OBB.h">
+      <Filter>YTEngine\Header File</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shader\Particle3D\Particle3D.hlsli">
