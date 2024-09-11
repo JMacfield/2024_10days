@@ -73,7 +73,7 @@ void GameScene::Initialize() {
 	materStep_ = 0;
 
 	// 追加ディレクトリパス
-	std::string directrypathMidle = "mater/mater";
+	std::string directrypathMidle = "antenna/antenna";
 	
 	// 初期化
 	for (int32_t i = 0; i < materUI_.size(); i++) {
@@ -84,14 +84,12 @@ void GameScene::Initialize() {
 		materTex_[i] = textureManager->LoadTexture(directrypath + directrypathMidle + number + format);
 		
 		// スプライト生成
-		materUI_[i] = Sprite::Create(materTex_[i], Vector2(256.0f, 256.0f));
-		materUI_[i]->SetAnchorPoint(Vector2(0.5f, 0.5f));
-		//materUI_[i]->SetScale(Vector2(0.5f, 0.5f));
-
+		materUI_[i] = Sprite::Create(materTex_[i], Vector2(32.0f, 24.0f));
+		materUI_[i]->SetScale(Vector2(0.7f, 0.7f));
 	}
 
-	materUI_[1]->SetUVMode(true);
-	materUI_[1]->SetTextureSize(Vector2(256.0f,0.0f));
+	materUI_[1]->SetPosition({ materUI_[0]->GetPosition().x + (materUI_[0]->GetScale().x * 512.0f) ,materUI_[0]->GetPosition().y });
+	materUI_[1]->SetAnchorPoint(Vector2(1.0f, 0.0f));
 
 }
 
@@ -173,7 +171,7 @@ void GameScene::Update(GameManager* gameManager) {
 	speedUI_[5]->SetTexture(numberTexHandle_[(viewSpeed)]);
 
 	// -- 速度メーター更新 -- //
-	//materUI_[1]->SetScale(Vector2(float(player_->GetNormalT() * 0.5f), 0.5f));
+	materUI_[1]->SetScale(Vector2(float(1.0f - player_->GetNormalT()) * materUI_[0]->GetScale().x, materUI_[0]->GetScale().y));
 
 }
 
@@ -190,7 +188,7 @@ void GameScene::Draw() {
 
 	// -- 速度メーター 描画 -- //
 	for (int32_t i = 0; i < materUI_.size(); i++) {
-		//materUI_[i]->Draw();
+		materUI_[i]->Draw();
 	}
 
 	// -- テクスチャ 描画 -- // 
