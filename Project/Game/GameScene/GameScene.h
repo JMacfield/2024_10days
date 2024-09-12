@@ -16,6 +16,7 @@
 #include "GameObject/Player.h"
 
 #include "GameObject/Enemy/Enemy.h"
+#include "GameObject/Enemy/Randam/Randam.h"
 
 //StatePatternを使う時は必ず前方宣言をするように
 class GameManager;

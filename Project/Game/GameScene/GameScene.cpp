@@ -40,6 +40,8 @@ void GameScene::Initialize() {
 	enemy_ = std::make_unique<Enemy>();
 	enemy_->Initialize();
 
+	Random::Initialize();
+
 	// -- カメラ 初期化 -- //
 	camera_.Initialize();
 	camera_.rotate_= {1.57f,0.0f,0.0f};

@@ -9,6 +9,7 @@
 class Missile
 {
 public:
+
 	//追尾時間
 	static const uint32_t kTrackingTime = 1000 * 2;
 
@@ -58,6 +59,13 @@ private:
 
 	//プレイヤーにはじかれたかどうか
 	bool isRepelled_ = false;
+
+	//攻撃までの最小範囲
+	float kMinSpornRange = -128;
+	//攻撃までの最大時間
+	float  kMaxSpornRange = 128;
+
+	float missileSpornPoint_ = 0;
 };
 
 
