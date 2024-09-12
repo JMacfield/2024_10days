@@ -58,6 +58,7 @@ public:
 private:
 	// -- カメラ -- //
 	Camera camera_ = {};
+	float cameraNormalT_; // 補間用の時間
 
 	// -- ゲーム進行段階 -- //
 	GameBehavior gameBehavior_;
@@ -106,4 +107,22 @@ private:
 	std::array<int32_t, 2> materTex_;
 	// メーター段階
 	int32_t materStep_;
+
+	// -- シェイク強度 -- //
+	Vector3 basePos;
+	Vector2 shakePos;
+	int32_t shakePower;
+	int32_t shakeCount;
+
+	// -- ホワイトアウト -- //
+	std::unique_ptr<Sprite> whiteOutSprite;
+	int32_t whiteOutTexHandle_;
+	float whiteOutNormalT_;
+
+	// -- 上下黒帯 -- //
+	std::unique_ptr<Sprite> movieScreenSprite;
+	int32_t movieScreenTexHandle_;
+	float movieScreenNormalT_;
+
+
 };

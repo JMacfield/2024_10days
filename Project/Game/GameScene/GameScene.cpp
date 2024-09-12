@@ -65,6 +65,7 @@ void GameScene::Initialize() {
 	camera_.rotate_= {1.57f,0.0f,0.0f};
 	camera_.translate_ = {0.0f,player_->GetWorld().translate_.y,0.0f};
 	camera_.fov_ = 1.0f;
+	cameraNormalT_ = 0.0f;
 
 	// -- UI 初期化＆ロード -- //
 
@@ -120,6 +121,27 @@ void GameScene::Initialize() {
 	gameBehavior_ = GameBehavior::kStart;
 
 	clowdModel_->SetLighting(false);
+
+	// -- シェイク強度 -- //
+	basePos = {};
+	shakePos = {};
+	shakePower = 32;
+	shakeCount = 0;
+
+	// -- ホワイトアウト -- //
+	whiteOutTexHandle_ = textureManager->LoadTexture("Resources/AssignmentTexture/white2x2.png");
+	whiteOutSprite.reset(Sprite::Create(whiteOutTexHandle_, Vector2(0.0f, 0.0f)));
+	whiteOutSprite->SetScale(Vector2(1280.0f, 720.0f));
+	whiteOutSprite->SetColor(Vector4(1.0f, 1.0f, 1.0f, 0.0f));
+	whiteOutNormalT_ = 0.0f;
+
+	// -- 上下黒帯 -- //
+	movieScreenTexHandle_ = textureManager->LoadTexture("Resources/AssignmentTexture/movieScreen.png");
+	movieScreenSprite.reset(Sprite::Create(movieScreenTexHandle_, Vector2(640.0f, 360.0f)));
+	movieScreenSprite->SetScale(Vector2(1.0f, 1.4f));
+	movieScreenSprite->SetAnchorPoint(Vector2(0.5f, 0.5f));
+	movieScreenNormalT_ = 0.0f;
+
 }
 
 /// <summary>
@@ -224,6 +246,10 @@ void GameScene::Draw() {
 
 	}
 
+	whiteOutSprite->Draw();
+
+	movieScreenSprite->Draw();
+
 }
 
 void GameScene::StartUpdate(GameManager* gameManager)
@@ -314,28 +340,70 @@ void GameScene::InGameUpdate(GameManager* gameManager)
 
 void GameScene::PerfectUpdate(GameManager* gameManager)
 {
-	static float cameraNormalT = 0.0f;
-	// time加算処理
-	if (cameraNormalT < 1.0f) {
-		// フレームレート * ゲーム時間(3分)で補間
-		cameraNormalT += 1.0f / (kFlamerate * 1.0f);
-	}
 
-	
-	// カメラ座標
-	camera_.translate_.z = OtherCode::ExponentialInterpolation(0.0f, -1500.0f,cameraNormalT,1.0f);
-	camera_.rotate_.x = OtherCode::ExponentialInterpolation(1.57f, 0.5f, cameraNormalT, 1.0f);
+	if (movieScreenNormalT_ < 1.0f) {
 
-	if (cameraNormalT > 0.8f) {
-		if (cometWorldTransform_.translate_.y >= cometWorldTransform_.scale_.y * 0.5f) {
-			cometWorldTransform_.translate_.y += player_->GetSpeed() * 0.5f;
+		movieScreenNormalT_ += 1.0f / (60.0f * 0.5f);
+		if (movieScreenNormalT_ > 1.0f) {
+			movieScreenNormalT_ = 1.0f;
 		}
 
-		// シェイク処理
+		Vector2 newScale = { 1.0f,1.0f };
+		newScale.y = OtherCode::ExponentialInterpolation(1.4f, 1.0f, movieScreenNormalT_, 1.0f);
+		movieScreenSprite->SetScale(newScale);
+	}
+	else {
 
+		// time加算処理
+		if (cameraNormalT_ < 1.0f) {
+			// フレームレート * ゲーム時間(3分)で補間
+			cameraNormalT_ += 1.0f / (kFlamerate * 1.0f);
+
+		}
+
+		// カメラ座標
+		camera_.translate_.z = OtherCode::ExponentialInterpolation(0.0f, -1500.0f, cameraNormalT_, 1.0f);
+		camera_.rotate_.x = OtherCode::ExponentialInterpolation(1.57f, 0.5f, cameraNormalT_, 1.0f);
+
+		// カメラ座標を保持
+		basePos = camera_.translate_;
+
+
+		if (cameraNormalT_ >= 1.0f) {
+			if (cometWorldTransform_.translate_.y >= cometWorldTransform_.scale_.y * 0.5f) {
+				cometWorldTransform_.translate_.y += player_->GetSpeed() * 0.5f;
+			}
+
+			// シェイク処理
+			if (shakePower > 0) {
+				shakePos.x = float(rand() % shakePower) - float(shakePower / 2);
+				shakePos.y = float(rand() % shakePower) - float(shakePower / 2);
+
+				camera_.translate_.x = basePos.x + shakePos.x;
+				camera_.translate_.y = basePos.y + shakePos.y;
+			}
+
+			shakeCount++;
+			if (shakeCount > 6) {
+				shakePower -= 1;
+				shakeCount = 0;
+			}
+
+			if (shakePower > 30) { return; }
+
+			if (whiteOutNormalT_ < 1.0f) {
+				whiteOutNormalT_ += 1.0f / (60.0f * 5.5f);
+				if (whiteOutNormalT_ >= 1.0f) {
+					whiteOutNormalT_ = 1.0f;
+				}
+			}
+
+			Vector4 newColor = { 1.0f,1.0f,1.0f,0.0f };
+			newColor.w = OtherCode::ExponentialInterpolation(newColor.w, 1.0f, whiteOutNormalT_, 1.1f);
+			whiteOutSprite->SetColor(newColor);
+		}
 
 	}
-
 	gameManager;
 }
 
