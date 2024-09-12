@@ -50,7 +50,7 @@ void GameScene::Initialize() {
 	cometModel_.reset(Model::Create(cometModelHandle_));
 	cometWorldTransform_.Initialize();
 	cometWorldTransform_.scale_ = { 512.0f,512.0f, 512.0f };
-	cometWorldTransform_.translate_ = { 0.0f,6000.0f, 0.0f };
+	cometWorldTransform_.translate_ = { 0.0f,60000.0f, 0.0f };
 
 	// -- Player 初期化 -- //
 	player_ = Player::GetInstance();
@@ -362,6 +362,7 @@ void GameScene::PerfectUpdate(GameManager* gameManager)
 		}
 
 		// カメラ座標
+		camera_.translate_.y = OtherCode::ExponentialInterpolation(camera_.translate_.y, 1000.0f, cameraNormalT_, 1.0f);
 		camera_.translate_.z = OtherCode::ExponentialInterpolation(0.0f, -1500.0f, cameraNormalT_, 1.0f);
 		camera_.rotate_.x = OtherCode::ExponentialInterpolation(1.57f, 0.5f, cameraNormalT_, 1.0f);
 
