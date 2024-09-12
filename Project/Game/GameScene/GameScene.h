@@ -58,9 +58,15 @@ public:
 private:
 	// -- カメラ -- //
 	Camera camera_ = {};
+	float cameraNormalT_; // 補間用の時間
 
 	// -- ゲーム進行段階 -- //
 	GameBehavior gameBehavior_;
+
+	// -- 天球  -- //
+	std::unique_ptr<Model> skydomeModel_ = nullptr;
+	uint32_t skydomeModelHandle_ = 0;
+	WorldTransform skydomeModelWorldTransform_ = {};
 
 	// -- 床(仮置き) -- //
 	std::unique_ptr<Model> planeModel_ = nullptr;
@@ -72,6 +78,11 @@ private:
 	uint32_t clowdModelHandle_ = 0;
 	WorldTransform clowdModelWorldTransform_ = {};
 	
+	// -- 隕石 -- //
+	std::unique_ptr<Model> cometModel_;
+	int32_t cometModelHandle_;
+	WorldTransform cometWorldTransform_;
+
 	// -- Player -- //
 	Player* player_;
 
@@ -96,4 +107,22 @@ private:
 	std::array<int32_t, 2> materTex_;
 	// メーター段階
 	int32_t materStep_;
+
+	// -- シェイク強度 -- //
+	Vector3 basePos;
+	Vector2 shakePos;
+	int32_t shakePower;
+	int32_t shakeCount;
+
+	// -- ホワイトアウト -- //
+	std::unique_ptr<Sprite> whiteOutSprite;
+	int32_t whiteOutTexHandle_;
+	float whiteOutNormalT_;
+
+	// -- 上下黒帯 -- //
+	std::unique_ptr<Sprite> movieScreenSprite;
+	int32_t movieScreenTexHandle_;
+	float movieScreenNormalT_;
+
+
 };

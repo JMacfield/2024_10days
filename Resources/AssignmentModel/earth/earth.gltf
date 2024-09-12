@@ -15,18 +15,13 @@
 	"nodes":[
 		{
 			"mesh":0,
-			"name":"ICO\u7403",
-			"scale":[
-				0.49000000953674316,
-				0.49000000953674316,
-				0.49000000953674316
-			]
+			"name":"sphere"
 		}
 	],
 	"materials":[
 		{
 			"doubleSided":true,
-			"name":"Material",
+			"name":"Material.001",
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
 					"index":0
@@ -38,7 +33,7 @@
 	],
 	"meshes":[
 		{
-			"name":"ICO\u7403.001",
+			"name":"\u7403.001",
 			"primitives":[
 				{
 					"attributes":{
@@ -61,69 +56,69 @@
 	"images":[
 		{
 			"mimeType":"image/png",
-			"name":"comet",
-			"uri":"comet.png"
+			"name":"earth",
+			"uri":"earth.png"
 		}
 	],
 	"accessors":[
 		{
 			"bufferView":0,
 			"componentType":5126,
-			"count":240,
+			"count":16474,
 			"max":[
-				0.9510578513145447,
-				1.050654411315918,
-				0.9999999403953552
+				0.9999998807907104,
+				1,
+				0.9999997615814209
 			],
 			"min":[
-				-0.9510578513145447,
+				-0.9999997019767761,
 				-1,
-				-0.9999999403953552
+				-1
 			],
 			"type":"VEC3"
 		},
 		{
 			"bufferView":1,
 			"componentType":5126,
-			"count":240,
+			"count":16474,
 			"type":"VEC3"
 		},
 		{
 			"bufferView":2,
 			"componentType":5126,
-			"count":240,
+			"count":16474,
 			"type":"VEC2"
 		},
 		{
 			"bufferView":3,
 			"componentType":5123,
-			"count":240,
+			"count":24192,
 			"type":"SCALAR"
 		}
 	],
 	"bufferViews":[
 		{
 			"buffer":0,
-			"byteLength":2880,
+			"byteLength":197688,
 			"byteOffset":0,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":2880,
-			"byteOffset":2880,
+			"byteLength":197688,
+			"byteOffset":197688,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":1920,
-			"byteOffset":5760,
+			"byteLength":131792,
+			"byteOffset":395376,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":480,
-			"byteOffset":7680,
+			"byteLength":48384,
+			"byteOffset":527168,
 			"target":34963
 		}
 	],
@@ -135,8 +130,8 @@
 	],
 	"buffers":[
 		{
-			"byteLength":8160,
-			"uri":"comet.bin"
+			"byteLength":575552,
+			"uri":"earth.bin"
 		}
 	]
 }

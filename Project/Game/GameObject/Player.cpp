@@ -17,7 +17,7 @@ Player::~Player() {}
 void Player::Init() {
 
 	// モデル設定
-	modelHandle_ = ModelManager::GetInstance()->LoadModelFile("Resources/AssignmentModel/comet", "comet.gltf");
+	modelHandle_ = ModelManager::GetInstance()->LoadModelFile("Resources/AssignmentModel/player", "player.gltf");
 	model_.reset(Model::Create(modelHandle_));
 
 	// ワールド座標 初期化
@@ -37,7 +37,7 @@ void Player::Init() {
 	reverseT = 0.0f;
 
 	// ゲーム時間(単位は秒)
-	inGameTime = 30.0f;
+	inGameTime = 12.0f;
 
 
 }
