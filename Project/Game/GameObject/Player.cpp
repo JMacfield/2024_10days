@@ -17,7 +17,7 @@ Player::~Player() {}
 void Player::Init() {
 
 	// モデル設定
-	modelHandle_ = ModelManager::GetInstance()->LoadModelFile("Resources/AssignmentModel/comet", "comet.gltf");
+	modelHandle_ = ModelManager::GetInstance()->LoadModelFile("Resources/AssignmentModel/player", "player.gltf");
 	model_.reset(Model::Create(modelHandle_));
 
 	// ワールド座標 初期化

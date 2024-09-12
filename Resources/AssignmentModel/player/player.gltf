@@ -15,18 +15,13 @@
 	"nodes":[
 		{
 			"mesh":0,
-			"name":"ICO\u7403",
-			"scale":[
-				0.49000000953674316,
-				0.49000000953674316,
-				0.49000000953674316
-			]
+			"name":"player"
 		}
 	],
 	"materials":[
 		{
 			"doubleSided":true,
-			"name":"Material",
+			"name":"Material.001",
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
 					"index":0
@@ -38,7 +33,7 @@
 	],
 	"meshes":[
 		{
-			"name":"ICO\u7403.001",
+			"name":"ICO\u7403.003",
 			"primitives":[
 				{
 					"attributes":{
@@ -61,69 +56,69 @@
 	"images":[
 		{
 			"mimeType":"image/png",
-			"name":"comet",
-			"uri":"comet.png"
+			"name":"player",
+			"uri":"player.png"
 		}
 	],
 	"accessors":[
 		{
 			"bufferView":0,
 			"componentType":5126,
-			"count":240,
+			"count":840,
 			"max":[
 				0.9510578513145447,
-				1.050654411315918,
-				0.9999999403953552
+				0.9453473091125488,
+				0.9453463554382324
 			],
 			"min":[
 				-0.9510578513145447,
-				-1,
-				-0.9999999403953552
+				-0.9453473687171936,
+				-0.9453463554382324
 			],
 			"type":"VEC3"
 		},
 		{
 			"bufferView":1,
 			"componentType":5126,
-			"count":240,
+			"count":840,
 			"type":"VEC3"
 		},
 		{
 			"bufferView":2,
 			"componentType":5126,
-			"count":240,
+			"count":840,
 			"type":"VEC2"
 		},
 		{
 			"bufferView":3,
 			"componentType":5123,
-			"count":240,
+			"count":1428,
 			"type":"SCALAR"
 		}
 	],
 	"bufferViews":[
 		{
 			"buffer":0,
-			"byteLength":2880,
+			"byteLength":10080,
 			"byteOffset":0,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":2880,
-			"byteOffset":2880,
+			"byteLength":10080,
+			"byteOffset":10080,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":1920,
-			"byteOffset":5760,
+			"byteLength":6720,
+			"byteOffset":20160,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":480,
-			"byteOffset":7680,
+			"byteLength":2856,
+			"byteOffset":26880,
 			"target":34963
 		}
 	],
@@ -135,8 +130,8 @@
 	],
 	"buffers":[
 		{
-			"byteLength":8160,
-			"uri":"comet.bin"
+			"byteLength":29736,
+			"uri":"player.bin"
 		}
 	]
 }

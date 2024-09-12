@@ -77,6 +77,11 @@ private:
 	uint32_t clowdModelHandle_ = 0;
 	WorldTransform clowdModelWorldTransform_ = {};
 	
+	// -- 隕石 -- //
+	std::unique_ptr<Model> cometModel_;
+	int32_t cometModelHandle_;
+	WorldTransform cometWorldTransform_;
+
 	// -- Player -- //
 	Player* player_;
 

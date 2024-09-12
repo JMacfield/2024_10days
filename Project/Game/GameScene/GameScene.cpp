@@ -35,6 +35,7 @@ void GameScene::Initialize() {
 	planeModelWorldTransform_.scale_ = { 512.0f,512.0f,512.0f };
 	planeModelWorldTransform_.translate_ = { 0.0f,-256.0f,0.0f };
 
+
 	// -- 雲 -- //
 	clowdModelHandle_ = ModelManager::GetInstance()->LoadModelFile("Resources/AssignmentModel/clowd", "clowd.gltf");
 	clowdModel_.reset(Model::Create(clowdModelHandle_));
@@ -44,6 +45,13 @@ void GameScene::Initialize() {
 	clowdModelWorldTransform_.scale_ = { 4.0f,8.0f,4.0f };
 	clowdModelWorldTransform_.translate_ = { 0.0f,200.0f,0.0f };
 	
+	// -- 隕石 -- //
+	cometModelHandle_ = ModelManager::GetInstance()->LoadModelFile("Resources/AssignmentModel/comet", "comet.gltf");
+	cometModel_.reset(Model::Create(cometModelHandle_));
+	cometWorldTransform_.Initialize();
+	cometWorldTransform_.scale_ = { 512.0f,512.0f, 512.0f };
+	cometWorldTransform_.translate_ = { 0.0f,6000.0f, 0.0f };
+
 	// -- Player 初期化 -- //
 	player_ = Player::GetInstance();
 	player_->Init();
@@ -56,6 +64,7 @@ void GameScene::Initialize() {
 	camera_.Initialize();
 	camera_.rotate_= {1.57f,0.0f,0.0f};
 	camera_.translate_ = {0.0f,player_->GetWorld().translate_.y,0.0f};
+	camera_.fov_ = 1.0f;
 
 	// -- UI 初期化＆ロード -- //
 
@@ -118,7 +127,7 @@ void GameScene::Initialize() {
 /// </summary>
 void GameScene::Update(GameManager* gameManager) {
 	
-	// カメラ 更新
+	
 	camera_.Update();
 
 	switch (gameBehavior_)
@@ -160,6 +169,10 @@ void GameScene::Update(GameManager* gameManager) {
 	ImGui::DragFloat3("Scale", &clowdModelWorldTransform_.scale_.x, 0.1f);
 	ImGui::End();
 
+	ImGui::Begin("Camera");
+	ImGui::DragFloat("Fov", &camera_.fov_, 0.01f);
+	ImGui::End();
+
 #endif
 
 	// -- 床 更新 -- //
@@ -167,6 +180,9 @@ void GameScene::Update(GameManager* gameManager) {
 
 	// -- 雲 更新 -- //
 	clowdModelWorldTransform_.Update();
+
+	// -- 隕石 更新 -- //
+	cometWorldTransform_.Update();
 
 	// -- 天球 更新 -- //
 	skydomeModelWorldTransform_.Update();
@@ -181,19 +197,17 @@ void GameScene::Draw() {
 	// -- 床 描画-- //
 	planeModel_->Draw(planeModelWorldTransform_, camera_);
 
-	// -- 雲 描画 -- //
-	clowdModel_->Draw(clowdModelWorldTransform_,camera_);
-
-	// -- テクスチャ 描画 -- // 
-	//enemy描画
-	enemy_->Draw(camera_);
-
-	// -- テクスチャ 更新 -- // 
-	for (int32_t i = 0; i < speedUI_.size(); i++) {
-		speedUI_[i]->Draw();
-	}
+	// -- 隕石 描画 -- //
+	cometModel_->Draw(cometWorldTransform_, camera_);
 
 	if (gameBehavior_ == GameBehavior::kInGame) {
+
+		// -- 雲 描画 -- //
+		clowdModel_->Draw(clowdModelWorldTransform_, camera_);
+
+		// -- テクスチャ 描画 -- // 
+		//enemy描画
+		enemy_->Draw(camera_);
 
 		// -- Player 描画 -- //
 		player_->Draw(camera_);
@@ -233,8 +247,17 @@ void GameScene::InGameUpdate(GameManager* gameManager)
 	//enemy更新
 	enemy_->Update();
 
+	// -- カメラ 更新 -- //
 	camera_.translate_.y = player_->GetWorld().translate_.y + 30.0f;
 	camera_.translate_.y += player_->GetSpeed();
+	// 視野角 調整
+	if (player_->GetNormalT() > 0.0f) {
+		camera_.fov_ = OtherCode::ExponentialInterpolation(1.0f, 0.3f, (player_->GetNormalT() - 0.0f) * 1.0f, 1.0f);
+	}
+
+	// 隕石座標
+	cometWorldTransform_.translate_.y = player_->GetWorld().translate_.y + (30.0f + (cometWorldTransform_.scale_.y * 0.5f));
+	cometWorldTransform_.translate_.y += player_->GetSpeed();
 
 	// コントローラーを接続していなければ早期リターン
 	if (!Input::GetInstance()->GetJoystickState(joyState)) {
@@ -295,13 +318,23 @@ void GameScene::PerfectUpdate(GameManager* gameManager)
 	// time加算処理
 	if (cameraNormalT < 1.0f) {
 		// フレームレート * ゲーム時間(3分)で補間
-		cameraNormalT += 1.0f / (kFlamerate * 4.0f);
+		cameraNormalT += 1.0f / (kFlamerate * 1.0f);
 	}
 
-	//if (camera_.translate_.y);
-
-	camera_.translate_.z = OtherCode::ExponentialInterpolation(0.0f, -750.0f,cameraNormalT,2.0f);
+	
+	// カメラ座標
+	camera_.translate_.z = OtherCode::ExponentialInterpolation(0.0f, -1500.0f,cameraNormalT,1.0f);
 	camera_.rotate_.x = OtherCode::ExponentialInterpolation(1.57f, 0.5f, cameraNormalT, 1.0f);
+
+	if (cameraNormalT > 0.8f) {
+		if (cometWorldTransform_.translate_.y >= cometWorldTransform_.scale_.y * 0.5f) {
+			cometWorldTransform_.translate_.y += player_->GetSpeed() * 0.5f;
+		}
+
+		// シェイク処理
+
+
+	}
 
 	gameManager;
 }
