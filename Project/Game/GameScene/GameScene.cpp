@@ -97,6 +97,7 @@ void GameScene::Initialize() {
 	materUI_[1]->SetUVMode(true);
 	materUI_[1]->SetTextureSize(Vector2(256.0f,0.0f));
 
+	clowdModel_->SetLighting(false);
 }
 
 /// <summary>

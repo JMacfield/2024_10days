@@ -40,7 +40,6 @@ void Player::Init() {
 	inGameTime = 30.0f;
 
 
-
 }
 
 void Player::Update() {
