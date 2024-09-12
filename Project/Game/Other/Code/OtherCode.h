@@ -1,5 +1,6 @@
 #pragma once
 #include <stdInt.h>
+#include "../Math/Vector/Vector3.h"
 
 namespace OtherCode{
 
@@ -8,6 +9,7 @@ namespace OtherCode{
 
 	// 指数補間
 	float ExponentialInterpolation(float a, float b, float t, float k);
+	Vector3 ExponentialInterpolation(Vector3 a, Vector3 b, float t, float k);
 
 };
 

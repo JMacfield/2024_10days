@@ -109,3 +109,10 @@ bool GameManager::IsTransitioned()
 {
 	return transition->IsTransitioned();
 }
+
+
+
+bool GameManager::IsStartTransition()
+{
+	return transition->IsTransition();
+}

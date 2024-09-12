@@ -22,7 +22,7 @@ void Player::Init() {
 
 	// ワールド座標 初期化
 	worldTransform_.Initialize();
-	worldTransform_.translate_.y = 4000.0f + 8000.0f;
+	worldTransform_.translate_.y = 4000.0f + 1000.0f;
 
 	// 移動量 初期化
 	vel_ = { 0.0f,-kGravityPower_,0.0f };

@@ -23,3 +23,11 @@ float OtherCode::ExponentialInterpolation(float a, float b, float t, float k) {
 
     return result;
 }
+
+Vector3 OtherCode::ExponentialInterpolation(Vector3 a, Vector3 b, float t, float k) {
+    Vector3 result = {};
+    result.x = a.x + ((b.x - a.x) * k * t);
+    result.y = a.y + ((b.y - a.y) * k * t);
+    result.z = a.z + ((b.z - a.z) * k * t);
+    return result;
+}
