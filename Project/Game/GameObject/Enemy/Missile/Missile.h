@@ -68,4 +68,11 @@ private:
 
 	// ミサイル当たり判定用
 	OBB collision_;
+
+	// 無敵タイマー　無敵
+	int invincibleTimer_ = 0;
+	bool isInvincible_ = false;
+	
+	// 無敵の時間
+	int invincibleTime_ = 60;
 };

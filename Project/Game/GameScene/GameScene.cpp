@@ -6,6 +6,8 @@
 #include "ModelManager.h"
 #include "AnimationManager.h"
 
+#include "OverScene.h"
+
 /// <summary>
 /// コンストラクタ
 /// </summary>
@@ -263,8 +265,9 @@ void GameScene::InGameUpdate(GameManager* gameManager)
 	// -- 速度メーター更新 -- //
 	materUI_[1]->SetScale(Vector2(float(1.0f - player_->GetNormalT()) * materUI_[0]->GetScale().x, materUI_[0]->GetScale().y));
 
-	// ミサイルとの判定 プレイヤーとエネミーのOBB
-	//IsCollision(player_->GetCollision(),);
+	if (player_->GetHP() == 0) {
+		
+	}
 }
 
 void GameScene::PerfectUpdate(GameManager* gameManager)

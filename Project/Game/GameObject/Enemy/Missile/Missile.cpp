@@ -95,8 +95,26 @@ void Missile::Update()
 
 	SetCollision();
 
-	if (IsCollision(player_->GetInstance()->GetCollision(), collision_)) {
-		
+	if (isInvincible_ == false) {
+		// 当たり判定
+		if (IsCollision(player_->GetInstance()->GetCollision(), collision_)) {
+			player_->MinusHP(1);
+			isDead_ = true;
+			isInvincible_ = true;
+
+			if (invincibleTime_ > 60) {
+				isInvincible_ = false;
+				invincibleTimer_ = 0;
+			}
+		}
+	}
+
+	if (isInvincible_ == true) {
+		invincibleTimer_++;
+	}
+
+	if (player_->GetHP() == 0) {
+		player_->SetAlive(false);
 	}
 
 	//フィールド外に出たら死亡フラグを立てる
