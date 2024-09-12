@@ -62,6 +62,11 @@ private:
 	// -- ゲーム進行段階 -- //
 	GameBehavior gameBehavior_;
 
+	// -- 天球  -- //
+	std::unique_ptr<Model> skydomeModel_ = nullptr;
+	uint32_t skydomeModelHandle_ = 0;
+	WorldTransform skydomeModelWorldTransform_ = {};
+
 	// -- 床(仮置き) -- //
 	std::unique_ptr<Model> planeModel_ = nullptr;
 	uint32_t planeModelHandle_ = 0;

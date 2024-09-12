@@ -37,7 +37,7 @@ void Player::Init() {
 	reverseT = 0.0f;
 
 	// ゲーム時間(単位は秒)
-	inGameTime = 30.0f;
+	inGameTime = 12.0f;
 
 
 }

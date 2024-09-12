@@ -5,6 +5,7 @@
 
 #include "ModelManager.h"
 #include "AnimationManager.h"
+#include "Other/Code/OtherCode.h"
 
 /// <summary>
 /// コンストラクタ
@@ -18,11 +19,21 @@ GameScene::GameScene() {
 /// </summary>
 void GameScene::Initialize() {
 
+	// -- 天球  -- //
+	skydomeModelHandle_ = ModelManager::GetInstance()->LoadModelFile("Resources/AssignmentModel/skydome", "skydome.gltf");
+	skydomeModel_.reset(Model::Create(skydomeModelHandle_));
+	skydomeModel_->SetLighting(false);
+	skydomeModelWorldTransform_.Initialize();
+	skydomeModelWorldTransform_.scale_ = { 8192.0f,8192,8192 };
+
+
 	// -- 床 仮置き -- //
-	planeModelHandle_ = ModelManager::GetInstance()->LoadModelFile("Resources/AssignmentModel/plane", "plane.gltf");
+	planeModelHandle_ = ModelManager::GetInstance()->LoadModelFile("Resources/AssignmentModel/earth", "earth.gltf");
 	planeModel_.reset(Model::Create(planeModelHandle_));
+	planeModel_->SetLighting(false);
 	planeModelWorldTransform_.Initialize();
-	planeModelWorldTransform_.scale_ = { 32.0f,1.0f,32.0f };
+	planeModelWorldTransform_.scale_ = { 512.0f,512.0f,512.0f };
+	planeModelWorldTransform_.translate_ = { 0.0f,-256.0f,0.0f };
 
 	// -- 雲 -- //
 	clowdModelHandle_ = ModelManager::GetInstance()->LoadModelFile("Resources/AssignmentModel/clowd", "clowd.gltf");
@@ -107,6 +118,9 @@ void GameScene::Initialize() {
 /// </summary>
 void GameScene::Update(GameManager* gameManager) {
 	
+	// カメラ 更新
+	camera_.Update();
+
 	switch (gameBehavior_)
 	{
 	case GameBehavior::kStart:
@@ -154,11 +168,16 @@ void GameScene::Update(GameManager* gameManager) {
 	// -- 雲 更新 -- //
 	clowdModelWorldTransform_.Update();
 
+	// -- 天球 更新 -- //
+	skydomeModelWorldTransform_.Update();
 
 }
 
 void GameScene::Draw() {
-	
+
+	// -- 天球 描画 -- //
+	skydomeModel_->Draw(skydomeModelWorldTransform_,camera_);
+
 	// -- 床 描画-- //
 	planeModel_->Draw(planeModelWorldTransform_, camera_);
 
@@ -214,8 +233,6 @@ void GameScene::InGameUpdate(GameManager* gameManager)
 	//enemy更新
 	enemy_->Update();
 
-	// カメラ 更新
-	camera_.Update();
 	camera_.translate_.y = player_->GetWorld().translate_.y + 30.0f;
 	camera_.translate_.y += player_->GetSpeed();
 
@@ -265,10 +282,27 @@ void GameScene::InGameUpdate(GameManager* gameManager)
 
 	// ミサイルとの判定 プレイヤーとエネミーのOBB
 	//IsCollision(player_->GetCollision(),);
+
+	if (player_->GetNormalT() >= 1.0f&& player_->GetWorld().translate_.y <= 1000.0f) {
+		gameBehavior_ = GameBehavior::kPerfectClear;
+	}
+
 }
 
 void GameScene::PerfectUpdate(GameManager* gameManager)
 {
+	static float cameraNormalT = 0.0f;
+	// time加算処理
+	if (cameraNormalT < 1.0f) {
+		// フレームレート * ゲーム時間(3分)で補間
+		cameraNormalT += 1.0f / (kFlamerate * 4.0f);
+	}
+
+	//if (camera_.translate_.y);
+
+	camera_.translate_.z = OtherCode::ExponentialInterpolation(0.0f, -750.0f,cameraNormalT,2.0f);
+	camera_.rotate_.x = OtherCode::ExponentialInterpolation(1.57f, 0.5f, cameraNormalT, 1.0f);
+
 	gameManager;
 }
 
