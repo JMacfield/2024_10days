@@ -95,6 +95,10 @@ void Missile::Update()
 
 	SetCollision();
 
+	if (IsCollision(player_->GetInstance()->GetCollision(), collision_)) {
+		
+	}
+
 	//フィールド外に出たら死亡フラグを立てる
 	if  (worldTransform_.translate_.y >= player_->GetWorld().translate_.y + 50.0f)
 	{
@@ -110,5 +114,5 @@ void Missile::Draw(Camera camera)
 void Missile::SetCollision() {
 	collision_.center = worldTransform_.GetWorldPosition();
 	GetOrientations(MakeRotateXYZMatrix(worldTransform_.rotate_.x, worldTransform_.rotate_.y, worldTransform_.rotate_.z), collision_.orientation);
-	collision_.size = { 1.0f,1.0f,1.0f };
+	collision_.size = { 3.0f,3.0f,3.0f };
 }

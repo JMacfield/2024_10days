@@ -39,6 +39,7 @@ public: // -- 公開 メンバ関数 -- //
 	OBB GetCollision() { return collision_; }
 
 	void SetCollision();
+	bool SetAlive(bool isAlive) { return isAlive_ = isAlive; }
 
 	// 被弾時の減速処理
 	void ResiveSpeedDoun(float power);
@@ -82,5 +83,10 @@ private: // -- 非公開 メンバ変数 -- //
 	// プレイヤークラスの当たり判定用
 	OBB collision_;
 
+	// 生存フラグ
+	bool isAlive_ = true;
+
+	// プレイヤーの体力
+	int hp_ = 10;
 };
 

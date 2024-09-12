@@ -69,5 +69,3 @@ private:
 	// ミサイル当たり判定用
 	OBB collision_;
 };
-
-
