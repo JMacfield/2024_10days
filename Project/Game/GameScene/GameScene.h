@@ -21,6 +21,15 @@
 //StatePatternを使う時は必ず前方宣言をするように
 class GameManager;
 
+// ゲーム進行を示す
+enum class GameBehavior{
+	kStart,
+	kInGame,
+	kPerfectClear,
+	kGameClear,
+	kGameOver,
+};
+
 class GameScene : public IGameScene {
 public:
 
@@ -39,11 +48,19 @@ public:
 	/// 描画
 	void Draw()override;
 
-
+	// 更新処理分割
+	void StartUpdate(GameManager* gameManager);
+	void InGameUpdate(GameManager* gameManager);
+	void PerfectUpdate(GameManager* gameManager);
+	void ClearUpdate(GameManager* gameManager);
+	void OverUpdate(GameManager* gameManager);
 
 private:
 	// -- カメラ -- //
 	Camera camera_ = {};
+
+	// -- ゲーム進行段階 -- //
+	GameBehavior gameBehavior_;
 
 	// -- 床(仮置き) -- //
 	std::unique_ptr<Model> planeModel_ = nullptr;

@@ -28,7 +28,11 @@ public:
 	// シーン終了をマネージャに伝える
 	void SceneEnd();
 
+	// シーン終了状態でかつトランジションが終了したか
 	bool IsTransitioned();
+
+	// シーン開始時のトランジションが終了したか
+	bool IsStartTransition();
 
 private:
 

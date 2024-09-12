@@ -28,6 +28,7 @@ void GameScene::Initialize() {
 	clowdModelHandle_ = ModelManager::GetInstance()->LoadModelFile("Resources/AssignmentModel/clowd", "clowd.gltf");
 	clowdModel_.reset(Model::Create(clowdModelHandle_));
 	clowdModel_->SetColor(Vector4(1.0f, 1.0f, 1.0f, 0.5f));
+	clowdModel_->SetLighting(false);
 	clowdModelWorldTransform_.Initialize();
 	clowdModelWorldTransform_.scale_ = { 4.0f,8.0f,4.0f };
 	clowdModelWorldTransform_.translate_ = { 0.0f,200.0f,0.0f };
@@ -77,7 +78,7 @@ void GameScene::Initialize() {
 	materStep_ = 0;
 
 	// 追加ディレクトリパス
-	std::string directrypathMidle = "mater/mater";
+	std::string directrypathMidle = "antenna/antenna";
 	
 	// 初期化
 	for (int32_t i = 0; i < materUI_.size(); i++) {
@@ -88,14 +89,15 @@ void GameScene::Initialize() {
 		materTex_[i] = textureManager->LoadTexture(directrypath + directrypathMidle + number + format);
 		
 		// スプライト生成
-		materUI_[i] = Sprite::Create(materTex_[i], Vector2(256.0f, 256.0f));
-		materUI_[i]->SetAnchorPoint(Vector2(0.5f, 0.5f));
-		//materUI_[i]->SetScale(Vector2(0.5f, 0.5f));
-
+		materUI_[i] = Sprite::Create(materTex_[i], Vector2(32.0f, 24.0f));
+		materUI_[i]->SetScale(Vector2(0.7f, 0.7f));
 	}
 
-	materUI_[1]->SetUVMode(true);
-	materUI_[1]->SetTextureSize(Vector2(256.0f,0.0f));
+	materUI_[1]->SetPosition({ materUI_[0]->GetPosition().x + (materUI_[0]->GetScale().x * 512.0f) ,materUI_[0]->GetPosition().y });
+	materUI_[1]->SetAnchorPoint(Vector2(1.0f, 0.0f));
+
+	// -- ゲーム進行状況 -- //
+	gameBehavior_ = GameBehavior::kStart;
 
 	clowdModel_->SetLighting(false);
 }
@@ -104,6 +106,94 @@ void GameScene::Initialize() {
 /// 更新
 /// </summary>
 void GameScene::Update(GameManager* gameManager) {
+	
+	switch (gameBehavior_)
+	{
+	case GameBehavior::kStart:
+
+		this->StartUpdate(gameManager);
+		
+		break;
+	case GameBehavior::kInGame:
+		
+		this->InGameUpdate(gameManager);
+		
+		break;
+	case GameBehavior::kPerfectClear:
+		
+		this->PerfectUpdate(gameManager);
+		
+		break;
+	case GameBehavior::kGameClear:
+		
+		this->ClearUpdate(gameManager);
+		
+		break;
+	case GameBehavior::kGameOver:
+		
+		this->OverUpdate(gameManager);
+		
+		break;
+	default:
+		break;
+	}
+
+#ifdef _DEBUG
+
+	ImGui::Begin("Clowd");
+	ImGui::DragFloat3("Pos", &clowdModelWorldTransform_.translate_.x, 1.0f);
+	ImGui::DragFloat3("Rot", &clowdModelWorldTransform_.rotate_.x, 0.01f);
+	ImGui::DragFloat3("Scale", &clowdModelWorldTransform_.scale_.x, 0.1f);
+	ImGui::End();
+
+#endif
+
+	// -- 床 更新 -- //
+	planeModelWorldTransform_.Update();
+
+	// -- 雲 更新 -- //
+	clowdModelWorldTransform_.Update();
+
+
+}
+
+void GameScene::Draw() {
+	
+	// -- 床 描画-- //
+	planeModel_->Draw(planeModelWorldTransform_, camera_);
+
+	// -- 雲 描画 -- //
+	clowdModel_->Draw(clowdModelWorldTransform_,camera_);
+
+	if (gameBehavior_ == GameBehavior::kInGame) {
+
+		// -- Player 描画 -- //
+		player_->Draw(camera_);
+
+		// -- 速度メーター 描画 -- //
+		for (int32_t i = 0; i < materUI_.size(); i++) {
+			materUI_[i]->Draw();
+		}
+
+		// -- テクスチャ 描画 -- // 
+		for (int32_t i = 0; i < speedUI_.size(); i++) {
+			speedUI_[i]->Draw();
+		}
+
+	}
+
+}
+
+void GameScene::StartUpdate(GameManager* gameManager)
+{
+	// トランジションが終了したらInGameへ移行する
+	if(!gameManager->IsStartTransition()){
+		gameBehavior_ = GameBehavior::kInGame;
+	}
+}
+
+void GameScene::InGameUpdate(GameManager* gameManager)
+{
 	gameManager;
 
 	// 入力
@@ -142,26 +232,7 @@ void GameScene::Update(GameManager* gameManager) {
 	}
 	player_->Move(move);
 
-#ifdef _DEBUG
-	
-	// 再起動処理 //LBで反応する
-	if (Input::GetInstance()->IsPushLeft(joyState)) {
-		player_->Init();
-	}
 
-	ImGui::Begin("Clowd");
-	ImGui::DragFloat3("Pos", &clowdModelWorldTransform_.translate_.x, 1.0f);
-	ImGui::DragFloat3("Rot", &clowdModelWorldTransform_.rotate_.x, 0.01f);
-	ImGui::DragFloat3("Scale", &clowdModelWorldTransform_.scale_.x, 0.1f);
-	ImGui::End();
-
-#endif
-	
-	// -- 床 更新 -- //
-	planeModelWorldTransform_.Update();
-	
-	// -- 床 更新 -- //
-	clowdModelWorldTransform_.Update();
 
 
 	// -- UI 更新 -- //
@@ -169,7 +240,7 @@ void GameScene::Update(GameManager* gameManager) {
 	// 速度に応じて画像を変更
 	float speed = player_->GetSpeed() * 1000.0f;
 	int32_t viewSpeed = std::abs((int32_t)speed);
-	
+
 	speedUI_[0]->SetTexture(numberTexHandle_[(viewSpeed / 10000)]);
 	viewSpeed = viewSpeed % 10000;
 	speedUI_[1]->SetTexture(numberTexHandle_[(viewSpeed / 1000)]);
@@ -181,27 +252,16 @@ void GameScene::Update(GameManager* gameManager) {
 	speedUI_[5]->SetTexture(numberTexHandle_[(viewSpeed)]);
 
 	// -- 速度メーター更新 -- //
-	//materUI_[1]->SetScale(Vector2(float(player_->GetNormalT() * 0.5f), 0.5f));
+	materUI_[1]->SetScale(Vector2(float(1.0f - player_->GetNormalT()) * materUI_[0]->GetScale().x, materUI_[0]->GetScale().y));
 
 	// ミサイルとの判定 プレイヤーとエネミーのOBB
 	//IsCollision(player_->GetCollision(),);
 }
 
-void GameScene::Draw() {
-	
-	// -- 床 描画-- //
-	planeModel_->Draw(planeModelWorldTransform_, camera_);
-
-	// -- 雲 描画 -- //
-	clowdModel_->Draw(clowdModelWorldTransform_,camera_);
-
-	// -- Player 描画 -- //
-	player_->Draw(camera_);
-
-	// -- 速度メーター 描画 -- //
-	for (int32_t i = 0; i < materUI_.size(); i++) {
-		//materUI_[i]->Draw();
-	}
+void GameScene::PerfectUpdate(GameManager* gameManager)
+{
+	gameManager;
+}
 
 	// -- テクスチャ 描画 -- // 
 	//enemy描画
@@ -211,7 +271,14 @@ void GameScene::Draw() {
 	for (int32_t i = 0; i < speedUI_.size(); i++) {
 		speedUI_[i]->Draw();
 	}
+void GameScene::ClearUpdate(GameManager* gameManager)
+{
+	gameManager;
+}
 
+void GameScene::OverUpdate(GameManager* gameManager)
+{
+	gameManager;
 }
 
 GameScene::~GameScene() {
