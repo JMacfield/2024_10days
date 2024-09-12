@@ -3,6 +3,7 @@
 #include "ModelManager.h"
 #include "../../Player.h"
 #include "VectorCalculation.h"
+#include "GameObject/Enemy/Randam/Randam.h"
 
 void Missile::Initialize(const Vector3& position, const Vector3& velocity)
 {
@@ -15,7 +16,7 @@ void Missile::Initialize(const Vector3& position, const Vector3& velocity)
 
 	//ワールドトランスフォームの初期化
 	worldTransform_.Initialize();
-	worldTransform_.translate_ = position;
+	worldTransform_.translate_ = { missileSpornPoint_ = Random::GetRandomFloat(kMinSpornRange, kMaxSpornRange),position.y,missileSpornPoint_ = Random::GetRandomFloat(kMinSpornRange, kMaxSpornRange)};
 	worldTransform_.scale_ = { 1.6f,1.6f,1.6f };
 
 	player_ = Player::GetInstance();
