@@ -37,8 +37,11 @@ public: // -- 公開 メンバ関数 -- //
 	
 	WorldTransform GetWorld() { return worldTransform_; }
 	OBB GetCollision() { return collision_; }
+	int GetHP() { return hp_; }
 
 	void SetCollision();
+	bool SetAlive(bool isAlive) { return isAlive_ = isAlive; }
+	int MinusHP(int hp) { return hp_ -= hp; }
 
 	// 被弾時の減速処理
 	void ResiveSpeedDoun(float power);
@@ -82,5 +85,10 @@ private: // -- 非公開 メンバ変数 -- //
 	// プレイヤークラスの当たり判定用
 	OBB collision_;
 
+	// 生存フラグ
+	bool isAlive_ = true;
+
+	// プレイヤーの体力
+	int hp_ = 5;
 };
 

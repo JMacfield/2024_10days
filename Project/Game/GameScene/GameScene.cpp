@@ -7,6 +7,8 @@
 #include "AnimationManager.h"
 #include "Other/Code/OtherCode.h"
 
+#include "OverScene.h"
+
 /// <summary>
 /// コンストラクタ
 /// </summary>
@@ -338,6 +340,9 @@ void GameScene::InGameUpdate(GameManager* gameManager)
 		gameBehavior_ = GameBehavior::kPerfectClear;
 	}
 
+	if (player_->GetHP() == 0) {
+		
+	}
 }
 
 void GameScene::PerfectUpdate(GameManager* gameManager)
