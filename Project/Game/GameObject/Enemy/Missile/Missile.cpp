@@ -8,7 +8,7 @@
 void Missile::Initialize(const Vector3& position, const Vector3& velocity)
 {
 	// モデル設定
-	modelHandle_ = ModelManager::GetInstance()->LoadModelFile("Resources/AssignmentModel/AnimatedCube", "AnimatedCube.gltf");
+	modelHandle_ = ModelManager::GetInstance()->LoadModelFile("Resources/AssignmentModel/missile", "missile.gltf");
 	model_.reset(Model::Create(modelHandle_));
 
 	//速度の初期化
@@ -17,7 +17,8 @@ void Missile::Initialize(const Vector3& position, const Vector3& velocity)
 	//ワールドトランスフォームの初期化
 	worldTransform_.Initialize();
 	worldTransform_.translate_ = { missileSpornPoint_ = Random::GetRandomFloat(kMinSpornRange, kMaxSpornRange),position.y,missileSpornPoint_ = Random::GetRandomFloat(kMinSpornRange, kMaxSpornRange)};
-	worldTransform_.scale_ = { 1.6f,1.6f,1.6f };
+	worldTransform_.rotate_.x = 135.1f;
+	worldTransform_.scale_ = { 1.0f,1.0f,1.0f };
 
 	player_ = Player::GetInstance();
 
@@ -88,8 +89,7 @@ void Missile::Update()
 	worldTransform_.translate_ += velocity_;
 
 	//回転処理
-	worldTransform_.rotate_.x += 0.02f;
-	worldTransform_.rotate_.y += 0.02f;
+
 
 	//ワールドトランスフォームの更新
 	worldTransform_.Update();
