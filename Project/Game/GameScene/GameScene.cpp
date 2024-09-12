@@ -165,6 +165,15 @@ void GameScene::Draw() {
 	// -- 雲 描画 -- //
 	clowdModel_->Draw(clowdModelWorldTransform_,camera_);
 
+	// -- テクスチャ 描画 -- // 
+	//enemy描画
+	enemy_->Draw(camera_);
+
+	// -- テクスチャ 更新 -- // 
+	for (int32_t i = 0; i < speedUI_.size(); i++) {
+		speedUI_[i]->Draw();
+	}
+
 	if (gameBehavior_ == GameBehavior::kInGame) {
 
 		// -- Player 描画 -- //
@@ -263,14 +272,6 @@ void GameScene::PerfectUpdate(GameManager* gameManager)
 	gameManager;
 }
 
-	// -- テクスチャ 描画 -- // 
-	//enemy描画
-	enemy_->Draw(camera_);
-
-	// -- テクスチャ 更新 -- // 
-	for (int32_t i = 0; i < speedUI_.size(); i++) {
-		speedUI_[i]->Draw();
-	}
 void GameScene::ClearUpdate(GameManager* gameManager)
 {
 	gameManager;
