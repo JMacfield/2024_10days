@@ -238,5 +238,5 @@ float Player::GetSpeedForEaseInOutQuad(float t)
 void Player::SetCollision() {
 	collision_.center = worldTransform_.GetWorldPosition();
 	GetOrientations(MakeRotateXYZMatrix(worldTransform_.rotate_.x, worldTransform_.rotate_.y, worldTransform_.rotate_.z), collision_.orientation);
-	collision_.size = { 3.0f,3.0f,3.0f };
+	collision_.size = { 2.0f,2.0f,2.0f };
 }
