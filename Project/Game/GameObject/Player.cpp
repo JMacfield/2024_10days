@@ -17,7 +17,7 @@ Player::~Player() {}
 void Player::Init() {
 
 	// モデル設定
-	modelHandle_ = ModelManager::GetInstance()->LoadModelFile("Resources/AssignmentModel/comet", "comet.gltf");
+	modelHandle_ = ModelManager::GetInstance()->LoadModelFile("Resources/AssignmentModel/player", "player.gltf");
 	model_.reset(Model::Create(modelHandle_));
 
 	// ワールド座標 初期化
@@ -37,7 +37,7 @@ void Player::Init() {
 	reverseT = 0.0f;
 
 	// ゲーム時間(単位は秒)
-	inGameTime = 30.0f;
+	inGameTime = 70.0f;
 
 
 }
@@ -75,11 +75,11 @@ void Player::Update() {
 	// 落下
 	if (worldTransform_.translate_.y > 0.0f) {
 		// イージングで移動量を設定
-		vel_.y = (1.0f - easeT) * 0.0f + easeT * -10.0f;
+		vel_.y = ((1.0f - easeT) * 0.0f + easeT * 10.0f) * -1.0f;
 
 		//acc += 0.0001f;
 		//vel_.y += (-acc);
-		worldTransform_.translate_.y += vel_.y;
+		worldTransform_.translate_.y += (vel_.y * 0.2f);
 	}
 	else if (worldTransform_.translate_.y < 0.0f) {
 		worldTransform_.translate_.y = 0.0f;

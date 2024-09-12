@@ -5,6 +5,7 @@
 
 #include "ModelManager.h"
 #include "AnimationManager.h"
+#include "Other/Code/OtherCode.h"
 
 /// <summary>
 /// コンストラクタ
@@ -18,11 +19,22 @@ GameScene::GameScene() {
 /// </summary>
 void GameScene::Initialize() {
 
+	// -- 天球  -- //
+	skydomeModelHandle_ = ModelManager::GetInstance()->LoadModelFile("Resources/AssignmentModel/skydome", "skydome.gltf");
+	skydomeModel_.reset(Model::Create(skydomeModelHandle_));
+	skydomeModel_->SetLighting(false);
+	skydomeModelWorldTransform_.Initialize();
+	skydomeModelWorldTransform_.scale_ = { 8192.0f,8192,8192 };
+
+
 	// -- 床 仮置き -- //
-	planeModelHandle_ = ModelManager::GetInstance()->LoadModelFile("Resources/AssignmentModel/plane", "plane.gltf");
+	planeModelHandle_ = ModelManager::GetInstance()->LoadModelFile("Resources/AssignmentModel/earth", "earth.gltf");
 	planeModel_.reset(Model::Create(planeModelHandle_));
+	planeModel_->SetLighting(false);
 	planeModelWorldTransform_.Initialize();
-	planeModelWorldTransform_.scale_ = { 32.0f,1.0f,32.0f };
+	planeModelWorldTransform_.scale_ = { 512.0f,512.0f,512.0f };
+	planeModelWorldTransform_.translate_ = { 0.0f,-256.0f,0.0f };
+
 
 	// -- 雲 -- //
 	clowdModelHandle_ = ModelManager::GetInstance()->LoadModelFile("Resources/AssignmentModel/clowd", "clowd.gltf");
@@ -33,6 +45,13 @@ void GameScene::Initialize() {
 	clowdModelWorldTransform_.scale_ = { 4.0f,8.0f,4.0f };
 	clowdModelWorldTransform_.translate_ = { 0.0f,200.0f,0.0f };
 	
+	// -- 隕石 -- //
+	cometModelHandle_ = ModelManager::GetInstance()->LoadModelFile("Resources/AssignmentModel/comet", "comet.gltf");
+	cometModel_.reset(Model::Create(cometModelHandle_));
+	cometWorldTransform_.Initialize();
+	cometWorldTransform_.scale_ = { 512.0f,512.0f, 512.0f };
+	cometWorldTransform_.translate_ = { 0.0f,60000.0f, 0.0f };
+
 	// -- Player 初期化 -- //
 	player_ = Player::GetInstance();
 	player_->Init();
@@ -47,6 +66,8 @@ void GameScene::Initialize() {
 	camera_.Initialize();
 	camera_.rotate_= {1.57f,0.0f,0.0f};
 	camera_.translate_ = {0.0f,player_->GetWorld().translate_.y,0.0f};
+	camera_.fov_ = 1.0f;
+	cameraNormalT_ = 0.0f;
 
 	// -- UI 初期化＆ロード -- //
 
@@ -102,6 +123,27 @@ void GameScene::Initialize() {
 	gameBehavior_ = GameBehavior::kStart;
 
 	clowdModel_->SetLighting(false);
+
+	// -- シェイク強度 -- //
+	basePos = {};
+	shakePos = {};
+	shakePower = 32;
+	shakeCount = 0;
+
+	// -- ホワイトアウト -- //
+	whiteOutTexHandle_ = textureManager->LoadTexture("Resources/AssignmentTexture/white2x2.png");
+	whiteOutSprite.reset(Sprite::Create(whiteOutTexHandle_, Vector2(0.0f, 0.0f)));
+	whiteOutSprite->SetScale(Vector2(1280.0f, 720.0f));
+	whiteOutSprite->SetColor(Vector4(1.0f, 1.0f, 1.0f, 0.0f));
+	whiteOutNormalT_ = 0.0f;
+
+	// -- 上下黒帯 -- //
+	movieScreenTexHandle_ = textureManager->LoadTexture("Resources/AssignmentTexture/movieScreen.png");
+	movieScreenSprite.reset(Sprite::Create(movieScreenTexHandle_, Vector2(640.0f, 360.0f)));
+	movieScreenSprite->SetScale(Vector2(1.0f, 1.4f));
+	movieScreenSprite->SetAnchorPoint(Vector2(0.5f, 0.5f));
+	movieScreenNormalT_ = 0.0f;
+
 }
 
 /// <summary>
@@ -109,6 +151,9 @@ void GameScene::Initialize() {
 /// </summary>
 void GameScene::Update(GameManager* gameManager) {
 	
+	
+	camera_.Update();
+
 	switch (gameBehavior_)
 	{
 	case GameBehavior::kStart:
@@ -148,6 +193,10 @@ void GameScene::Update(GameManager* gameManager) {
 	ImGui::DragFloat3("Scale", &clowdModelWorldTransform_.scale_.x, 0.1f);
 	ImGui::End();
 
+	ImGui::Begin("Camera");
+	ImGui::DragFloat("Fov", &camera_.fov_, 0.01f);
+	ImGui::End();
+
 #endif
 
 	// -- 床 更新 -- //
@@ -156,27 +205,33 @@ void GameScene::Update(GameManager* gameManager) {
 	// -- 雲 更新 -- //
 	clowdModelWorldTransform_.Update();
 
+	// -- 隕石 更新 -- //
+	cometWorldTransform_.Update();
+
+	// -- 天球 更新 -- //
+	skydomeModelWorldTransform_.Update();
 
 }
 
 void GameScene::Draw() {
-	
+
+	// -- 天球 描画 -- //
+	skydomeModel_->Draw(skydomeModelWorldTransform_,camera_);
+
 	// -- 床 描画-- //
 	planeModel_->Draw(planeModelWorldTransform_, camera_);
 
-	// -- 雲 描画 -- //
-	clowdModel_->Draw(clowdModelWorldTransform_,camera_);
-
-	// -- テクスチャ 描画 -- // 
-	//enemy描画
-	enemy_->Draw(camera_);
-
-	// -- テクスチャ 更新 -- // 
-	for (int32_t i = 0; i < speedUI_.size(); i++) {
-		speedUI_[i]->Draw();
-	}
+	// -- 隕石 描画 -- //
+	cometModel_->Draw(cometWorldTransform_, camera_);
 
 	if (gameBehavior_ == GameBehavior::kInGame) {
+
+		// -- 雲 描画 -- //
+		clowdModel_->Draw(clowdModelWorldTransform_, camera_);
+
+		// -- テクスチャ 描画 -- // 
+		//enemy描画
+		enemy_->Draw(camera_);
 
 		// -- Player 描画 -- //
 		player_->Draw(camera_);
@@ -192,6 +247,10 @@ void GameScene::Draw() {
 		}
 
 	}
+
+	whiteOutSprite->Draw();
+
+	movieScreenSprite->Draw();
 
 }
 
@@ -216,10 +275,17 @@ void GameScene::InGameUpdate(GameManager* gameManager)
 	//enemy更新
 	enemy_->Update();
 
-	// カメラ 更新
-	camera_.Update();
+	// -- カメラ 更新 -- //
 	camera_.translate_.y = player_->GetWorld().translate_.y + 30.0f;
 	camera_.translate_.y += player_->GetSpeed();
+	// 視野角 調整
+	if (player_->GetNormalT() > 0.0f) {
+		camera_.fov_ = OtherCode::ExponentialInterpolation(1.0f, 0.3f, (player_->GetNormalT() - 0.0f) * 1.0f, 1.0f);
+	}
+
+	// 隕石座標
+	cometWorldTransform_.translate_.y = player_->GetWorld().translate_.y + (30.0f + (cometWorldTransform_.scale_.y * 0.5f));
+	cometWorldTransform_.translate_.y += player_->GetSpeed();
 
 	// コントローラーを接続していなければ早期リターン
 	if (!Input::GetInstance()->GetJoystickState(joyState)) {
@@ -267,10 +333,80 @@ void GameScene::InGameUpdate(GameManager* gameManager)
 
 	// ミサイルとの判定 プレイヤーとエネミーのOBB
 	//IsCollision(player_->GetCollision(),);
+
+	if (player_->GetNormalT() >= 1.0f&& player_->GetWorld().translate_.y <= 1000.0f) {
+		gameBehavior_ = GameBehavior::kPerfectClear;
+	}
+
 }
 
 void GameScene::PerfectUpdate(GameManager* gameManager)
 {
+
+	if (movieScreenNormalT_ < 1.0f) {
+
+		movieScreenNormalT_ += 1.0f / (60.0f * 0.5f);
+		if (movieScreenNormalT_ > 1.0f) {
+			movieScreenNormalT_ = 1.0f;
+		}
+
+		Vector2 newScale = { 1.0f,1.0f };
+		newScale.y = OtherCode::ExponentialInterpolation(1.4f, 1.0f, movieScreenNormalT_, 1.0f);
+		movieScreenSprite->SetScale(newScale);
+	}
+	else {
+
+		// time加算処理
+		if (cameraNormalT_ < 1.0f) {
+			// フレームレート * ゲーム時間(3分)で補間
+			cameraNormalT_ += 1.0f / (kFlamerate * 1.0f);
+
+		}
+
+		// カメラ座標
+		camera_.translate_.y = OtherCode::ExponentialInterpolation(camera_.translate_.y, 1000.0f, cameraNormalT_, 1.0f);
+		camera_.translate_.z = OtherCode::ExponentialInterpolation(0.0f, -1500.0f, cameraNormalT_, 1.0f);
+		camera_.rotate_.x = OtherCode::ExponentialInterpolation(1.57f, 0.5f, cameraNormalT_, 1.0f);
+
+		// カメラ座標を保持
+		basePos = camera_.translate_;
+
+
+		if (cameraNormalT_ >= 1.0f) {
+			if (cometWorldTransform_.translate_.y >= cometWorldTransform_.scale_.y * 0.5f) {
+				cometWorldTransform_.translate_.y += player_->GetSpeed() * 0.5f;
+			}
+
+			// シェイク処理
+			if (shakePower > 0) {
+				shakePos.x = float(rand() % shakePower) - float(shakePower / 2);
+				shakePos.y = float(rand() % shakePower) - float(shakePower / 2);
+
+				camera_.translate_.x = basePos.x + shakePos.x;
+				camera_.translate_.y = basePos.y + shakePos.y;
+			}
+
+			shakeCount++;
+			if (shakeCount > 6) {
+				shakePower -= 1;
+				shakeCount = 0;
+			}
+
+			if (shakePower > 30) { return; }
+
+			if (whiteOutNormalT_ < 1.0f) {
+				whiteOutNormalT_ += 1.0f / (60.0f * 5.5f);
+				if (whiteOutNormalT_ >= 1.0f) {
+					whiteOutNormalT_ = 1.0f;
+				}
+			}
+
+			Vector4 newColor = { 1.0f,1.0f,1.0f,0.0f };
+			newColor.w = OtherCode::ExponentialInterpolation(newColor.w, 1.0f, whiteOutNormalT_, 1.1f);
+			whiteOutSprite->SetColor(newColor);
+		}
+
+	}
 	gameManager;
 }
 
