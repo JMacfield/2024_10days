@@ -8,6 +8,7 @@
 #include "Other/Code/OtherCode.h"
 
 #include "OverScene.h"
+#include "ClearScene.h"
 
 /// <summary>
 /// コンストラクタ
@@ -46,7 +47,7 @@ void GameScene::Initialize() {
 	clowdModelWorldTransform_.Initialize();
 	clowdModelWorldTransform_.scale_ = { 4.0f,8.0f,4.0f };
 	clowdModelWorldTransform_.translate_ = { 0.0f,200.0f,0.0f };
-	
+
 	// -- 隕石 -- //
 	cometModelHandle_ = ModelManager::GetInstance()->LoadModelFile("Resources/AssignmentModel/comet", "comet.gltf");
 	cometModel_.reset(Model::Create(cometModelHandle_));
@@ -66,8 +67,8 @@ void GameScene::Initialize() {
 
 	// -- カメラ 初期化 -- //
 	camera_.Initialize();
-	camera_.rotate_= {1.57f,0.0f,0.0f};
-	camera_.translate_ = {0.0f,player_->GetWorld().translate_.y,0.0f};
+	camera_.rotate_ = { 1.57f,0.0f,0.0f };
+	camera_.translate_ = { 0.0f,player_->GetWorld().translate_.y,0.0f };
 	camera_.fov_ = 1.0f;
 	cameraNormalT_ = 0.0f;
 
@@ -86,11 +87,11 @@ void GameScene::Initialize() {
 	// 文字テクスチャ
 	stringTexHandle_["km"] = textureManager->LoadTexture(directrypath + "km" + format);
 	stringTexHandle_["dot"] = textureManager->LoadTexture(directrypath + "dot" + format);
-	
+
 	// 速度のテクスチャを設定
 	for (int32_t i = 0; i < speedUI_.size(); i++) {
 		speedUI_[i] = Sprite::Create(numberTexHandle_[0], Vector2(i * 32.0f, 5.0f));
-		speedUI_[i]->SetScale(Vector2(1.0f /8.0f, 1.0f / 8.0f));
+		speedUI_[i]->SetScale(Vector2(1.0f / 8.0f, 1.0f / 8.0f));
 	}
 	// 3文字目を"."に7文字目をkmのテクスチャに変更
 	speedUI_[2]->SetTexture(stringTexHandle_["dot"]);
@@ -104,15 +105,15 @@ void GameScene::Initialize() {
 
 	// 追加ディレクトリパス
 	std::string directrypathMidle = "antenna/antenna";
-	
+
 	// 初期化
 	for (int32_t i = 0; i < materUI_.size(); i++) {
-		
+
 		// 画像読み込み
 		std::string number = std::to_string(i);
 
 		materTex_[i] = textureManager->LoadTexture(directrypath + directrypathMidle + number + format);
-		
+
 		// スプライト生成
 		materUI_[i] = Sprite::Create(materTex_[i], Vector2(32.0f, 24.0f));
 		materUI_[i]->SetScale(Vector2(0.7f, 0.7f));
@@ -152,8 +153,8 @@ void GameScene::Initialize() {
 /// 更新
 /// </summary>
 void GameScene::Update(GameManager* gameManager) {
-	
-	
+
+
 	camera_.Update();
 
 	switch (gameBehavior_)
@@ -161,27 +162,27 @@ void GameScene::Update(GameManager* gameManager) {
 	case GameBehavior::kStart:
 
 		this->StartUpdate(gameManager);
-		
+
 		break;
 	case GameBehavior::kInGame:
-		
+
 		this->InGameUpdate(gameManager);
-		
+
 		break;
 	case GameBehavior::kPerfectClear:
-		
+
 		this->PerfectUpdate(gameManager);
-		
+
 		break;
 	case GameBehavior::kGameClear:
-		
+
 		this->ClearUpdate(gameManager);
-		
+
 		break;
 	case GameBehavior::kGameOver:
-		
+
 		this->OverUpdate(gameManager);
-		
+
 		break;
 	default:
 		break;
@@ -213,12 +214,16 @@ void GameScene::Update(GameManager* gameManager) {
 	// -- 天球 更新 -- //
 	skydomeModelWorldTransform_.Update();
 
+	if (whiteOutNormalT_ >= 0.9f) {
+		gameManager->ChangeScene(new ClearScene);
+	}
+
 }
 
 void GameScene::Draw() {
 
 	// -- 天球 描画 -- //
-	skydomeModel_->Draw(skydomeModelWorldTransform_,camera_);
+	skydomeModel_->Draw(skydomeModelWorldTransform_, camera_);
 
 	// -- 床 描画-- //
 	planeModel_->Draw(planeModelWorldTransform_, camera_);
@@ -259,7 +264,7 @@ void GameScene::Draw() {
 void GameScene::StartUpdate(GameManager* gameManager)
 {
 	// トランジションが終了したらInGameへ移行する
-	if(!gameManager->IsStartTransition()){
+	if (!gameManager->IsStartTransition()) {
 		gameBehavior_ = GameBehavior::kInGame;
 	}
 }
@@ -336,18 +341,31 @@ void GameScene::InGameUpdate(GameManager* gameManager)
 	// ミサイルとの判定 プレイヤーとエネミーのOBB
 	//IsCollision(player_->GetCollision(),);
 
-	if (player_->GetNormalT() >= 1.0f&& player_->GetWorld().translate_.y <= 1000.0f) {
-		gameBehavior_ = GameBehavior::kPerfectClear;
+	// ゴールライン
+	if (player_->GetWorld().translate_.y <= 1000.0f) {
+
+		// 一定範囲内 かつ 速度が最大であれば
+		if (player_->GetWorld().translate_.y >= 900.0f && player_->GetNormalT() >= 1.0f) {
+			// 完全クリア演出へ移行
+			gameBehavior_ = GameBehavior::kPerfectClear;
+		}
+
+		// 速度が最大じゃない場合
+		else if (player_->GetWorld().translate_.y < 900.0f && player_->GetNormalT() < 1.0f) {
+			// 通常クリア演出へ移行
+			gameBehavior_ = GameBehavior::kGameClear;
+		}
+
 	}
 
 	if (player_->GetHP() == 0) {
-		
+
 	}
 }
 
 void GameScene::PerfectUpdate(GameManager* gameManager)
 {
-
+	gameManager;
 	if (movieScreenNormalT_ < 1.0f) {
 
 		movieScreenNormalT_ += 1.0f / (60.0f * 0.5f);
@@ -412,11 +430,54 @@ void GameScene::PerfectUpdate(GameManager* gameManager)
 		}
 
 	}
-	gameManager;
+
 }
 
 void GameScene::ClearUpdate(GameManager* gameManager)
 {
+	// 隕石の落下
+	if (cometWorldTransform_.translate_.y >= cometWorldTransform_.scale_.y * -0.25f) {
+		cometWorldTransform_.translate_.y += player_->GetSpeed() * 0.4f;
+		
+	}
+
+	cometWorldTransform_.rotate_.y += 0.02f;
+
+	if (movieScreenNormalT_ < 1.0f) {
+
+		movieScreenNormalT_ += 1.0f / (60.0f * 3.0f);
+		if (movieScreenNormalT_ > 1.0f) {
+			movieScreenNormalT_ = 1.0f;
+		}
+
+		Vector2 newScale = { 1.0f,1.0f };
+		newScale.y = OtherCode::ExponentialInterpolation(1.4f, 1.0f, movieScreenNormalT_, 1.0f);
+		movieScreenSprite->SetScale(newScale);
+
+		// 視野角 調整
+		camera_.fov_ = OtherCode::ExponentialInterpolation(0.3f, 1.4f, movieScreenNormalT_, 1.0f);
+
+		camera_.translate_.y = OtherCode::ExponentialInterpolation(camera_.translate_.y, 1000.0f, movieScreenNormalT_, 1.0f);
+
+		// カメラ座標を保持
+		basePos = camera_.translate_;
+
+	}
+	else
+	{
+
+		if (whiteOutNormalT_ < 1.0f) {
+
+			whiteOutNormalT_ += 1.0f / (60.0f * 7.0f);
+
+			Vector4 newColor = { 1.0f,1.0f,1.0f,0.0f };
+			newColor.w = OtherCode::ExponentialInterpolation(newColor.w, 1.0f, whiteOutNormalT_, 1.1f);
+			whiteOutSprite->SetColor(newColor);
+
+		}
+
+	}
+
 	gameManager;
 }
 
@@ -426,7 +487,7 @@ void GameScene::OverUpdate(GameManager* gameManager)
 }
 
 GameScene::~GameScene() {
-	
+
 	player_->Final();
 
 	// Sprite 解放 

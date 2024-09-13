@@ -177,6 +177,18 @@ void Player::Debug()
 		if (ImGui::Button("Reset")) { this->Init(); }
 		// 被弾による加速度減少
 		if (ImGui::Button("Slow")) { this->ResiveSpeedDoun(0.02f); }
+		// 最高速
+		if (ImGui::Button("FullSpeed")) { 
+			this->normalT = 1.0f; 
+			// イージング
+			easeT = GetSpeedForEaseInOutQuad(normalT);
+		}
+		// 中速
+		if (ImGui::Button("HalfSpeed")) {
+			this->normalT = 0.5f;
+			// イージング
+			easeT = GetSpeedForEaseInOutQuad(normalT);
+		}
 
 	}
 

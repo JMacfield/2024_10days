@@ -100,7 +100,7 @@ void Missile::Update()
 		// 当たり判定
 		if (IsCollision(player_->GetInstance()->GetCollision(), collision_)) {
 			//player_->MinusHP(1);
-			player_->ResiveSpeedDoun(0.02f);
+			//player_->ResiveSpeedDoun(0.02f);
 			isDead_ = true;
 			isInvincible_ = true;
 
