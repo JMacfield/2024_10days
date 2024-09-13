@@ -58,10 +58,17 @@ void TitleScene::Initialize()
 	normalT_ = 0.5f;
 	isUpper_ = true;
 
+	// タイトルBGM
+	//titleBGMHandle_ = Audio::GetInstance()->LoadWave("Resources/title.wav");
+
+	titleBGMHandle_ = Audio::GetInstance()->LoadMP3(L"Resources/Sounds/title.mp3");
 }
 
 void TitleScene::Update(GameManager* gameManager)
 {
+	// BGM再生
+	Audio::GetInstance()->PlayMP3(titleBGMHandle_, true);
+
 	// -- カメラ 更新 -- //
 	camera_.Update();
 
