@@ -125,5 +125,6 @@ private:
 	int32_t movieScreenTexHandle_;
 	float movieScreenNormalT_;
 
+	bool isPerfect_;
 
 };

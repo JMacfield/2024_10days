@@ -3,6 +3,7 @@
 #include "GameScene/TitleScene.h"
 #include "GameScene/OverScene.h"
 #include "GameScene/ClearScene.h"
+#include "GameScene/PerfectScene.h"
 
 //コンストラクタ
 GameManager::GameManager() {
@@ -33,7 +34,7 @@ void GameManager::Update() {
 	// デバッグ用シーン切り替え
 	//
 
-	const char* items[] = { "Title Scene", "GameScene", "Over Scene", "Clear Scene" };
+	const char* items[] = { "Title Scene", "GameScene", "Over Scene", "Clear Scene", "Perfect Scene" };
 	static int currentItem = 0; 
 
 	// 横幅を設定 (例: 150.0f)
@@ -56,6 +57,9 @@ void GameManager::Update() {
 			break;
 		case 3:
 			ChangeScene(new ClearScene);
+			break;
+		case 4:
+			ChangeScene(new PerfectScene);
 			break;
 
 		default:

@@ -132,6 +132,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\Game\GameObject\Enemy\Randam\Randam.cpp" />
     <ClCompile Include="Project\Game\GameObject\Enemy\state\EnemyMissile.cpp" />
     <ClCompile Include="Project\Game\GameObject\Enemy\state\EnemyNormal.cpp" />
+    <ClCompile Include="Project\Game\GameScene\PerfectScene.cpp" />
     <ClCompile Include="Project\Game\Other\Code\OtherCode.cpp" />
     <ClCompile Include="Project\Game\GameObject\Player.cpp" />
     <ClCompile Include="Project\Game\GameScene\ClearScene.cpp" />
@@ -219,6 +220,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\Game\GameObject\Enemy\state\EnemyMissile.h" />
     <ClInclude Include="Project\Game\GameObject\Enemy\state\EnemyNormal.h" />
     <ClInclude Include="Project\Game\GameObject\Enemy\state\IEnemyState.h" />
+    <ClInclude Include="Project\Game\GameScene\PerfectScene.h" />
     <ClInclude Include="Project\Game\Other\Code\OtherCode.h" />
     <ClInclude Include="Project\Game\GameObject\Player.h" />
     <ClInclude Include="Project\Game\GameScene\ClearScene.h" />

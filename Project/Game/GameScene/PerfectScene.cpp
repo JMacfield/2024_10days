@@ -1,4 +1,4 @@
-#include "ClearScene.h"
+#include "PerfectScene.h"
 #include "TitleScene.h"
 
 #include <imgui.h>
@@ -9,7 +9,7 @@
 
 #include "Other/Code/OtherCode.h"
 
-void ClearScene::Initialize()
+void PerfectScene::Initialize()
 {
 	// -- カメラ 初期化 -- //
 	camera_.Initialize();
@@ -23,25 +23,25 @@ void ClearScene::Initialize()
 	skydomeModelWorldTransform_.Initialize();
 	skydomeModelWorldTransform_.scale_ = { 1024.0f,1024.0f,1024.0f };
 
-	// -- 床 仮置き -- //
-	planeModelHandle_ = ModelManager::GetInstance()->LoadModelFile("Resources/AssignmentModel/earth", "brokenEarth.gltf");
-	planeModel_.reset(Model::Create(planeModelHandle_));
-	planeModel_->SetLighting(false);
-	planeModelWorldTransform_.Initialize();
-	planeModelWorldTransform_.scale_ = { 16.0f,16.0f, 16.0f };
-	planeModelWorldTransform_.translate_ = { 0.0f,-4.0f,32.0f };
+	//// -- 床 仮置き -- //
+	//planeModelHandle_ = ModelManager::GetInstance()->LoadModelFile("Resources/AssignmentModel/earth", "brokenEarth.gltf");
+	//planeModel_.reset(Model::Create(planeModelHandle_));
+	//planeModel_->SetLighting(false);
+	//planeModelWorldTransform_.Initialize();
+	//planeModelWorldTransform_.scale_ = { 16.0f,16.0f, 16.0f };
+	//planeModelWorldTransform_.translate_ = { 0.0f,-4.0f,32.0f };
 
 	// -- タイトルのUI -- //
-	titleUITex_[0] = TextureManager::LoadTexture("Resources/AssignmentTexture/UI/win.png");
+	titleUITex_[0] = TextureManager::LoadTexture("Resources/AssignmentTexture/UI/perfect.png");
 	titleUITex_[1] = TextureManager::LoadTexture("Resources/AssignmentTexture/UI/remove.png");
 
 	
-	titleUI_[0].reset(Sprite::Create(titleUITex_[0], Vector2(640.0f, 140.0f)));
+	titleUI_[0].reset(Sprite::Create(titleUITex_[0], Vector2(640.0f, 200.0f)));
 	titleUI_[0]->SetAnchorPoint(Vector2(0.5f, 0.5f));
 	titleUI_[0]->SetScale(Vector2(0.5f, 0.5f));
 	
 
-	titleUI_[1].reset(Sprite::Create(titleUITex_[1], Vector2(640.0f, 450.0f)));
+	titleUI_[1].reset(Sprite::Create(titleUITex_[1], Vector2(640.0f, 500.0f)));
 	titleUI_[1]->SetAnchorPoint(Vector2(0.5f, 0.5f));
 	titleUI_[1]->SetScale(Vector2(0.5f, 0.5f));
 
@@ -49,15 +49,15 @@ void ClearScene::Initialize()
 	isUpper_ = true;
 }
 
-void ClearScene::Update(GameManager* gameManager)
+void PerfectScene::Update(GameManager* gameManager)
 {
 	// -- カメラ 更新 -- //
 	camera_.Update();
 
-	// -- 地球 更新 -- //
-	planeModelWorldTransform_.rotate_.y += 0.01f;
-	planeModelWorldTransform_.rotate_.z += 0.0025f;
-	planeModelWorldTransform_.Update();
+	// -- 天球 更新 -- //
+	skydomeModelWorldTransform_.rotate_.y += 0.01f;
+	skydomeModelWorldTransform_.rotate_.z += 0.0025f;
+	skydomeModelWorldTransform_.Update();
 
 	// -- 天球 更新 -- //
 	skydomeModelWorldTransform_.Update();
@@ -75,7 +75,7 @@ void ClearScene::Update(GameManager* gameManager)
 		// normalT 増減
 		if (isUpper_) {
 			if (normalT_ < 1.0f) {
-				normalT_ += 1.0f / 60.0f;
+				normalT_ += 1.0f / 30.0f;
 
 				if (normalT_ >= 1.0f) {
 					isUpper_ = false;
@@ -95,9 +95,9 @@ void ClearScene::Update(GameManager* gameManager)
 		}
 
 		// 選択中のUIを回転させる
-		float rotUI = OtherCode::ExponentialInterpolation(-0.3f, 0.3f, normalT_, 1.0f);
+		float rotUI = OtherCode::ExponentialInterpolation(0.3f, 1.0f, normalT_, 1.0f);
 
-		titleUI_[1]->SetRotate(rotUI);
+		titleUI_[0]->SetScale(Vector2(rotUI,rotUI));
 
 	}
 
@@ -106,13 +106,13 @@ void ClearScene::Update(GameManager* gameManager)
 	ImGui::End();
 }
 
-void ClearScene::Draw()
+void PerfectScene::Draw()
 {
 	// -- 天球 描画 -- //
 	skydomeModel_->Draw(skydomeModelWorldTransform_, camera_);
 
 	// -- 地球 描画 -- //
-	planeModel_->Draw(planeModelWorldTransform_, camera_);
+	//planeModel_->Draw(planeModelWorldTransform_, camera_);
 
 	for (int32_t i = 0; i < titleUI_.size(); i++) {
 		if (i == 2) { continue; }

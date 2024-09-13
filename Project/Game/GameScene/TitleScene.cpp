@@ -39,7 +39,7 @@ void TitleScene::Initialize()
 	titleUITex_[0] = TextureManager::LoadTexture("Resources/AssignmentTexture/UI/title.png");
 	titleUITex_[1] = TextureManager::LoadTexture("Resources/AssignmentTexture/UI/start.png");
 	titleUITex_[2] = TextureManager::LoadTexture("Resources/AssignmentTexture/UI/0.png");
-	titleUITex_[3] = TextureManager::LoadTexture("Resources/AssignmentTexture/UI/exit.png");
+	titleUITex_[3] = TextureManager::LoadTexture("Resources/AssignmentTexture/UI/enter.png");
 	titleUITex_[4] = TextureManager::LoadTexture("Resources/AssignmentTexture/UI/break.png");
 	
 	for (int32_t i = 0; i < titleUI_.size(); i++) {
@@ -49,6 +49,8 @@ void TitleScene::Initialize()
 
 	titleUI_[0]->SetScale(Vector2(1.5f, 1.5f));
 	titleUI_[0]->SetPosition(Vector2(640.0f, 140.0f));
+
+	titleUI_[3]->SetScale(Vector2(0.4f, 0.4f));
 
 	titleUI_[4]->SetScale(Vector2(0.25f, 0.25f));
 	titleUI_[4]->SetPosition(Vector2(300.0f, 350.0f));
@@ -114,50 +116,6 @@ void TitleScene::Update(GameManager* gameManager)
 
 			titleUI_[1]->SetRotate(rotUI);
 
-			if (Input::GetInstance()->IsTriggerKey(DIK_UP)) {
-				selectNumber_ = 2;
-				normalT_ = 0.5f;
-				isUpper_ = true;
-
-				titleUI_[1]->SetRotate(0.0f);
-			}
-
-			if (Input::GetInstance()->IsTriggerKey(DIK_DOWN)) {
-				selectNumber_ = 2;
-				normalT_ = 0.5f;
-				isUpper_ = true;
-
-				titleUI_[1]->SetRotate(0.0f);
-			}
-
-
-
-			break;
-		case 1:
-
-			break;
-		case 2:
-
-			titleUI_[3]->SetRotate(rotUI);
-
-			if (Input::GetInstance()->IsTriggerKey(DIK_UP)) {
-				selectNumber_ = 0;
-				normalT_ = 0.5f;
-				isUpper_ = true;
-
-				titleUI_[3]->SetRotate(0.0f);
-			}
-
-			if (Input::GetInstance()->IsTriggerKey(DIK_DOWN)) {
-				selectNumber_ = 0;
-				normalT_ = 0.5f;
-				isUpper_ = true;
-
-				titleUI_[3]->SetRotate(0.0f);
-			}
-
-
-			break;
 		default:
 			break;
 		}

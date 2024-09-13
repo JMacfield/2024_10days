@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include "GameManager/IGameScene.h"
 #include "GameManager/GameManager.h"
 
@@ -13,7 +12,7 @@
 
 class GameManager;
 
-class OverScene : public IGameScene
+class PerfectScene : public IGameScene
 {
 public:
 
@@ -49,5 +48,4 @@ private:
 
 	float normalT_;
 	bool isUpper_;
-
 };

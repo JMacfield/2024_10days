@@ -9,6 +9,7 @@
 
 #include "OverScene.h"
 #include "ClearScene.h"
+#include "PerfectScene.h"
 
 /// <summary>
 /// コンストラクタ
@@ -147,6 +148,8 @@ void GameScene::Initialize() {
 	movieScreenSprite->SetAnchorPoint(Vector2(0.5f, 0.5f));
 	movieScreenNormalT_ = 0.0f;
 
+	isPerfect_ = false;
+
 }
 
 /// <summary>
@@ -215,7 +218,16 @@ void GameScene::Update(GameManager* gameManager) {
 	skydomeModelWorldTransform_.Update();
 
 	if (whiteOutNormalT_ >= 0.9f) {
-		gameManager->ChangeScene(new ClearScene);
+		if (isPerfect_) {
+			gameManager->ChangeScene(new PerfectScene);
+		}
+		else {
+			gameManager->ChangeScene(new ClearScene);
+		}
+	}
+
+	if (gameBehavior_ == GameBehavior::kGameOver&& gameManager->IsTransitioned()) {
+		gameManager->ChangeScene(new OverScene);
 	}
 
 }
@@ -359,12 +371,14 @@ void GameScene::InGameUpdate(GameManager* gameManager)
 	}
 
 	if (player_->GetHP() == 0) {
-
+		// 敗北演出へ移行
+		gameBehavior_ = GameBehavior::kGameOver;
 	}
 }
 
 void GameScene::PerfectUpdate(GameManager* gameManager)
 {
+	isPerfect_ = true;
 	gameManager;
 	if (movieScreenNormalT_ < 1.0f) {
 
@@ -483,6 +497,81 @@ void GameScene::ClearUpdate(GameManager* gameManager)
 
 void GameScene::OverUpdate(GameManager* gameManager)
 {
+	if (movieScreenNormalT_ == 0.0f) {
+		// 隕石が宇宙に消えていく
+		cometWorldTransform_.translate_.y = player_->GetWorld().translate_.y;
+		movieScreenNormalT_ += 1.0f / (60.0f * 0.5f);
+	}
+	else if (movieScreenNormalT_ < 1.0f) {
+
+		movieScreenNormalT_ += 1.0f / (60.0f * 0.5f);
+		if (movieScreenNormalT_ > 1.0f) {
+			movieScreenNormalT_ = 1.0f;
+		}
+
+		// 視野角 調整
+		camera_.fov_ = OtherCode::ExponentialInterpolation(camera_.fov_, 1.4f, movieScreenNormalT_, 1.0f);
+
+		Vector2 newScale = { 1.0f,1.0f };
+		newScale.y = OtherCode::ExponentialInterpolation(1.4f, 1.0f, movieScreenNormalT_, 1.0f);
+		movieScreenSprite->SetScale(newScale);
+	}
+
+	else {
+
+		// 隕石が宇宙に消えていく
+		cometWorldTransform_.translate_.y += 7.5f;
+		if (cometWorldTransform_.scale_.x > 0.1f) {
+			cometWorldTransform_.scale_.x -= 0.03f;
+			cometWorldTransform_.scale_.y -= 0.03f;
+			cometWorldTransform_.scale_.z -= 0.03f;
+		}
+		cometWorldTransform_.rotate_.y -= 0.01f;
+		cometWorldTransform_.rotate_.z -= 0.01f;
+
+		// time加算処理
+		if (cameraNormalT_ < 1.0f) {
+			// フレームレート * ゲーム時間(3分)で補間
+			cameraNormalT_ += 1.0f / (kFlamerate * 1.0f);
+
+		}
+
+		// カメラ座標
+		camera_.rotate_.x = OtherCode::ExponentialInterpolation(1.57f, -1.57f, cameraNormalT_, 1.0f);
+
+		// カメラ座標を保持
+		basePos = camera_.translate_;
+
+
+		if (cameraNormalT_ >= 1.0f) {
+			
+
+			// シェイク処理
+			if (shakePower > 0) {
+				shakePos.x = float(rand() % shakePower) - float(shakePower / 2);
+				shakePos.y = float(rand() % shakePower) - float(shakePower / 2);
+
+				camera_.translate_.x = basePos.x + shakePos.x;
+				camera_.translate_.y = basePos.y + shakePos.y;
+			}
+			else {
+				if (!gameManager->IsTransitioned()) {
+					gameManager->SceneEnd();
+				}
+			}
+
+			shakeCount++;
+			if (shakeCount > 8) {
+				shakePower -= 1;
+				shakeCount = 0;
+			}
+
+			if (shakePower > 30) { return; }
+
+		}
+
+	}
+
 	gameManager;
 }
 

@@ -189,6 +189,10 @@ void Player::Debug()
 			// イージング
 			easeT = GetSpeedForEaseInOutQuad(normalT);
 		}
+		// HP0
+		if (ImGui::Button("GameEnd")) {
+			this->hp_ = 0;
+		}
 
 	}
 

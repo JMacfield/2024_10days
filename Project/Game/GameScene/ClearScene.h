@@ -4,6 +4,11 @@
 #include "GameManager/GameManager.h"
 
 #include "Input.h"
+#include "Camera.h"
+
+#include "Model.h"
+#include <array>
+#include "Sprite.h"
 
 class GameManager;
 
@@ -23,4 +28,24 @@ public:
 private:
 
 	XINPUT_STATE joyState;
+
+	// -- カメラ -- //
+	Camera camera_ = {};
+
+	// -- 天球  -- //
+	std::unique_ptr<Model> skydomeModel_ = nullptr;
+	uint32_t skydomeModelHandle_ = 0;
+	WorldTransform skydomeModelWorldTransform_ = {};
+
+	// -- 地球 -- //
+	std::unique_ptr<Model> planeModel_ = nullptr;
+	uint32_t planeModelHandle_ = 0;
+	WorldTransform planeModelWorldTransform_ = {};
+
+	// -- タイトルのUI -- //
+	std::array<std::unique_ptr<Sprite>, 2> titleUI_;
+	std::array<int32_t, 2> titleUITex_;
+
+	float normalT_;
+	bool isUpper_;
 };
