@@ -11,7 +11,7 @@
 // 重力加速度
 const float kGravityPower_ = 0.098f;
 // 移動限界距離( -x ~ x, -z ~ z)
-const Vector2 kLimitArea_ = { 4.0f,4.0f };
+const Vector2 kLimitArea_ = { 7.0f,5.0f };
 // フレームレート(仮)
 const float kFlamerate = 60.0f;
 
