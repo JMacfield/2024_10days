@@ -20,6 +20,7 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
 		Demo|x64 = Demo|x64
+		PreRelease|x64 = PreRelease|x64
 		Profile|x64 = Profile|x64
 		Release|x64 = Release|x64
 	EndGlobalSection
@@ -28,14 +29,18 @@ Global
 		{CF451278-00C1-4D36-95D3-B55AE87E0973}.Debug|x64.Build.0 = Debug|x64
 		{CF451278-00C1-4D36-95D3-B55AE87E0973}.Demo|x64.ActiveCfg = Demo|x64
 		{CF451278-00C1-4D36-95D3-B55AE87E0973}.Demo|x64.Build.0 = Demo|x64
-		{CF451278-00C1-4D36-95D3-B55AE87E0973}.Profile|x64.ActiveCfg = Release|x64
-		{CF451278-00C1-4D36-95D3-B55AE87E0973}.Profile|x64.Build.0 = Release|x64
+		{CF451278-00C1-4D36-95D3-B55AE87E0973}.PreRelease|x64.ActiveCfg = PreRelease|x64
+		{CF451278-00C1-4D36-95D3-B55AE87E0973}.PreRelease|x64.Build.0 = PreRelease|x64
+		{CF451278-00C1-4D36-95D3-B55AE87E0973}.Profile|x64.ActiveCfg = PreRelease|x64
+		{CF451278-00C1-4D36-95D3-B55AE87E0973}.Profile|x64.Build.0 = PreRelease|x64
 		{CF451278-00C1-4D36-95D3-B55AE87E0973}.Release|x64.ActiveCfg = Release|x64
 		{CF451278-00C1-4D36-95D3-B55AE87E0973}.Release|x64.Build.0 = Release|x64
 		{371B9FA9-4C90-4AC6-A123-ACED756D6C77}.Debug|x64.ActiveCfg = Debug|x64
 		{371B9FA9-4C90-4AC6-A123-ACED756D6C77}.Debug|x64.Build.0 = Debug|x64
 		{371B9FA9-4C90-4AC6-A123-ACED756D6C77}.Demo|x64.ActiveCfg = Demo|x64
 		{371B9FA9-4C90-4AC6-A123-ACED756D6C77}.Demo|x64.Build.0 = Demo|x64
+		{371B9FA9-4C90-4AC6-A123-ACED756D6C77}.PreRelease|x64.ActiveCfg = PreRelease|x64
+		{371B9FA9-4C90-4AC6-A123-ACED756D6C77}.PreRelease|x64.Build.0 = PreRelease|x64
 		{371B9FA9-4C90-4AC6-A123-ACED756D6C77}.Profile|x64.ActiveCfg = Profile|x64
 		{371B9FA9-4C90-4AC6-A123-ACED756D6C77}.Profile|x64.Build.0 = Profile|x64
 		{371B9FA9-4C90-4AC6-A123-ACED756D6C77}.Release|x64.ActiveCfg = Release|x64
@@ -44,6 +49,8 @@ Global
 		{4A762DB2-1E1D-47D2-851F-DE22B87C24D0}.Debug|x64.Build.0 = Debug|x64
 		{4A762DB2-1E1D-47D2-851F-DE22B87C24D0}.Demo|x64.ActiveCfg = Demo|x64
 		{4A762DB2-1E1D-47D2-851F-DE22B87C24D0}.Demo|x64.Build.0 = Demo|x64
+		{4A762DB2-1E1D-47D2-851F-DE22B87C24D0}.PreRelease|x64.ActiveCfg = PreRelease|x64
+		{4A762DB2-1E1D-47D2-851F-DE22B87C24D0}.PreRelease|x64.Build.0 = PreRelease|x64
 		{4A762DB2-1E1D-47D2-851F-DE22B87C24D0}.Profile|x64.ActiveCfg = Debug|x64
 		{4A762DB2-1E1D-47D2-851F-DE22B87C24D0}.Profile|x64.Build.0 = Debug|x64
 		{4A762DB2-1E1D-47D2-851F-DE22B87C24D0}.Release|x64.ActiveCfg = Release|x64

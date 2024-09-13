@@ -68,6 +68,8 @@ void TitleScene::Initialize()
 
 void TitleScene::Update(GameManager* gameManager)
 {
+	//XINPUT_STATE joyState{};
+
 	// BGM再生
 	Audio::GetInstance()->PlayMP3(titleBGMHandle_, true);
 
@@ -93,6 +95,10 @@ void TitleScene::Update(GameManager* gameManager)
 	if (Input::GetInstance()->IsTriggerKey(DIK_SPACE)) {
 		count_++;
 	}
+
+	/*if (joyState.Gamepad.wButtons & XINPUT_GAMEPAD_A) {
+		count_++;
+	}*/
 
 	// デバッグ用 シーン切替
 	if (count_ == 1) {
