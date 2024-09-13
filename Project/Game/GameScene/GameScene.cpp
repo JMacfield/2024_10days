@@ -233,10 +233,12 @@ void GameScene::Update(GameManager* gameManager) {
 	if (whiteOutNormalT_ >= 0.9f) {
 		if (isPerfect_) {
 			isAudioPlay_ = false;
+			Audio::GetInstance()->StopMP3(gameBGMHandle_);
 			gameManager->ChangeScene(new PerfectScene);
 		}
 		else {
 			isAudioPlay_ = false;
+			Audio::GetInstance()->StopMP3(gameBGMHandle_);
 			gameManager->ChangeScene(new ClearScene);
 			
 		}
@@ -244,6 +246,7 @@ void GameScene::Update(GameManager* gameManager) {
 
 	if (gameBehavior_ == GameBehavior::kGameOver&& gameManager->IsTransitioned()) {
 		isAudioPlay_ = false;
+		Audio::GetInstance()->StopMP3(gameBGMHandle_);
 		gameManager->ChangeScene(new OverScene);
 	}
 
