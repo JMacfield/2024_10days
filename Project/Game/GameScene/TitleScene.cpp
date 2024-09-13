@@ -61,6 +61,9 @@ void TitleScene::Initialize()
 	titleBGMHandle_ = Audio::GetInstance()->LoadMP3(L"Resources/Sounds/title.mp3");
 
 	Audio::GetInstance()->ChangeVolume(titleBGMHandle_, 0.05f);
+
+	tutorialHandle_ = TextureManager::LoadTexture("Resources/AssignmentTexture/tutorial.png");
+	tutorial_.reset(Sprite::Create(tutorialHandle_, Vector2(0.0f, 0.0f)));
 }
 
 void TitleScene::Update(GameManager* gameManager)
@@ -83,10 +86,23 @@ void TitleScene::Update(GameManager* gameManager)
 		Audio::GetInstance()->StopMP3(titleBGMHandle_);
 	}
 
+	/*if (Input::GetInstance()->IsTriggerKey(DIK_M)) {
+		isFlip_ = true;
+	}*/
+
+	if (Input::GetInstance()->IsTriggerKey(DIK_SPACE)) {
+		count_++;
+	}
+
 	// デバッグ用 シーン切替
-	if (Input::GetInstance()->IsPushKey(DIK_N)) {
-		isAudioPlay_ = false;
+	if (count_ == 1) {
+		isFlip_ = true;
+	}
+
+	if (count_ == 2) {
 		gameManager->SceneEnd();
+		isAudioPlay_ = false;
+		count_ = 3;
 	}
 	if (gameManager->IsTransitioned()) {
 		gameManager->ChangeScene(new GameScene);
@@ -176,9 +192,9 @@ void TitleScene::Update(GameManager* gameManager)
 
 #ifdef _DEBUG
 
-	ImGui::Begin("Debug");
+	/*ImGui::Begin("Debug");
 	ImGui::Text("Now, This is Title.");
-	ImGui::End();
+	ImGui::End();*/
 
 #endif // _DEBUG
 
@@ -195,7 +211,13 @@ void TitleScene::Draw()
 
 	for (int32_t i = 0; i < titleUI_.size(); i++) {
 		if (i == 2) { continue; }
-		titleUI_[i]->Draw();
+		if (isFlip_ == false) {
+			titleUI_[i]->Draw();
+		}
+	}
+
+	if (isFlip_ == true) {
+		tutorial_->Draw();
 	}
 }
 

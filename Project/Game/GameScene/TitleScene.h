@@ -62,4 +62,10 @@ private:
 	uint32_t titleBGMHandle_;
 
 	bool isAudioPlay_ = true;
+
+	std::unique_ptr<Sprite> tutorial_;
+	int32_t tutorialHandle_;
+
+	bool isFlip_ = false;
+	int count_ = 0;
 };

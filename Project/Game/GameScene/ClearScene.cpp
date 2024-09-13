@@ -14,9 +14,9 @@ void ClearScene::Update(GameManager* gameManager)
 		gameManager->ChangeScene(new TitleScene);
 	}
 
-	ImGui::Begin("Debug");
+	/*ImGui::Begin("Debug");
 	ImGui::Text("Now, This is Clear.");
-	ImGui::End();
+	ImGui::End();*/
 }
 
 void ClearScene::Draw()

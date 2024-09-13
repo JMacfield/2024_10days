@@ -42,7 +42,7 @@ void YTEngine::Initialize()
 	//Audio
 	Audio::GetInstance()->Initialize();
 
-	GlobalVariables::GetInstance()->LoadFile();
+	//GlobalVariables::GetInstance()->LoadFile();
 
 	//GameManager
 	gameManager_ = new GameManager();
@@ -58,7 +58,7 @@ void YTEngine::BeginFrame()
 
 void YTEngine::Update()
 {
-	GlobalVariables::GetInstance()->GetInstance()->Update();
+	//GlobalVariables::GetInstance()->GetInstance()->Update();
 
 	ImGuiManager::GetInstance()->Update();
 

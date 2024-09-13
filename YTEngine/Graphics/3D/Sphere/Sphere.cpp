@@ -117,16 +117,16 @@ void Sphere::Initialize() {
 
 
 void Sphere::Update() {
-	ImGui::Begin("Sphere");
-	//ImGui::Checkbox("useMonsterBall", &useMonsterBall_);
-	ImGui::InputFloat3("color", &directionalLightData_->color.x);
-	ImGui::SliderFloat3("color", &directionalLightData_->color.x, 0.0f, 1.0f);
-	ImGui::InputFloat3("direction", &directionalLightData_->direction.x);
-	ImGui::SliderFloat3("direction", &directionalLightData_->direction.x, -1.0f, 1.0f);
-	ImGui::InputFloat("interity", &directionalLightData_->intensity);
-	ImGui::SliderFloat("interity", &directionalLightData_->intensity, 0.0f, 1.0f);
+	//ImGui::Begin("Sphere");
+	////ImGui::Checkbox("useMonsterBall", &useMonsterBall_);
+	//ImGui::InputFloat3("color", &directionalLightData_->color.x);
+	//ImGui::SliderFloat3("color", &directionalLightData_->color.x, 0.0f, 1.0f);
+	//ImGui::InputFloat3("direction", &directionalLightData_->direction.x);
+	//ImGui::SliderFloat3("direction", &directionalLightData_->direction.x, -1.0f, 1.0f);
+	//ImGui::InputFloat("interity", &directionalLightData_->intensity);
+	//ImGui::SliderFloat("interity", &directionalLightData_->intensity, 0.0f, 1.0f);
 
-	ImGui::End();
+	//ImGui::End();
 }
 
 

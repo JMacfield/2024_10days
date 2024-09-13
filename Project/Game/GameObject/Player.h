@@ -89,6 +89,6 @@ private: // -- 非公開 メンバ変数 -- //
 	bool isAlive_ = true;
 
 	// プレイヤーの体力
-	int hp_ = 5;
+	int hp_ = 15;
 };
 

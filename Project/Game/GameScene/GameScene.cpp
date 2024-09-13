@@ -99,6 +99,9 @@ void GameScene::Initialize() {
 
 	// -- 速度メーター 初期化 -- //
 
+	hpUI_[0] = Sprite::Create(numberTexHandle_[5], Vector2(1000.0, 600.0f));
+	hpUI_[1] = Sprite::Create(numberTexHandle_[1], Vector2(1000.0, 570.0f));
+
 	// メーター段階
 	materStep_ = 0;
 
@@ -192,7 +195,7 @@ void GameScene::Update(GameManager* gameManager) {
 
 #ifdef _DEBUG
 
-	ImGui::Begin("Clowd");
+	/*ImGui::Begin("Clowd");
 	ImGui::DragFloat3("Pos", &clowdModelWorldTransform_.translate_.x, 1.0f);
 	ImGui::DragFloat3("Rot", &clowdModelWorldTransform_.rotate_.x, 0.01f);
 	ImGui::DragFloat3("Scale", &clowdModelWorldTransform_.scale_.x, 0.1f);
@@ -200,7 +203,7 @@ void GameScene::Update(GameManager* gameManager) {
 
 	ImGui::Begin("Camera");
 	ImGui::DragFloat("Fov", &camera_.fov_, 0.01f);
-	ImGui::End();
+	ImGui::End();*/
 
 #endif
 
@@ -251,6 +254,8 @@ void GameScene::Draw() {
 			speedUI_[i]->Draw();
 		}
 
+		hpUI_[0]->Draw();
+		hpUI_[1]->Draw();
 	}
 
 	whiteOutSprite->Draw();
@@ -320,8 +325,13 @@ void GameScene::InGameUpdate(GameManager* gameManager)
 	else {
 		move.z *= 0.5f;
 	}
-	player_->Move(move);
 
+	if (Input::GetInstance()->IsPushKey(DIK_W)) move.z += 0.3f;
+	if (Input::GetInstance()->IsPushKey(DIK_S)) move.z -= 0.3f;
+	if (Input::GetInstance()->IsPushKey(DIK_A)) move.x -= 0.3f;
+	if (Input::GetInstance()->IsPushKey(DIK_D)) move.x += 0.3f;
+
+	player_->Move(move);
 
 
 
@@ -343,9 +353,6 @@ void GameScene::InGameUpdate(GameManager* gameManager)
 
 	// -- 速度メーター更新 -- //
 	materUI_[1]->SetScale(Vector2(float(1.0f - player_->GetNormalT()) * materUI_[0]->GetScale().x, materUI_[0]->GetScale().y));
-
-	// ミサイルとの判定 プレイヤーとエネミーのOBB
-	//IsCollision(player_->GetCollision(),);
 
 	if (player_->GetNormalT() >= 1.0f&& player_->GetWorld().translate_.y <= 1000.0f) {
 		gameBehavior_ = GameBehavior::kPerfectClear;
@@ -439,6 +446,9 @@ void GameScene::OverUpdate(GameManager* gameManager)
 GameScene::~GameScene() {
 	
 	player_->Final();
+
+	delete hpUI_[0];
+	delete hpUI_[1];
 
 	// Sprite 解放 
 	for (int32_t i = 0; i < speedUI_.size(); i++) {

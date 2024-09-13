@@ -14,9 +14,9 @@ void OverScene::Update(GameManager* gameManager)
 		gameManager->ChangeScene(new TitleScene);
 	}
 
-	ImGui::Begin("Debug");
+	/*ImGui::Begin("Debug");
 	ImGui::Text("Now, This is Over.");
-	ImGui::End();
+	ImGui::End();*/
 }
 
 void OverScene::Draw()

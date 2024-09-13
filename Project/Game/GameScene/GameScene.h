@@ -104,6 +104,8 @@ private:
 	// 文字テクスチャ
 	std::map<std::string, int32_t> stringTexHandle_;
 
+	std::array<Sprite*, 2> hpUI_;
+
 	// 速度メーター
 	std::array<Sprite*, 2> materUI_;
 	// メーターテクスチャ

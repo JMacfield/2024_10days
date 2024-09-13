@@ -38,8 +38,8 @@ void Player::Init() {
 
 	// ゲーム時間(単位は秒)
 	inGameTime = 70.0f;
-
-
+	
+	//model_->SetLighting(false);
 }
 
 void Player::Update() {
@@ -95,6 +95,9 @@ void Player::Update() {
 
 	Debug();
 
+	/*ImGui::Begin("PlayerHP");
+	ImGui::DragInt("PlayerHP %d", &hp_);
+	ImGui::End();*/
 }
 
 void Player::Draw(Camera camera) {
