@@ -13,6 +13,8 @@
 #include <Particle3D.h>
 #include "SkinCluster.h"
 
+#include "Audio.h"
+
 // ゲームオブジェクト
 #include "GameObject/Player.h"
 
@@ -102,6 +104,8 @@ private:
 	// 文字テクスチャ
 	std::map<std::string, int32_t> stringTexHandle_;
 
+	std::array<Sprite*, 2> hpUI_;
+
 	// 速度メーター
 	std::array<Sprite*, 2> materUI_;
 	// メーターテクスチャ
@@ -126,5 +130,10 @@ private:
 	float movieScreenNormalT_;
 
 	bool isPerfect_;
+	// インゲームBGM
+	uint32_t gameBGMHandle_;
 
+	bool isAudioPlay_ = true;
+
+	std::unique_ptr<Sprite> hpIcon_;
 };

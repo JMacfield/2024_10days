@@ -101,9 +101,9 @@ void ClearScene::Update(GameManager* gameManager)
 
 	}
 
-	ImGui::Begin("Debug");
+	/*ImGui::Begin("Debug");
 	ImGui::Text("Now, This is Clear.");
-	ImGui::End();
+	ImGui::End();*/
 }
 
 void ClearScene::Draw()

@@ -101,11 +101,21 @@ void GameScene::Initialize() {
 
 	// -- 速度メーター 初期化 -- //
 
+	hpUI_[0] = Sprite::Create(numberTexHandle_[5], Vector2(1130.0, 5.0f));
+	hpUI_[1] = Sprite::Create(numberTexHandle_[1], Vector2(1100.0, 5.0f));
+	hpUI_[0]->SetScale(Vector2(1.0f / 8.0f, 1.0f / 8.0f));
+	hpUI_[1]->SetScale(Vector2(1.0f / 8.0f, 1.0f / 8.0f));
+
 	// メーター段階
 	materStep_ = 0;
 
 	// 追加ディレクトリパス
 	std::string directrypathMidle = "antenna/antenna";
+	
+	int32_t hpIconHandle = TextureManager::LoadTexture("Resources/AssignmentTexture/UI/mater/mater1.png");
+
+	hpIcon_.reset(Sprite::Create(hpIconHandle, Vector2(1100, 50.0f)));
+	hpIcon_->SetScale(Vector2(1.0f / 6.0f, 1.0f / 6.0f));
 
 	// 初期化
 	for (int32_t i = 0; i < materUI_.size(); i++) {
@@ -148,6 +158,9 @@ void GameScene::Initialize() {
 	movieScreenSprite->SetAnchorPoint(Vector2(0.5f, 0.5f));
 	movieScreenNormalT_ = 0.0f;
 
+	// インゲームBGM
+	gameBGMHandle_ = Audio::GetInstance()->LoadMP3(L"Resources/Sounds/game.mp3");
+	Audio::GetInstance()->ChangeVolume(gameBGMHandle_, 0.05f);
 	isPerfect_ = false;
 
 }
@@ -193,7 +206,7 @@ void GameScene::Update(GameManager* gameManager) {
 
 #ifdef _DEBUG
 
-	ImGui::Begin("Clowd");
+	/*ImGui::Begin("Clowd");
 	ImGui::DragFloat3("Pos", &clowdModelWorldTransform_.translate_.x, 1.0f);
 	ImGui::DragFloat3("Rot", &clowdModelWorldTransform_.rotate_.x, 0.01f);
 	ImGui::DragFloat3("Scale", &clowdModelWorldTransform_.scale_.x, 0.1f);
@@ -201,7 +214,7 @@ void GameScene::Update(GameManager* gameManager) {
 
 	ImGui::Begin("Camera");
 	ImGui::DragFloat("Fov", &camera_.fov_, 0.01f);
-	ImGui::End();
+	ImGui::End();*/
 
 #endif
 
@@ -246,7 +259,7 @@ void GameScene::Draw() {
 	if (gameBehavior_ == GameBehavior::kInGame) {
 
 		// -- 雲 描画 -- //
-		clowdModel_->Draw(clowdModelWorldTransform_, camera_);
+		//clowdModel_->Draw(clowdModelWorldTransform_, camera_);
 
 		// -- テクスチャ 描画 -- // 
 		//enemy描画
@@ -265,6 +278,10 @@ void GameScene::Draw() {
 			speedUI_[i]->Draw();
 		}
 
+		hpUI_[0]->Draw();
+		hpUI_[1]->Draw();
+
+		hpIcon_->Draw();
 	}
 
 	whiteOutSprite->Draw();
@@ -284,6 +301,14 @@ void GameScene::StartUpdate(GameManager* gameManager)
 void GameScene::InGameUpdate(GameManager* gameManager)
 {
 	gameManager;
+
+	if (isAudioPlay_ == true) {
+		Audio::GetInstance()->PlayMP3(gameBGMHandle_, true);
+	}
+
+	if (isAudioPlay_ == false) {
+		Audio::GetInstance()->StopMP3(gameBGMHandle_);
+	}
 
 	// 入力
 	XINPUT_STATE joyState;
@@ -326,8 +351,13 @@ void GameScene::InGameUpdate(GameManager* gameManager)
 	else {
 		move.z *= 0.5f;
 	}
-	player_->Move(move);
 
+	if (Input::GetInstance()->IsPushKey(DIK_W)) move.z += 0.3f;
+	if (Input::GetInstance()->IsPushKey(DIK_S)) move.z -= 0.3f;
+	if (Input::GetInstance()->IsPushKey(DIK_A)) move.x -= 0.3f;
+	if (Input::GetInstance()->IsPushKey(DIK_D)) move.x += 0.3f;
+
+	player_->Move(move);
 
 
 
@@ -347,9 +377,19 @@ void GameScene::InGameUpdate(GameManager* gameManager)
 	viewSpeed = viewSpeed % 10;
 	speedUI_[5]->SetTexture(numberTexHandle_[(viewSpeed)]);
 
+	int health = player_->GetHP();
+	int32_t hHealth = std::abs((int32_t)health);
+
+	hpUI_[1]->SetTexture(numberTexHandle_[(hHealth/10)]);
+	hHealth = hHealth % 10;
+	hpUI_[0]->SetTexture(numberTexHandle_[(hHealth)]);
+
 	// -- 速度メーター更新 -- //
 	materUI_[1]->SetScale(Vector2(float(1.0f - player_->GetNormalT()) * materUI_[0]->GetScale().x, materUI_[0]->GetScale().y));
 
+	if (player_->GetNormalT() >= 1.0f&& player_->GetWorld().translate_.y <= 1000.0f) {
+		gameBehavior_ = GameBehavior::kPerfectClear;
+	}
 	// ミサイルとの判定 プレイヤーとエネミーのOBB
 	//IsCollision(player_->GetCollision(),);
 
@@ -578,6 +618,9 @@ void GameScene::OverUpdate(GameManager* gameManager)
 GameScene::~GameScene() {
 
 	player_->Final();
+
+	delete hpUI_[0];
+	delete hpUI_[1];
 
 	// Sprite 解放 
 	for (int32_t i = 0; i < speedUI_.size(); i++) {

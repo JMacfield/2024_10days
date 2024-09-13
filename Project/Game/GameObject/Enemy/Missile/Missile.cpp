@@ -99,7 +99,6 @@ void Missile::Update()
 	if (isInvincible_ == false) {
 		// 当たり判定
 		if (IsCollision(player_->GetInstance()->GetCollision(), collision_)) {
-			//player_->MinusHP(1);
 			//player_->ResiveSpeedDoun(0.02f);
 			isDead_ = true;
 			isInvincible_ = true;
@@ -107,7 +106,7 @@ void Missile::Update()
 			if (invincibleTime_ > 60) {
 				isInvincible_ = false;
 				invincibleTimer_ = 0;
-				player_->ResiveSpeedDoun(0.0f);
+				//player_->ResiveSpeedDoun(0.0f);
 			}
 		}
 	}
@@ -117,7 +116,7 @@ void Missile::Update()
 	}
 
 	if (player_->GetHP() == 0) {
-		player_->SetAlive(false);
+		//player_->SetAlive(false);
 	}
 
 	//フィールド外に出たら死亡フラグを立てる
@@ -125,6 +124,11 @@ void Missile::Update()
 	{
 		isDead_ = true;
 		player_->MinusHP(1);
+	}
+
+	if (worldTransform_.translate_.y >= player_->GetWorld().translate_.y + 50.0f && isDead_ == false)
+	{
+		
 	}
 }
 
@@ -136,5 +140,5 @@ void Missile::Draw(Camera camera)
 void Missile::SetCollision() {
 	collision_.center = worldTransform_.GetWorldPosition();
 	GetOrientations(MakeRotateXYZMatrix(worldTransform_.rotate_.x, worldTransform_.rotate_.y, worldTransform_.rotate_.z), collision_.orientation);
-	collision_.size = { 2.0f,2.0f,2.0f };
+	collision_.size = { 2.0f,4.0f,2.0f };
 }

@@ -104,9 +104,9 @@ void OverScene::Update(GameManager* gameManager)
 	}
 
 
-	ImGui::Begin("Debug");
+	/*ImGui::Begin("Debug");
 	ImGui::Text("Now, This is Over.");
-	ImGui::End();
+	ImGui::End();*/
 }
 
 void OverScene::Draw()

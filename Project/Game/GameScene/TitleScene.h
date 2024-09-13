@@ -10,6 +10,8 @@
 #include <array>
 #include "Sprite.h"
 
+#include "Audio.h"
+
 class GameManager;
 
 class TitleScene : public IGameScene
@@ -56,5 +58,14 @@ private:
 	float normalT_;
 	bool isUpper_;
 
+	// タイトルBGM
+	uint32_t titleBGMHandle_;
 
+	bool isAudioPlay_ = true;
+
+	std::unique_ptr<Sprite> tutorial_;
+	int32_t tutorialHandle_;
+
+	bool isFlip_ = false;
+	int count_ = 0;
 };

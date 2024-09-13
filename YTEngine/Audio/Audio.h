@@ -113,6 +113,11 @@ public:
 	/// <param name="ハンドル名"></param>
 	void StopWave(uint32_t audioHandle);
 
+	/// <summary>
+	/// 停止
+	/// </summary>
+	/// <param name="audioHandle"></param>
+	void StopMP3(uint32_t audioHandle);
 
 #pragma endregion
 
@@ -284,7 +289,6 @@ private:
 	//IXAudio2はCOMオブジェクトなのでComPtr管理
 	ComPtr<IXAudio2> xAudio2_ = nullptr;
 	//マスターボイス
-	//最終的にここでまとめるよ(スピーカーみたいな感じだね)
 	IXAudio2MasteringVoice* masterVoice_ = nullptr;
 	
 
@@ -303,7 +307,6 @@ private:
 
 
 	//構造体版
-	//Texturemanagerとだいたい同じ感じにした
 	//音声データの最大数
 	static const int SOUND_DATE_MAX_ = 256;
 	std::array<AudioInformation, SOUND_DATE_MAX_> audioInformation_{};
@@ -319,7 +322,6 @@ private:
 
 
 	//自分のエンジンではA4は442Hz基準にする
-	//もちろん12段階で1オクターブ
 	static const int SCALE_AMOUNT_ = 13;
 	const float SEMITONE_RATIO_[SCALE_AMOUNT_] = {
 		1.00000f, //C4
