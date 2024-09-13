@@ -233,14 +233,17 @@ void GameScene::Update(GameManager* gameManager) {
 	if (whiteOutNormalT_ >= 0.9f) {
 		if (isPerfect_) {
 			gameManager->ChangeScene(new PerfectScene);
+			isAudioPlay_ == false;
 		}
 		else {
 			gameManager->ChangeScene(new ClearScene);
+			isAudioPlay_ == false;
 		}
 	}
 
 	if (gameBehavior_ == GameBehavior::kGameOver&& gameManager->IsTransitioned()) {
 		gameManager->ChangeScene(new OverScene);
+		isAudioPlay_ == false;
 	}
 
 }

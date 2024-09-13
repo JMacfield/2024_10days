@@ -65,7 +65,7 @@ void OverScene::Update(GameManager* gameManager)
 	skydomeModelWorldTransform_.Update();
 
 	// デバッグ用 シーン切替
-	if (Input::GetInstance()->IsPushKey(DIK_N))
+	if (Input::GetInstance()->IsTriggerKey(DIK_SPACE))
 	{
 		gameManager->SceneEnd();
 	}
