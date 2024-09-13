@@ -99,8 +99,10 @@ void GameScene::Initialize() {
 
 	// -- 速度メーター 初期化 -- //
 
-	hpUI_[0] = Sprite::Create(numberTexHandle_[5], Vector2(1000.0, 600.0f));
-	hpUI_[1] = Sprite::Create(numberTexHandle_[1], Vector2(1000.0, 570.0f));
+	hpUI_[0] = Sprite::Create(numberTexHandle_[5], Vector2(1130.0, 5.0f));
+	hpUI_[1] = Sprite::Create(numberTexHandle_[1], Vector2(1100.0, 5.0f));
+	hpUI_[0]->SetScale(Vector2(1.0f / 8.0f, 1.0f / 8.0f));
+	hpUI_[1]->SetScale(Vector2(1.0f / 8.0f, 1.0f / 8.0f));
 
 	// メーター段階
 	materStep_ = 0;
@@ -108,6 +110,11 @@ void GameScene::Initialize() {
 	// 追加ディレクトリパス
 	std::string directrypathMidle = "antenna/antenna";
 	
+	int32_t hpIconHandle = TextureManager::LoadTexture("Resources/AssignmentTexture/UI/mater/mater1.png");
+
+	hpIcon_.reset(Sprite::Create(hpIconHandle, Vector2(1100, 50.0f)));
+	hpIcon_->SetScale(Vector2(1.0f / 6.0f, 1.0f / 6.0f));
+
 	// 初期化
 	for (int32_t i = 0; i < materUI_.size(); i++) {
 		
@@ -235,7 +242,7 @@ void GameScene::Draw() {
 	if (gameBehavior_ == GameBehavior::kInGame) {
 
 		// -- 雲 描画 -- //
-		clowdModel_->Draw(clowdModelWorldTransform_, camera_);
+		//clowdModel_->Draw(clowdModelWorldTransform_, camera_);
 
 		// -- テクスチャ 描画 -- // 
 		//enemy描画
@@ -256,6 +263,8 @@ void GameScene::Draw() {
 
 		hpUI_[0]->Draw();
 		hpUI_[1]->Draw();
+
+		hpIcon_->Draw();
 	}
 
 	whiteOutSprite->Draw();
@@ -350,6 +359,13 @@ void GameScene::InGameUpdate(GameManager* gameManager)
 	speedUI_[4]->SetTexture(numberTexHandle_[(viewSpeed / 10)]);
 	viewSpeed = viewSpeed % 10;
 	speedUI_[5]->SetTexture(numberTexHandle_[(viewSpeed)]);
+
+	int health = player_->GetHP();
+	int32_t hHealth = std::abs((int32_t)health);
+
+	hpUI_[1]->SetTexture(numberTexHandle_[(hHealth/10)]);
+	hHealth = hHealth % 10;
+	hpUI_[0]->SetTexture(numberTexHandle_[(hHealth)]);
 
 	// -- 速度メーター更新 -- //
 	materUI_[1]->SetScale(Vector2(float(1.0f - player_->GetNormalT()) * materUI_[0]->GetScale().x, materUI_[0]->GetScale().y));

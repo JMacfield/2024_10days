@@ -133,4 +133,6 @@ private:
 	uint32_t gameBGMHandle_;
 
 	bool isAudioPlay_ = true;
+
+	std::unique_ptr<Sprite> hpIcon_;
 };
