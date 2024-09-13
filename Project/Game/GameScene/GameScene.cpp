@@ -146,6 +146,9 @@ void GameScene::Initialize() {
 	movieScreenSprite->SetAnchorPoint(Vector2(0.5f, 0.5f));
 	movieScreenNormalT_ = 0.0f;
 
+	// インゲームBGM
+	gameBGMHandle_ = Audio::GetInstance()->LoadMP3(L"Resources/Sounds/game.mp3");
+	Audio::GetInstance()->ChangeVolume(gameBGMHandle_, 0.05f);
 }
 
 /// <summary>
@@ -267,6 +270,14 @@ void GameScene::StartUpdate(GameManager* gameManager)
 void GameScene::InGameUpdate(GameManager* gameManager)
 {
 	gameManager;
+
+	if (isAudioPlay_ == true) {
+		Audio::GetInstance()->PlayMP3(gameBGMHandle_, true);
+	}
+
+	if (isAudioPlay_ == false) {
+		Audio::GetInstance()->StopMP3(gameBGMHandle_);
+	}
 
 	// 入力
 	XINPUT_STATE joyState;

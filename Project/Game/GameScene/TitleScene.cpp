@@ -58,10 +58,9 @@ void TitleScene::Initialize()
 	normalT_ = 0.5f;
 	isUpper_ = true;
 
-	// タイトルBGM
-	//titleBGMHandle_ = Audio::GetInstance()->LoadWave("Resources/title.wav");
-
 	titleBGMHandle_ = Audio::GetInstance()->LoadMP3(L"Resources/Sounds/title.mp3");
+
+	Audio::GetInstance()->ChangeVolume(titleBGMHandle_, 0.05f);
 }
 
 void TitleScene::Update(GameManager* gameManager)
@@ -80,9 +79,13 @@ void TitleScene::Update(GameManager* gameManager)
 	// -- 天球 更新 -- //
 	skydomeModelWorldTransform_.Update();
 
+	if (isAudioPlay_ == false) {
+		Audio::GetInstance()->StopMP3(titleBGMHandle_);
+	}
+
 	// デバッグ用 シーン切替
-	if (Input::GetInstance()->IsPushKey(DIK_N))
-	{
+	if (Input::GetInstance()->IsPushKey(DIK_N)) {
+		isAudioPlay_ = false;
 		gameManager->SceneEnd();
 	}
 	if (gameManager->IsTransitioned()) {

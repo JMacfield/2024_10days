@@ -494,6 +494,12 @@ void Audio::StopWave(uint32_t audioHandle) {
 	assert(SUCCEEDED(hr));
 }
 
+void Audio::StopMP3(uint32_t audioHandle) {
+	HRESULT hr{};
+	hr = audioInformation_[audioHandle].pSourceVoice_->Stop();
+	assert(SUCCEEDED(hr));
+}
+
 #pragma endregion
 
 

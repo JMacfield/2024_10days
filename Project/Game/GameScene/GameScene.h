@@ -13,6 +13,8 @@
 #include <Particle3D.h>
 #include "SkinCluster.h"
 
+#include "Audio.h"
+
 // ゲームオブジェクト
 #include "GameObject/Player.h"
 
@@ -125,5 +127,8 @@ private:
 	int32_t movieScreenTexHandle_;
 	float movieScreenNormalT_;
 
+	// インゲームBGM
+	uint32_t gameBGMHandle_;
 
+	bool isAudioPlay_ = true;
 };

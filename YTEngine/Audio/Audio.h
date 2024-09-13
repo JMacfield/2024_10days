@@ -113,6 +113,11 @@ public:
 	/// <param name="ハンドル名"></param>
 	void StopWave(uint32_t audioHandle);
 
+	/// <summary>
+	/// 停止
+	/// </summary>
+	/// <param name="audioHandle"></param>
+	void StopMP3(uint32_t audioHandle);
 
 #pragma endregion
 

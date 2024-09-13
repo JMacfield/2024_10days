@@ -60,4 +60,6 @@ private:
 
 	// タイトルBGM
 	uint32_t titleBGMHandle_;
+
+	bool isAudioPlay_ = true;
 };
