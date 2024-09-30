@@ -114,92 +114,92 @@ void Player::Debug()
 #ifdef _DEBUG
 
 	// ImGuiを表示する
-	ImGui::Begin("Player");
+	//ImGui::Begin("Player");
 
-	// パラメータ
-	if (ImGui::CollapsingHeader("Parameters")) {
-		ImGui::DragFloat3("Pos", &this->worldTransform_.translate_.x, 0.0f);
-		ImGui::DragFloat3("Vel", &this->vel_.x, 0.0f);
-		ImGui::DragFloat("Acc", &this->acc, 0.0f);
+	//// パラメータ
+	//if (ImGui::CollapsingHeader("Parameters")) {
+	//	ImGui::DragFloat3("Pos", &this->worldTransform_.translate_.x, 0.0f);
+	//	ImGui::DragFloat3("Vel", &this->vel_.x, 0.0f);
+	//	ImGui::DragFloat("Acc", &this->acc, 0.0f);
 
-		
-		std::ostringstream ossNormalT;// 小数点を2桁のみ表示
-		ossNormalT << std::fixed << std::setprecision(2) << normalT;
-		std::string strNormalT = "NormalT : " + ossNormalT.str();
-		ImGui::ProgressBar(normalT, ImVec2(-1.0f, 0.0f), strNormalT.c_str());
-		
-		
-		std::ostringstream ossEaseT;// 小数点を2桁のみ表示
-		ossEaseT << std::fixed << std::setprecision(2) << easeT;
-		std::string strEaseT = "EaseT : " + ossEaseT.str();
-		ImGui::ProgressBar(easeT, ImVec2(-1.0f, 0.0f), strEaseT.c_str());
+	//	
+	//	std::ostringstream ossNormalT;// 小数点を2桁のみ表示
+	//	ossNormalT << std::fixed << std::setprecision(2) << normalT;
+	//	std::string strNormalT = "NormalT : " + ossNormalT.str();
+	//	ImGui::ProgressBar(normalT, ImVec2(-1.0f, 0.0f), strNormalT.c_str());
+	//	
+	//	
+	//	std::ostringstream ossEaseT;// 小数点を2桁のみ表示
+	//	ossEaseT << std::fixed << std::setprecision(2) << easeT;
+	//	std::string strEaseT = "EaseT : " + ossEaseT.str();
+	//	ImGui::ProgressBar(easeT, ImVec2(-1.0f, 0.0f), strEaseT.c_str());
 
-		const int32_t LineSize = 100;
-		float values[LineSize] = {};
-		float t = 0.0f;
-		for (int32_t i = 0; i < LineSize; i++) {
-			t = (float)i / (float)LineSize;
-			t = GetSpeedForEaseInOutQuad(t);
-			// イージングで移動量を設定
-			values[i] = (1.0f - t) * 0.0f + t * 100.0f;
-		}
-		int valuesCount = sizeof(values) / sizeof(float);
+	//	const int32_t LineSize = 100;
+	//	float values[LineSize] = {};
+	//	float t = 0.0f;
+	//	for (int32_t i = 0; i < LineSize; i++) {
+	//		t = (float)i / (float)LineSize;
+	//		t = GetSpeedForEaseInOutQuad(t);
+	//		// イージングで移動量を設定
+	//		values[i] = (1.0f - t) * 0.0f + t * 100.0f;
+	//	}
+	//	int valuesCount = sizeof(values) / sizeof(float);
 
 
-		// 描画リストを取得
-		ImDrawList* draw_list = ImGui::GetWindowDrawList();
-		// グラフの描画位置を取得
-		ImVec2 plotPos = ImGui::GetCursorScreenPos();
-		// 折れ線グラフの描画
-		ImGui::PlotLines("Speed meter", values, valuesCount,
-			0, nullptr, 0.0f, 100.0f, ImVec2(200, 200));
+	//	// 描画リストを取得
+	//	ImDrawList* draw_list = ImGui::GetWindowDrawList();
+	//	// グラフの描画位置を取得
+	//	ImVec2 plotPos = ImGui::GetCursorScreenPos();
+	//	// 折れ線グラフの描画
+	//	ImGui::PlotLines("Speed meter", values, valuesCount,
+	//		0, nullptr, 0.0f, 100.0f, ImVec2(200, 200));
 
-		// プロットの幅を計算 (各点のX軸の間隔)
-		float stepX = 200.0f / (valuesCount - 1);  // データ点間のX軸距離
-		float easedValue = GetSpeedForEaseInOutQuad(normalT) * 100.0f;  // イージングに基づいた値
+	//	// プロットの幅を計算 (各点のX軸の間隔)
+	//	float stepX = 200.0f / (valuesCount - 1);  // データ点間のX軸距離
+	//	float easedValue = GetSpeedForEaseInOutQuad(normalT) * 100.0f;  // イージングに基づいた値
 
-		// 各データポイントの画面座標を計算
-		ImVec2 pointPos = ImVec2(plotPos.x + (valuesCount - 1) * stepX * normalT,
-			plotPos.y + (1.0f - easedValue / 100.0f) * 200.0f);
+	//	// 各データポイントの画面座標を計算
+	//	ImVec2 pointPos = ImVec2(plotPos.x + (valuesCount - 1) * stepX * normalT,
+	//		plotPos.y + (1.0f - easedValue / 100.0f) * 200.0f);
 
-		// 赤い円を描画
-		draw_list->AddCircleFilled(pointPos, 3.0f, IM_COL32(255, 0, 0, 255)); // 赤い円
-		// 円の座標が最大値の何％に相当するかを計算
-		float percentX = ((pointPos.x - plotPos.x) / 200.0f);
-		float percentY = ((plotPos.y + 200.0f - pointPos.y) / 200.0f);
+	//	// 赤い円を描画
+	//	draw_list->AddCircleFilled(pointPos, 3.0f, IM_COL32(255, 0, 0, 255)); // 赤い円
+	//	// 円の座標が最大値の何％に相当するかを計算
+	//	float percentX = ((pointPos.x - plotPos.x) / 200.0f);
+	//	float percentY = ((plotPos.y + 200.0f - pointPos.y) / 200.0f);
 
-		// 計算したパーセンテージを表示
-		ImGui::Text("Circle Position (X, Y):");
-		ImGui::Text("X: %.2f", percentX);
-		ImGui::Text("Y: %.2f", percentY);
-	}
+	//	// 計算したパーセンテージを表示
+	//	ImGui::Text("Circle Position (X, Y):");
+	//	ImGui::Text("X: %.2f", percentX);
+	//	ImGui::Text("Y: %.2f", percentY);
+	//}
 
-	// デバッグ操作
-	if (ImGui::CollapsingHeader("Advanced Setings")) {
-		// リセット
-		if (ImGui::Button("Reset")) { this->Init(); }
-		// 被弾による加速度減少
-		if (ImGui::Button("Slow")) { this->ResiveSpeedDoun(0.02f); }
-		// 最高速
-		if (ImGui::Button("FullSpeed")) { 
-			this->normalT = 1.0f; 
-			// イージング
-			easeT = GetSpeedForEaseInOutQuad(normalT);
-		}
-		// 中速
-		if (ImGui::Button("HalfSpeed")) {
-			this->normalT = 0.5f;
-			// イージング
-			easeT = GetSpeedForEaseInOutQuad(normalT);
-		}
-		// HP0
-		if (ImGui::Button("GameEnd")) {
-			this->hp_ = 0;
-		}
+	//// デバッグ操作
+	//if (ImGui::CollapsingHeader("Advanced Setings")) {
+	//	// リセット
+	//	if (ImGui::Button("Reset")) { this->Init(); }
+	//	// 被弾による加速度減少
+	//	if (ImGui::Button("Slow")) { this->ResiveSpeedDoun(0.02f); }
+	//	// 最高速
+	//	if (ImGui::Button("FullSpeed")) { 
+	//		this->normalT = 1.0f; 
+	//		// イージング
+	//		easeT = GetSpeedForEaseInOutQuad(normalT);
+	//	}
+	//	// 中速
+	//	if (ImGui::Button("HalfSpeed")) {
+	//		this->normalT = 0.5f;
+	//		// イージング
+	//		easeT = GetSpeedForEaseInOutQuad(normalT);
+	//	}
+	//	// HP0
+	//	if (ImGui::Button("GameEnd")) {
+	//		this->hp_ = 0;
+	//	}
 
-	}
+	//}
 
-	ImGui::End();
+	//ImGui::End();
 
 
 #endif // _DEBUG
